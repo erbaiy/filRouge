@@ -20,12 +20,13 @@ class AuthentificationController extends Controller
             'password' => 'required|min:8',
         ], [
             'email.unique' => 'The email address is already registered.',
+            'password.min' => 'The password must be at least 8 characters.',
         ]);
 
         $isEmailExist = User::where('email', $request->email)->first();
 
         if ($isEmailExist) {
-            return back()->withErrors(['email' => 'The email address is already registered.']);
+            return back()->withErrors(['email' => 'The email address is already registered.'])->withInput();
         }
 
         $user = User::create([

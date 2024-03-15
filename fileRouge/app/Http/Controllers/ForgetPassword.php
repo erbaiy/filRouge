@@ -26,25 +26,31 @@ class ForgetPassword extends Controller
             'email' => 'required|email',
         ]);
 
+        $user = User::where('email', $request->email)->first();
+        if (!$user) {
+            return back()->withErrors(['email' => 'the email does not existe.']);
+        }
         $token = Str::random(60);
+
         User::where('email', $request->email)
             ->update(['remember_token' => $token]);
 
-        $resetLink = route('resetwithemail', ['token' => $token]);
+        $link = route('resetwithemail', ['token' => $token]);
 
-        $success = Mail::raw('To reset your password, click on the following link: ' . $resetLink, function ($message) use ($request) {
+        $success = Mail::raw('To reset your password, click on the following link: ' . $link, function ($message) use ($request) {
             $message->to($request->email)
-                ->subject('Password Reset Link');
+                ->subject('Reset Password');
         });
         // dd($resetLink);
         if ($success) {
-            // dd('seccess');
-            return back()->with('status', 'Password reset link sent.');
+
+            return back()->with('seccess', 'Password reset link sent.');
         } else {
-            // dd('failed');
-            return back()->withErrors(['email' => 'Failed to send reset link.']);
+            dd('failed');
+            return back()->withErrors(['error' => 'Failed to send reset link.']);
         }
     }
+
     public function getThenewPassword($token)
     {
         return view('aut.newpassword', compact('token'));

@@ -38,7 +38,7 @@ Route::get('/tables', function () {
 
 // the below code  is all routes has rolation with authentification:
 
-Route::get('/getRogister', [AuthentificationController::class, 'getRogister'])->name("auth_getRogister");
+Route::get('/registerview', [AuthentificationController::class, 'getRogister'])->name("auth_getRogister");
 Route::post('/register', [AuthentificationController::class, 'register'])->name("auth_Rogister");
 
 Route::get('/getLogin', [AuthentificationController::class, 'getLogin'])->name("auth_getLogin");
