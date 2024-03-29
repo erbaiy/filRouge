@@ -6,7 +6,8 @@ use App\Http\Controllers\CategoryController;
 use  App\Http\Controllers\ForgetPassword;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
-use App\Http\controllers\FrontOfficeRoomController;
+use App\Http\controllers\HomeController;
+use App\Http\Controllers\ResevationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +20,15 @@ use App\Http\controllers\FrontOfficeRoomController;
 |
 */
 
-Route::get('/romms', [FrontOfficeRoomController::class, 'index']);
+Route::get('/romms', [HomeController::class, 'index']);
 Route::get('/', function () {
     return view('front-office.index');
 });
 Route::get('/gallery', function () {
     return view('front-office.gallery');
+});
+Route::get('/test', function () {
+    return view('test');
 });
 
 
@@ -62,11 +66,20 @@ Route::delete('/category/delete/{id}', [CategoryController::class,  'destroy'])-
 // rooms routes 
 Route::get('/room', [RoomController::class,  'index'])->name('room.index');
 Route::post('/romm/store', [RoomController::class,  'store'])->name('room.store');
-Route::put('/room/update/{id}', [RoomController::class,  'update'])->name('room.update');
+Route::match(['put', 'patch'], '/room/update/{id}', [RoomController::class, 'update'])->name('room.update');
 Route::delete('/room/delete/{id}', [RoomController::class,  'destroy'])->name('room.destroy');
+// admin getRoomsForApproval
+Route::get('/getRoomsForApproval', [RoomController::class,  'getRoomsForApproval'])->name('room.getRoomsForApproval');
+Route::delete('/room/refuse/{id}', [RoomController::class,  'refuse'])->name('room.refuse');
+Route::delete('/room/accept/{id}', [RoomController::class,  'accept'])->name('room.accept');
 
 //Service routes
 Route::get('/service', [ServiceController::class,  'index'])->name('service.index');
 Route::post('/service/store', [ServiceController::class,  'store'])->name('service.store');
 Route::put('/service/update/{id}', [ServiceController::class,  'update'])->name('service.update');
 Route::delete('/service/delete/{id}', [ServiceController::class,  'destroy'])->name('service.destroy');
+
+
+// RESERVATION ROUTES
+
+Route::post('/reserve', [ResevationController::class,  'index'])->name('service');

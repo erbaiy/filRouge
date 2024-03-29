@@ -11,7 +11,10 @@
         <table class="table border" id="nn">
             <thead class="border">
                 <tr>
-                    <th scope="col" class="border">name</th>
+                    <th scope="col" class="border">image</th>
+                    <th scope="col" class="border">description</th>
+
+                    <th scope="col" class="border">availability</th>
                     <th scope="col" class="border">edit</th>
                     <th scope="col" class="border">delete</th>
                 </tr>
@@ -34,6 +37,7 @@
                                 alt="Room Image">
                         </td>
                         <td class="border">{{ $row->description }}</td>
+                        <td class="border">{{ $row->availability }}</td>
 
                         <td class="border">
                             <button class="btn btn-outline-success" data-bs-toggle="modal"
@@ -48,7 +52,8 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="{{ route('room.update', $row->id) }}" method="POST">
+                                            <form action="{{ route('room.update', $row->id) }}" method="POST"
+                                                enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
 
@@ -101,12 +106,23 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
+                                                    <div class="mb-3">
+                                                        <label for="service" class="form-label">Service</label>
+                                                        <select name="service_id[]" id="category" class="form-control"
+                                                            multiple required>
+                                                            <option value="">Select Service</option>
+                                                            @foreach ($services as $service)
+                                                                <option value="{{ $service->id }}">{{ $service->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
 
                                                     <div class="mb-3">
                                                         <label for="price" class="form-label">Night Price</label>
                                                         <input type="text" name="price" class="form-control"
                                                             id="price" required value="{{ $row->price }}">
-                                                        <input type="hidden" name="user_id" value="2">
+                                                        <input type="hidden" name="user_id" value="1">
                                                     </div>
                                                 </div>
                                                 <!-- Modal Footer -->
@@ -190,9 +206,18 @@
                             </select>
                         </div>
                         <div class="mb-3">
+                            <label for="service" class="form-label">Service</label>
+                            <select name="service_id[]" id="category" class="form-control" multiple required>
+                                <option value="">Select Service</option>
+                                @foreach ($services as $service)
+                                    <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="price" class="form-label">Night Price</label>
                             <input type="text" name="price" class="form-control" id="price" required>
-                            <input type="hidden" name="user_id" id="" value="2">
+                            <input type="hidden" name="user_id" id="" value="1">
                         </div>
                     </div>
                     <!-- Modal Footer -->

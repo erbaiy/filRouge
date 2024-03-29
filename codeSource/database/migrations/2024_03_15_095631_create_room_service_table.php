@@ -12,12 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('room_service', function (Blueprint $table) {
-
             $table->id();
-            $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('service_id')->constrained('service')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('room_id');
+            $table->unsignedBigInteger('service_id');
             $table->timestamps();
+
+            // Add foreign key constraints
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->foreign('service_id')->references('id')->on('service')->onDelete('cascade');
         });
+        // Schema::create('room_service', function (Blueprint $table) {
+
+        //     $table->id();
+        //     $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade')->onUpdate('cascade');
+        //     $table->foreignId('service_id')->constrained('service')->onDelete('cascade')->onUpdate('cascade');
+        //     $table->timestamps();
+        // });
     }
 
     /**

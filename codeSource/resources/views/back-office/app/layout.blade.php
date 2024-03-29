@@ -74,7 +74,7 @@
             opacity: 0 !important
         }
     </style>
-    <script>
+    {{-- <script>
         (function(a, s, y, n, c, h, i, d, e) {
             s.className += ' ' + y;
             h.start = 1 * new Date;
@@ -90,9 +90,9 @@
         })(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {
             'GTM-K9BGS8K': true
         });
-    </script>
+    </script> --}}
 
-    <script>
+    {{-- <script>
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function() {
@@ -112,10 +112,10 @@
         ga('require', 'displayfeatures');
         ga('require', 'linker');
         ga('linker:autoLink', ["2checkout.com", "avangate.com"]);
-    </script>
+    </script> --}}
 
 
-    <script>
+    {{-- <script>
         (function(w, d, s, l, i) {
             w[l] = w[l] || [];
             w[l].push({
@@ -130,7 +130,7 @@
                 '../../../www.googletagmanager.com/gtm5445.html?id=' + i + dl;
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-NKDMSK6');
-    </script>
+    </script> --}}
 
 
 

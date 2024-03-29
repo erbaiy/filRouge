@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->enum('room_type', ['single', 'double', 'suite']);
+            $table->enum('is_accepted', ['refuse', 'accepte']);
             $table->string('description');
             $table->string('image')->nullable();
             $table->boolean('availability')->default(true);
