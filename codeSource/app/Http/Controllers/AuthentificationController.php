@@ -33,6 +33,7 @@ class AuthentificationController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role_id' => 17,
         ]);
 
         return redirect()->route('auth_getLogin');

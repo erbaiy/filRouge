@@ -65,7 +65,7 @@
 
     <link id="pagestyle" href="../assets/css/soft-ui-dashboard.minf2ad.css?v=1.0.7" rel="stylesheet" />
 
-    <style>
+    {{-- <style>
         .async-hide {
             opacity: 0 !important
         }
@@ -87,7 +87,6 @@
             'GTM-K9BGS8K': true
         });
     </script>
-
     <script>
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -109,8 +108,6 @@
         ga('require', 'linker');
         ga('linker:autoLink', ["2checkout.com", "avangate.com"]);
     </script>
-
-
     <script>
         (function(w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -126,7 +123,7 @@
                 '../../../www.googletagmanager.com/gtm5445.html?id=' + i + dl;
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-NKDMSK6');
-    </script>
+    </script> --}}
 
 
 

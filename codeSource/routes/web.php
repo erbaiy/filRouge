@@ -7,7 +7,11 @@ use  App\Http\Controllers\ForgetPassword;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
 use App\Http\controllers\HomeController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ResevationController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +82,25 @@ Route::get('/service', [ServiceController::class,  'index'])->name('service.inde
 Route::post('/service/store', [ServiceController::class,  'store'])->name('service.store');
 Route::put('/service/update/{id}', [ServiceController::class,  'update'])->name('service.update');
 Route::delete('/service/delete/{id}', [ServiceController::class,  'destroy'])->name('service.destroy');
+
+//Users routes
+Route::get('/users', [UserController::class,  'index'])->name('users.index');
+// Route::post('/users/store', [UserController::class,  'store'])->name('user.store');
+Route::put('/users/update/{id}', [UserController::class,  'update'])->name('users.update');
+Route::delete('/users/delete/{id}', [UserController::class,  'destroy'])->name('users.destroy');
+
+
+Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+Route::post('/roles/store', [RoleController::class,  'store'])->name('roles.store');
+Route::put('/roles/update/{id}', [RoleController::class,  'update'])->name('roles.update');
+Route::delete('/roles/delete/{id}', [RoleController::class,  'destroy'])->name('roles.destroy');
+//Reservations
+
+Route::get('/reservations', [ReservationController::class, 'index'])->name('roles.index');
+Route::delete('/roles/delete/{id}', [RoleController::class,  'destroy'])->name('roles.destroy');
+
+
+
 
 
 // RESERVATION ROUTES

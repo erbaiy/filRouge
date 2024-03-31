@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Route;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route as FacadesRoute;
 
 class InsertRoutesCommand extends Command
 {
@@ -20,34 +20,28 @@ class InsertRoutesCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Insert routes into the database';
 
     /**
      * Execute the console command.
+     *
+     * @return void
      */
     public function handle()
     {
-        $routes = app('router')->getRoutes();
-        $routeData = [];
+        // Fetch all routes from web.php
+        $routeCollection = FacadesRoute::getRoutes();
 
-        foreach ($routes as $route) {
+        foreach ($routeCollection as $route) {
             $uri = $route->uri();
-
-            // Skip routes containing '-' or 'api'
             if (strpos($uri, '-') !== false || strpos($uri, 'api') !== false) {
                 continue;
             }
-            // dd($uri);  
-
-            $routeData[] = [
+            Route::create([
                 'uri' => $uri,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
+            ]);
         }
 
-        Route::insert($routeData);
-
-        $this->info('Routes inserted successfully.');
+        $this->info('Routes inserted successfully!');
     }
 }

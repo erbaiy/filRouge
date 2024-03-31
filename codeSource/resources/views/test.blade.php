@@ -283,8 +283,9 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label for="departure">travels</label>
-                                            <input type="select" class="form-control" id="departure"
-                                                name="departure">
+                                            <select class="form-control" name="" id="">
+                                                <option value="oneway">One Way</option>
+                                            </select>
                                         </div>
                                         <div class="col-md-4 pt-" style="padding-top: 2rem !important;">
                                             <button type="submit" class="btn btn-primary">Book Now</button>

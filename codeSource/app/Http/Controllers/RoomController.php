@@ -134,60 +134,6 @@ class RoomController extends Controller
 
         return back()->with('success', 'Room updated successfully');
     }
-    // public function update(Request $request, $id)
-    // {
-    //     $data = $request->validate([
-    //         'room_type' => 'required',
-    //         'description' => 'required',
-    //         'image' => 'required',
-    //         'type_accept' => 'required',
-    //         'price' => 'required',
-    //         'user_id' => 'required',
-    //         'category_id' => 'required',
-    //     ]);
-
-
-    //     try {
-    //         DB::beginTransaction();
-
-    //         $service = Service::findOrFail($id);
-    //         $service->fill($data);
-
-    //         if ($request->hasFile('image')) {
-    //             $image = $request->file('image');
-    //             $uniqueFileName = uniqid() . '_' . $image->getClientOriginalName();
-    //             $image->move(public_path('assets/img'), $uniqueFileName);
-    //             $service->image = $uniqueFileName;
-    //         }
-
-    //         $service->save();
-    //         dd('jflkgh  ');
-    //         // Update room services
-    //         $roomServices = [];
-
-    //         // Validate service IDs exist (optional)
-    //         // You can check if service IDs exist in your database before creating entries
-    //         foreach ($request->input('service_id') as $serviceId) {
-    //             $roomServices[] = [
-    //                 'service_id' => $serviceId,
-    //                 'room_id' => $id, // Use the created room's ID
-    //             ];
-    //         }
-
-    //         // Delete existing room services
-    //         RoomService::where('room_id', $id)->delete();
-
-    //         // Create multiple entries using the `insert()` method
-    //         RoomService::insert($roomServices);
-
-    //         DB::commit();
-
-    //         return back()->with("success", 'Service updated successfully');
-    //     } catch (\Exception $e) {
-    //         DB::rollBack();
-    //         return back()->with('error', 'Failed to update service');
-    //     }
-    // }
 
     public function destroy($id)
     {
