@@ -322,9 +322,208 @@
 
                         </div>
                         <div class="row">
+                            @foreach ($rooms as $room)
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="room">
+                                        <div class="room_img">
+                                            <figure>
+                                                <img src="{{ 'assets/img/' . $room->image }}" alt="#"
+                                                    style="width: 100%; border-radius: 15px;">
+                                            </figure>
+                                        </div>
+                                        <div class="bed_room">
+                                            <div
+                                                style="  
+                                              display: flex;
+                                        justify-content: space-between;    
+                                        padding: 0px 20px;">
+                                                <div>
+                                                    <h4>{{ $room->room_type }}</h4>
+                                                </div>
+                                                <div>
+                                                    <span>
+                                                        {{ $room->price }}$
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                {{ $room->description }}
+
+                                            </div>
+
+                                            <div class="card-footer"
+                                                style="    display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;">
+                                                <span class="float-left price">services</span>
+                                                <button data-bs-toggle="modal"
+                                                    data-bs-target="#fullScreenModal{{ $room->id }}"
+                                                    class="btn btn-outline-success float-right">Reserve</button>
+                                                {{-- modal start --}}
+                                                <div class="modal fade" id="fullScreenModal{{ $room->id }}"
+                                                    tabindex="-1" aria-labelledby="fullScreenModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="fullScreenModalLabel">
+                                                                    Full-Screen Modal</h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
+                                                            </div>
+                                                            <form action="{{ route('reserve') }}" method="POST">
+                                                                @csrf
+                                                                <div class="modal-body">
+                                                                    <div class="card">
+                                                                        <div class="card-header">
+                                                                            <ul class="nav nav-tabs">
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link"
+                                                                                        href="#">Account</a>
+                                                                                </li>
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link active"
+                                                                                        href="#">Payment</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <input type="hidden" name="user_id"
+                                                                                value="{{ session('id') }}"
+                                                                                id="">
+                                                                            <input type="hidden" name="room_id"
+                                                                                value="{{ $room->id }}"
+                                                                                id="">
+                                                                            <input type="hidden" name="price"
+                                                                                value="{{ $room->price }}"
+                                                                                id="">
+
+                                                                            <div class="row mb-3">
+                                                                                <label for="">Chech in </label>
+                                                                                <div class="col-7">
+                                                                                    <input type="date"
+                                                                                        name="checkin"
+                                                                                        class="form-control"
+                                                                                        placeholder="check out">
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="row mb-3">
+                                                                                <label for="">Chech out
+                                                                                </label>
+                                                                                <div class="col-7">
+                                                                                    <input type="date"
+                                                                                        name="checkout"
+                                                                                        class="form-control"
+                                                                                        placeholder="check in">
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <h5 class="card-title">Saved cards:</h5>
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-2"><img
+                                                                                        class="img-fluid"
+                                                                                        src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
+                                                                                </div>
+                                                                                <div class="col-7">
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        placeholder="**** **** **** 3193">
+                                                                                </div>
+                                                                                <div class="col-3">
+                                                                                    <a href="#"
+                                                                                        class="btn btn-link">Remove
+                                                                                        card</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-2"><img
+                                                                                        class="img-fluid"
+                                                                                        src="https://img.icons8.com/color/48/000000/visa.png" />
+                                                                                </div>
+                                                                                <div class="col-7">
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        placeholder="**** **** **** 4296">
+                                                                                </div>
+                                                                                <div class="col-3">
+                                                                                    <a href="#"
+                                                                                        class="btn btn-link">Remove
+                                                                                        card</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <h5 class="card-title">Add new card:</h5>
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-12">
+                                                                                    <label for="cardHolderName"
+                                                                                        class="form-label">Card holder
+                                                                                        name</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="cardHolderName"
+                                                                                        placeholder="Bojan Viner">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row mb-3">
+                                                                                <div class="col-12 col-md-7">
+                                                                                    <label for="cardNumber"
+                                                                                        class="form-label">Card
+                                                                                        number</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="cardNumber"
+                                                                                        placeholder="5134-5264-4">
+                                                                                </div>
+                                                                                <div class="col-6 col-md-2">
+                                                                                    <label for="expDate"
+                                                                                        class="form-label">Exp.
+                                                                                        date</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="expDate"
+                                                                                        placeholder="MM/YY">
+                                                                                </div>
+                                                                                <div class="col-6 col-md-2">
+                                                                                    <label for="cvv"
+                                                                                        class="form-label">CVV</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="cvv"
+                                                                                        placeholder="CVV">
+                                                                                </div>
+                                                                                <div class="col-12 col-md-1">
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-primary mt-3 mt-md-0">Add
+                                                                                        card</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </form>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn"
+                                                                    data-bs-dismiss="modal">save</button>
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{-- modale end --}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            @endforeach
 
 
-                            <div class="col-md-4 col-sm-6">
+
+                            {{-- <div class="col-md-4 col-sm-6">
                                 <div class="room">
                                     <div class="room_img">
                                         <figure>
@@ -349,190 +548,8 @@
                                     </div>
                                 </div>
 
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="room">
-                                    <div class="room_img">
-                                        <figure>
-                                            <img src="https://www.beleontours.com/Media/Hotels/rooms_76938894_NJV%20Athens%20Plaza%20-%20Rooms%20H%20(7).jpg?w=750&h=430&mode=crop&scale=both"
-                                                alt="#" style="width:100%;border-radius:15px;">
-                                        </figure>
-                                    </div>
-                                    <div class="bed_room">
+                            </div> --}}
 
-                                        <h3>Bed Room</h3>
-                                        <div>
-                                            A parais
-                                        </div>
-
-                                        <div class="card-footer"
-                                            style="    display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;">
-                                            <span class="float-left price">$59/night</span>
-                                            <a href="#" class="btn btn-outline-success float-right">Reserve</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="room">
-                                    <div class="room_img">
-                                        <figure>
-                                            <img src="https://www.beleontours.com/Media/Hotels/rooms_76938894_NJV%20Athens%20Plaza%20-%20Rooms%20H%20(7).jpg?w=750&h=430&mode=crop&scale=both"
-                                                alt="#" style="width:100%;border-radius:15px;">
-                                        </figure>
-                                    </div>
-                                    <div class="bed_room">
-
-                                        <h3>Bed Room</h3>
-                                        <div>
-                                            A parais
-                                        </div>
-
-                                        <div class="card-footer"
-                                            style="    display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;">
-                                            <span class="float-left price">$59/night</span>
-                                            <a href="#" class="btn btn-outline-success float-right">Reserve</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="room">
-                                    <div class="room_img">
-                                        <figure>
-                                            <img src="https://www.beleontours.com/Media/Hotels/rooms_76938894_NJV%20Athens%20Plaza%20-%20Rooms%20H%20(7).jpg?w=750&h=430&mode=crop&scale=both"
-                                                alt="#" style="width:100%;border-radius:15px;">
-                                        </figure>
-                                    </div>
-                                    <div class="bed_room">
-
-                                        <h3>Bed Room</h3>
-                                        <div>
-                                            A parais
-                                        </div>
-
-                                        <div class="card-footer"
-                                            style="    display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;">
-                                            <span class="float-left price">$59/night</span>
-                                            <a href="#" class="btn btn-outline-success float-right">Reserve</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="room">
-                                    <div class="room_img">
-                                        <figure>
-                                            <img src="https://www.beleontours.com/Media/Hotels/rooms_76938894_NJV%20Athens%20Plaza%20-%20Rooms%20H%20(7).jpg?w=750&h=430&mode=crop&scale=both"
-                                                alt="#" style="width:100%;border-radius:15px;">
-                                        </figure>
-                                    </div>
-                                    <div class="bed_room">
-
-                                        <h3>Bed Room</h3>
-                                        <div>
-                                            A parais
-                                        </div>
-
-                                        <div class="card-footer"
-                                            style="    display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;">
-                                            <span class="float-left price">$59/night</span>
-                                            <a href="#" class="btn btn-outline-success float-right">Reserve</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="room">
-                                    <div class="room_img">
-                                        <figure>
-                                            <img src="https://www.beleontours.com/Media/Hotels/rooms_76938894_NJV%20Athens%20Plaza%20-%20Rooms%20H%20(7).jpg?w=750&h=430&mode=crop&scale=both"
-                                                alt="#" style="width:100%;border-radius:15px;">
-                                        </figure>
-                                    </div>
-                                    <div class="bed_room">
-
-                                        <h3>Bed Room</h3>
-                                        <div>
-                                            A parais
-                                        </div>
-
-                                        <div class="card-footer"
-                                            style="    display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;">
-                                            <span class="float-left price">$59/night</span>
-                                            <a href="#" class="btn btn-outline-success float-right">Reserve</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-4 col-sm-6">
-                                <div class="room">
-                                    <div class="room_img">
-                                        <figure>
-                                            <img src="https://www.beleontours.com/Media/Hotels/rooms_76938894_NJV%20Athens%20Plaza%20-%20Rooms%20H%20(7).jpg?w=750&h=430&mode=crop&scale=both"
-                                                alt="#" style="width:100%;border-radius:15px;">
-                                        </figure>
-                                    </div>
-                                    <div class="bed_room">
-
-                                        <h3>Bed Room</h3>
-                                        <div>
-                                            A parais
-                                        </div>
-
-                                        <div class="card-footer"
-                                            style="    display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;">
-                                            <span class="float-left price">$59/night</span>
-                                            <a href="#" class="btn btn-outline-success float-right">Reserve</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-4 col-sm-6">
-                                <div class="room">
-                                    <div class="room_img">
-                                        <figure>
-                                            <img src="https://th.bing.com/th/id/OIP.DZ2WhYjPLBZXh545xgJR2AHaEK?rs=1&pid=ImgDetMain"
-                                                alt="#" style="width:100%;border-radius:15px;">
-                                        </figure>
-                                    </div>
-                                    <div class="bed_room">
-
-                                        <h3>Bed Room</h3>
-                                        <div>
-                                            A parais
-                                        </div>
-
-                                        <div class="card-footer"
-                                            style="    display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;">
-                                            <span class="float-left price">$59/night</span>
-                                            <a href="#" class="btn btn-outline-success float-right">Reserve</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
 
                         </div>
                     </div>

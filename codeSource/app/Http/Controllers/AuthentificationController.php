@@ -56,8 +56,6 @@ class AuthentificationController extends Controller
             return back()->withErrors(['email' => 'The provided credentials do not match our records.']);
         } else {
             session(['id' => $user->id]);
-            $x = session('id');
-            dd($x);
         }
     }
     public function logout()

@@ -24,16 +24,17 @@ use App\Models\User;
 |
 */
 
-Route::get('/romms', [HomeController::class, 'index']);
+Route::get('/acceuille', [HomeController::class, 'index']);
+Route::post('/reserve', [HomeController::class, 'reserve'])->name("reserve");
 Route::get('/', function () {
-    return view('front-office.index');
+    return view('welcome');
 });
 Route::get('/gallery', function () {
     return view('front-office.gallery');
 });
-Route::get('/test', function () {
-    return view('test');
-});
+// Route::get('/test', function () {
+//     return view('test');
+// });
 
 
 // back-office
@@ -105,4 +106,4 @@ Route::delete('/roles/delete/{id}', [RoleController::class,  'destroy'])->name('
 
 // RESERVATION ROUTES
 
-Route::post('/reserve', [ResevationController::class,  'index'])->name('service');
+// Route::post('/reserve', [ResevationController::class,  'index'])->name('service');

@@ -122,7 +122,8 @@
                                                         <label for="price" class="form-label">Night Price</label>
                                                         <input type="text" name="price" class="form-control"
                                                             id="price" required value="{{ $row->price }}">
-                                                        <input type="hidden" name="user_id" value="1">
+                                                        <input type="hidden" name="user_id"
+                                                            value="{{ session('id') }}">
                                                     </div>
                                                 </div>
                                                 <!-- Modal Footer -->
@@ -217,7 +218,7 @@
                         <div class="mb-3">
                             <label for="price" class="form-label">Night Price</label>
                             <input type="text" name="price" class="form-control" id="price" required>
-                            <input type="hidden" name="user_id" id="" value="1">
+                            <input type="hidden" name="user_id" id="" value="{{ session('id') }}">
                         </div>
                     </div>
                     <!-- Modal Footer -->
