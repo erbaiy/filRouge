@@ -9,7 +9,11 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        $reservations = Reservation::all();
+        $reservations = Reservation::select('*')
+            ->join('users', 'reservations.user_id', '=', 'users.id')
+            ->join('rooms', 'reservations.room_id', '=', 'rooms.id')
+            ->get();
+
         return view('back-office.reservation', compact('reservations'));
     }
     public function reserve(Request $request)

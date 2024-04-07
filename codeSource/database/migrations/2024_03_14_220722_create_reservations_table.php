@@ -20,6 +20,7 @@ return new class extends Migration
             $table->dateTime('checkin');
             $table->dateTime('checkout');
             $table->integer('number_of_nights');
+            $table->enum('status', ['accepted', 'rejected', 'pending'])->default('pending');
             $table->decimal('total_price', 10, 3);
             $table->timestamps();
         });

@@ -97,8 +97,12 @@ Route::put('/roles/update/{id}', [RoleController::class,  'update'])->name('role
 Route::delete('/roles/delete/{id}', [RoleController::class,  'destroy'])->name('roles.destroy');
 //Reservations
 
-Route::get('/reservations', [ReservationController::class, 'index'])->name('roles.index');
+Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+
+
 Route::delete('/roles/delete/{id}', [RoleController::class,  'destroy'])->name('roles.destroy');
+
+
 
 
 

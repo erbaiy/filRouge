@@ -159,7 +159,7 @@
 
                 {{--  --}}
                 <li class="nav-item">
-                    <a class="nav-link  " href="">
+                    <a class="nav-link  " href="{{ route('room.index') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
@@ -183,12 +183,12 @@
                             </svg>
                         </div>
 
-                        <span class="nav-link-text ms-1">Admin Statistique</span>
+                        <span class="nav-link-text ms-1">Rooms</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link  " href="">
+                    <a class="nav-link  " href="{{ route('service.index') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -211,11 +211,11 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Users</span>
+                        <span class="nav-link-text ms-1">Services</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active" href="">
+                    <a class="nav-link  active" href="{{ route('category.index') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1"
@@ -242,7 +242,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="">
+                    <a class="nav-link  " href="{{ route('room.getRoomsForApproval') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -268,11 +268,11 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1"> Events hundle</span>
+                        <span class="nav-link-text ms-1"> RoomsForApproval</span>
                     </a>
                 </li>
 
-                <a class="nav-link  " href="">
+                <a class="nav-link  " href="{{ route('reservations.index') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
@@ -296,10 +296,10 @@
                         </svg>
                     </div>
 
-                    <span class="nav-link-text ms-1">Organizer Statistique</span>
+                    <span class="nav-link-text ms-1">ReservationsAproval</span>
                 </a>
                 <li class="nav-item">
-                    <a class="nav-link  " href="">
+                    <a class="nav-link  " href="{{ route('roles.index') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
@@ -322,7 +322,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">event</span>
+                        <span class="nav-link-text ms-1">Roles</span>
                     </a>
                 </li>
                 <li class="nav-item">

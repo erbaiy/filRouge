@@ -73,6 +73,42 @@
             opacity: 0 !important
         }
     </style>
+    {{-- <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        // Create a Stripe client
+        var stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY');
+
+        // Create an instance of elements
+        var elements = stripe.elements();
+
+        // Create the card element
+        var card = elements.create('card');
+        card.mount('#card-element');
+
+        // Handle form submission
+        var form = document.getElementById('reservation-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function(result) {
+                if (result.error) {
+                    // Handle error
+                } else {
+                    // Append the token to the form data
+                    var tokenInput = document.createElement('input');
+                    tokenInput.setAttribute('type', 'hidden');
+                    tokenInput.setAttribute('name', 'token');
+                    tokenInput.setAttribute('value', result.token.id);
+                    form.appendChild(tokenInput);
+
+                    // Submit the form
+                    form.submit();
+                }
+            });
+        });
+    </script> --}}
+
+
     {{-- <script>
         (function(a, s, y, n, c, h, i, d, e) {
             s.className += ' ' + y;
@@ -308,6 +344,12 @@
 
 
         <section>
+
+            @if ($errors->any())
+                <script>
+                    alert("{{ implode(' ', $errors->all()) }}");
+                </script>
+            @endif
             <div class="container">
                 <div class="row">
                     <div class="container">
@@ -315,6 +357,7 @@
                             <div class="col-md-12">
                                 <div class="titlepage text-center" style="margin: 40px;">
                                     <h3>Our Rooms</h3>
+
                                     <p class="mb-0">Welcome to our official booking website. Book now and enjoy the
                                         best luxury hotel experience.</p>
                                 </div>
@@ -360,6 +403,7 @@
                                                     data-bs-target="#fullScreenModal{{ $room->id }}"
                                                     class="btn btn-outline-success float-right">Reserve</button>
                                                 {{-- modal start --}}
+
                                                 <div class="modal fade" id="fullScreenModal{{ $room->id }}"
                                                     tabindex="-1" aria-labelledby="fullScreenModalLabel"
                                                     aria-hidden="true">
@@ -372,8 +416,11 @@
                                                                     data-bs-dismiss="modal"
                                                                     aria-label="Close"></button>
                                                             </div>
-                                                            <form action="{{ route('reserve') }}" method="POST">
+                                                            <form action="{{ route('reserve') }}" method="POST"
+                                                                id="payment-form">
                                                                 @csrf
+                                                                <input type="hidden" name="token"
+                                                                    value="{{ bin2hex(random_bytes(16)) }}">
                                                                 <div class="modal-body">
                                                                     <div class="card">
                                                                         <div class="card-header">
@@ -398,118 +445,121 @@
                                                                             <input type="hidden" name="price"
                                                                                 value="{{ $room->price }}"
                                                                                 id="">
-
-                                                                            <div class="row mb-3">
-                                                                                <label for="">Chech in </label>
-                                                                                <div class="col-7">
-                                                                                    <input type="date"
-                                                                                        name="checkin"
-                                                                                        class="form-control"
-                                                                                        placeholder="check out">
+                                                                            <div id="card-element">
+                                                                                <div class="row mb-3">
+                                                                                    <label
+                                                                                        for="">Check-in</label>
+                                                                                    <div class="col-7">
+                                                                                        <input type="date"
+                                                                                            name="checkin"
+                                                                                            class="form-control"
+                                                                                            placeholder="Check-in">
+                                                                                    </div>
                                                                                 </div>
-
-                                                                            </div>
-                                                                            <div class="row mb-3">
-                                                                                <label for="">Chech out
-                                                                                </label>
-                                                                                <div class="col-7">
-                                                                                    <input type="date"
-                                                                                        name="checkout"
-                                                                                        class="form-control"
-                                                                                        placeholder="check in">
+                                                                                <div class="row mb-3">
+                                                                                    <label
+                                                                                        for="">Check-out</label>
+                                                                                    <div class="col-7">
+                                                                                        <input type="date"
+                                                                                            name="checkout"
+                                                                                            class="form-control"
+                                                                                            placeholder="Check-out">
+                                                                                    </div>
                                                                                 </div>
-
-                                                                            </div>
-                                                                            <h5 class="card-title">Saved cards:</h5>
-                                                                            <div class="row mb-3">
-                                                                                <div class="col-2"><img
-                                                                                        class="img-fluid"
-                                                                                        src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
+                                                                                <h5 class="card-title">Saved cards:
+                                                                                </h5>
+                                                                                <div class="row mb-3">
+                                                                                    <div class="col-2">
+                                                                                        <img class="img-fluid"
+                                                                                            src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
+                                                                                    </div>
+                                                                                    <div class="col-7">
+                                                                                        <input type="text"
+                                                                                            name="token"
+                                                                                            class="form-control"
+                                                                                            placeholder="**** **** **** 3193">
+                                                                                    </div>
+                                                                                    <div class="col-3">
+                                                                                        <a href="#"
+                                                                                            class="btn btn-link">Remove
+                                                                                            card</a>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="col-7">
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        placeholder="**** **** **** 3193">
+                                                                                <div class="row mb-3">
+                                                                                    <div class="col-2">
+                                                                                        <img class="img-fluid"
+                                                                                            src="https://img.icons8.com/color/48/000000/visa.png" />
+                                                                                    </div>
+                                                                                    <div class="col-7">
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="**** **** **** 4296">
+                                                                                    </div>
+                                                                                    <div class="col-3">
+                                                                                        <a href="#"
+                                                                                            class="btn btn-link">Remove
+                                                                                            card</a>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="col-3">
-                                                                                    <a href="#"
-                                                                                        class="btn btn-link">Remove
-                                                                                        card</a>
+                                                                                <h5 class="card-title">Add new card:
+                                                                                </h5>
+                                                                                <div class="row mb-3">
+                                                                                    <div class="col-12">
+                                                                                        <label for="cardHolderName"
+                                                                                            class="form-label">Card
+                                                                                            holder name</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="cardHolderName"
+                                                                                            placeholder="Bojan Viner">
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="row mb-3">
-                                                                                <div class="col-2"><img
-                                                                                        class="img-fluid"
-                                                                                        src="https://img.icons8.com/color/48/000000/visa.png" />
-                                                                                </div>
-                                                                                <div class="col-7">
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        placeholder="**** **** **** 4296">
-                                                                                </div>
-                                                                                <div class="col-3">
-                                                                                    <a href="#"
-                                                                                        class="btn btn-link">Remove
-                                                                                        card</a>
-                                                                                </div>
-                                                                            </div>
-                                                                            <h5 class="card-title">Add new card:</h5>
-                                                                            <div class="row mb-3">
-                                                                                <div class="col-12">
-                                                                                    <label for="cardHolderName"
-                                                                                        class="form-label">Card holder
-                                                                                        name</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="cardHolderName"
-                                                                                        placeholder="Bojan Viner">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row mb-3">
-                                                                                <div class="col-12 col-md-7">
-                                                                                    <label for="cardNumber"
-                                                                                        class="form-label">Card
-                                                                                        number</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="cardNumber"
-                                                                                        placeholder="5134-5264-4">
-                                                                                </div>
-                                                                                <div class="col-6 col-md-2">
-                                                                                    <label for="expDate"
-                                                                                        class="form-label">Exp.
-                                                                                        date</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="expDate"
-                                                                                        placeholder="MM/YY">
-                                                                                </div>
-                                                                                <div class="col-6 col-md-2">
-                                                                                    <label for="cvv"
-                                                                                        class="form-label">CVV</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        id="cvv"
-                                                                                        placeholder="CVV">
-                                                                                </div>
-                                                                                <div class="col-12 col-md-1">
-                                                                                    <button type="submit"
-                                                                                        class="btn btn-primary mt-3 mt-md-0">Add
-                                                                                        card</button>
+                                                                                <div class="row mb-3">
+                                                                                    <div class="col-12 col-md-7">
+                                                                                        <label for="cardNumber"
+                                                                                            class="form-label">Card
+                                                                                            number</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="cardNumber"
+                                                                                            placeholder="5134-5264-4">
+                                                                                    </div>
+                                                                                    <div class="col-6 col-md-2">
+                                                                                        <label for="expDate"
+                                                                                            class="form-label">Exp.
+                                                                                            date</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="expDate"
+                                                                                            placeholder="MM/YY">
+                                                                                    </div>
+                                                                                    <div class="col-6 col-md-2">
+                                                                                        <label for="cvv"
+                                                                                            class="form-label">CVV</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="cvv"
+                                                                                            placeholder="CVV">
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                </div>
+                                                                <div id="card-element"></div>
+                                                                <button type="button" id="submit-payment">Add
+                                                                    card</button>
 
+                                                                <div class="modal-footer">
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary mt-3 mt-md-0">Add
+                                                                        card</button>
+                                                                    <button type="button" class="btn btn"
+                                                                        data-bs-dismiss="modal">Save</button>
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close</button>
                                                                 </div>
                                                             </form>
-
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn"
-                                                                    data-bs-dismiss="modal">save</button>
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -635,6 +685,45 @@
         integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
         data-cf-beacon='{"rayId":"84338226b95c6689","b":1,"version":"2023.10.0","token":"1b7cbb72744b40c580f8633c6b62637e"}'
         crossorigin="anonymous"></script>
+
+
+
+    {{-- stripe  start --}}
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/elements.js"></script>
+
+    <script>
+        var stripe = Stripe(
+            'pk_test_51OgSVDJsUWbtqrB0BZQVmybq1Hdwu6VGjRGLdVM8YuUlRWWCJkfj7zJntK9uaaRTTimcXo79TD87AR324RHStdUo00VdKYvNGF'
+        );
+        var elements = stripe.elements();
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+        var form = document.getElementById('payment-form');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            stripe.createToken(cardElement).then(function(result) {
+                if (result.error) {
+                    // Handle error
+                    console.error(result.error.message);
+                } else {
+                    // Token created successfully
+                    var token = result.token;
+                    // Add the token to the form as a hidden input field
+                    var tokenInput = document.createElement('input');
+                    tokenInput.setAttribute('type', 'hidden');
+                    tokenInput.setAttribute('name', 'token');
+                    tokenInput.setAttribute('value', token.id);
+                    form.appendChild(tokenInput);
+                    // Submit the form
+                    form.submit();
+                }
+            });
+        });
+    </script>
+    {{-- end stripe --}}
 </body>
 
 <!-- Mirrored from demos.creative-tim.com/soft-ui-dashboard/pages/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 08:22:18 GMT -->

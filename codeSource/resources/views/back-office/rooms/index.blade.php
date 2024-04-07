@@ -2,12 +2,13 @@
 
 
 @section('content')
-    <div class="container">
+    <div class="container table-responsive">
 
 
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTagModal">
             Add New role
         </button>
+
         <table class="table border" id="nn">
             <thead class="border">
                 <tr>
@@ -88,10 +89,12 @@
                                                         <select name="type_accept" id="typeAccept" class="form-control"
                                                             required>
                                                             <option value="auto"
-                                                                @if ($row->typeAccept === 'auto') selected @endif>Automatic
+                                                                @if ($row->typeAccept === 'auto') selected @endif>
+                                                                Automatic
                                                             </option>
                                                             <option value="manuelle"
-                                                                @if ($row->typeAccept === 'manuelle') selected @endif>manuelle
+                                                                @if ($row->typeAccept === 'manuelle') selected @endif>
+                                                                manuelle
                                                             </option>
                                                         </select>
                                                     </div>
@@ -101,7 +104,8 @@
                                                             required>
                                                             <option value="">Select Category</option>
                                                             @foreach ($categories as $category)
-                                                                <option value="{{ $category->id }}">{{ $category->name }}
+                                                                <option value="{{ $category->id }}">
+                                                                    {{ $category->name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -112,7 +116,8 @@
                                                             multiple required>
                                                             <option value="">Select Service</option>
                                                             @foreach ($services as $service)
-                                                                <option value="{{ $service->id }}">{{ $service->name }}
+                                                                <option value="{{ $service->id }}">
+                                                                    {{ $service->name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -150,6 +155,7 @@
                 @endforeach
             </tbody>
         </table>
+
         <!-- Display pagination links -->
         <div class="pagination">
             {{ $rooms->links('pagination::bootstrap-4') }}
