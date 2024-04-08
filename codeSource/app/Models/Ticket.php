@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model
+class Ticket extends Model
 {
     use HasFactory;
-    protected $table = "payments";
+    protected $table = 'tickets';
     protected $fillable = [
-        'reservation_id',
-        'amount',
-        'is_paid',
+        'payment_id',
+        'token',
     ];
 }

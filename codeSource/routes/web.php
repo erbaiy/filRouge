@@ -7,6 +7,7 @@ use  App\Http\Controllers\ForgetPassword;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
 use App\Http\controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ResevationController;
 use App\Http\Controllers\RoleController;
@@ -24,13 +25,23 @@ use App\Models\User;
 |
 */
 
+
+
+// routes/web.php
+// routes/web.php
+
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+Route::post('/payment', [PaymentController::class, 'process'])->name('payment.process');
+
+
+
 Route::get('/acceuille', [HomeController::class, 'index']);
 Route::post('/reserve', [HomeController::class, 'reserve'])->name("reserve");
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/gallery', function () {
-    return view('front-office.gallery');
+Route::get('/detail', function () {
+    return view('detaill');
 });
 // Route::get('/test', function () {
 //     return view('test');
@@ -38,8 +49,8 @@ Route::get('/gallery', function () {
 
 
 // back-office
-Route::get('/Dashboard', function () {
-    return view('back-office.dashboard');
+Route::get('/ticket', function () {
+    return view('ticket');
 });
 Route::get('/profile', function () {
     return view('back-office.profile');

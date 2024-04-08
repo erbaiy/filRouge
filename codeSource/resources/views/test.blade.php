@@ -73,40 +73,8 @@
             opacity: 0 !important
         }
     </style>
-    {{-- <script src="https://js.stripe.com/v3/"></script>
-    <script>
-        // Create a Stripe client
-        var stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY');
+    <script src="https://js.stripe.com/v3/"></script>
 
-        // Create an instance of elements
-        var elements = stripe.elements();
-
-        // Create the card element
-        var card = elements.create('card');
-        card.mount('#card-element');
-
-        // Handle form submission
-        var form = document.getElementById('reservation-form');
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            stripe.createToken(card).then(function(result) {
-                if (result.error) {
-                    // Handle error
-                } else {
-                    // Append the token to the form data
-                    var tokenInput = document.createElement('input');
-                    tokenInput.setAttribute('type', 'hidden');
-                    tokenInput.setAttribute('name', 'token');
-                    tokenInput.setAttribute('value', result.token.id);
-                    form.appendChild(tokenInput);
-
-                    // Submit the form
-                    form.submit();
-                }
-            });
-        });
-    </script> --}}
 
 
     {{-- <script>
@@ -391,9 +359,7 @@
                                             </div>
                                             <div>
                                                 {{ $room->description }}
-
                                             </div>
-
                                             <div class="card-footer"
                                                 style="    display: flex;
                                         justify-content: space-between;
@@ -416,7 +382,81 @@
                                                                     data-bs-dismiss="modal"
                                                                     aria-label="Close"></button>
                                                             </div>
-                                                            <form action="{{ route('reserve') }}" method="POST"
+                                                            <form action="{{ route('reserve') }}" method="post">
+                                                                @csrf
+
+                                                                <div class="card">
+                                                                    <div class="card-header">
+                                                                        <ul class="nav nav-tabs">
+                                                                            <li class="nav-item">
+                                                                                <a class="nav-link"
+                                                                                    href="#">Account</a>
+                                                                            </li>
+                                                                            <li class="nav-item">
+                                                                                <a class="nav-link active"
+                                                                                    href="#">Payment</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <input type="hidden" name="stripeToken">
+                                                                    <div class="card-body">
+                                                                        <input type="hidden" name="user_id"
+                                                                            value="{{ session('id') }}">
+                                                                        <input type="hidden" name="room_id"
+                                                                            value="{{ $room->id }}">
+                                                                        <input type="hidden" name="price"
+                                                                            value="{{ $room->price }}">
+
+                                                                        <div class="row mb-3">
+                                                                            <label for="checkin"
+                                                                                class="col-sm-3 col-form-label">Check-in</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="date"
+                                                                                    class="form-control"
+                                                                                    id="checkin" name="checkin"
+                                                                                    placeholder="Check-in date"
+                                                                                    required>
+                                                                                <div class="invalid-feedback">Please
+                                                                                    enter a valid check-in date.</div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mb-3">
+                                                                            <label for="checkout"
+                                                                                class="col-sm-3 col-form-label">Check-out</label>
+                                                                            <div class="col-sm-9">
+                                                                                <input type="date"
+                                                                                    class="form-control"
+                                                                                    id="checkout" name="checkout"
+                                                                                    placeholder="Check-out date"
+                                                                                    required>
+                                                                                <div class="invalid-feedback">Please
+                                                                                    enter a valid check-out date.</div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="row mb-3">
+                                                                            <label for="card-element"
+                                                                                class="col-sm-3 col-form-label">Payment
+                                                                                Card</label>
+                                                                            <div class="col-sm-9">
+                                                                                <div id="card-element"></div>
+                                                                                <div class="invalid-feedback">Please
+                                                                                    enter valid card details.</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary mt-3 mt-md-0">Reserve
+                                                                            Now</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+
+                                                            {{-- <form action="{{ route('reserve') }}" method="POST"
                                                                 id="payment-form">
                                                                 @csrf
                                                                 <input type="hidden" name="token"
@@ -546,7 +586,6 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div id="card-element"></div>
                                                                 <button type="button" id="submit-payment">Add
                                                                     card</button>
 
@@ -559,7 +598,7 @@
                                                                     <button type="button" class="btn btn-secondary"
                                                                         data-bs-dismiss="modal">Close</button>
                                                                 </div>
-                                                            </form>
+                                                            </form> --}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -687,9 +726,8 @@
         crossorigin="anonymous"></script>
 
 
-
     {{-- stripe  start --}}
-    <script src="https://js.stripe.com/v3/"></script>
+    {{-- <script src="https://js.stripe.com/v3/"></script>
     <script src="https://js.stripe.com/v3/elements.js"></script>
 
     <script>
@@ -722,7 +760,7 @@
                 }
             });
         });
-    </script>
+    </script> --}}
     {{-- end stripe --}}
 </body>
 
