@@ -81,7 +81,7 @@
 </head>
 
 <body class>
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0"
+    <noscript><iframe src="https://wwwmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="container position-sticky z-index-sticky top-0">
@@ -146,56 +146,38 @@
         </div>
     </div>
     <main class="main-content  mt-0">
-
         <section>
-            <div class="page-header min-vh-75">
-
-                <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
-                    <div class="card card-plain mt-8 ml-3">
-                        <div class="card-header pb-0 text-left bg-transparent">
-                            <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
-                            <p class="mb-0">Enter your email and password to sign in</p>
-                        </div>
-                        <div class="card-body">
-
-                            <div class="book-room">
-                                <h1>Book a Room Online</h1>
-                                <form class="book-now">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label for="arrival">Arrival Date:</label>
-                                            <input type="date" class="form-control" id="arrival" name="arrival"
-                                                placeholder="dd/mm/yyyy">
+            {{-- <div class="page-header min-vh-75 d-flex flex-column">
+                <div class="col-xl-4 col-lg-5 col-md-6 mx-auto">
+                    <div class="card card-plain mt-8">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="room">
+                                    <div class="bed_room">
+                                        <h3>Bed Room</h3>
+                                        <div>
+                                            A parais
                                         </div>
-                                        <div class="col-md-4">
-                                            <label for="departure">Departure Date:</label>
-                                            <input type="date" class="form-control" id="departure"
-                                                name="departure" placeholder="dd/mm/yyyy">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="departure">travels</label>
-                                            <select class="form-control" name="" id="">
-                                                <option value="oneway">One Way</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 pt-" style="padding-top: 2rem !important;">
-                                            <button type="submit" class="btn btn-primary">Book Now</button>
+                                        <div class="card-footer d-flex justify-content-between align-items-center">
+                                            <span class="float-left price">$59/night</span>
+                                            <a href="#" class="btn btn-outline-success float-right">Reserve</a>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
+                            </div>
+                            <div class="col-md-6 d-none d-md-block">
+                                <div class="oblique position-absolute top-0 h-100">
+                                    <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0"
+                                        style="background-image: url('assets/img/65fa16d973db3_User-Signup-and-Sign-in-using-HTML-and-PHP.png');">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                        <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
-                            style="background-image:url('https://www.teledataict.com/media/2021/08/hotel_technology-1024x576.jpg')">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div> --}}
         </section>
+
 
 
         <section>
@@ -206,37 +188,30 @@
                 </script>
             @endif
             <div class="container">
-                <div class="row">
-
-                    <div class="row">
+                <div class="col-xl-4 col-lg-5 col-md-6 mx-auto">
+                    <div class="card card-plain mt-8">
                         <div class="col-md-4 col-sm-6">
                             <div class="room">
-                                <div class="room_img">
-                                    <figure>
-                                        <img src="https://www.beleontours.com/Media/Hotels/rooms_76938894_NJV%20Athens%20Plaza%20-%20Rooms%20H%20(7).jpg?w=750&h=430&mode=crop&scale=both"
-                                            alt="#" style="width:100%;border-radius:15px;">
-                                    </figure>
-                                </div>
                                 <div class="bed_room">
-
                                     <h3>Bed Room</h3>
                                     <div>
                                         A parais
                                     </div>
-
-                                    <div class="card-footer"
-                                        style="    display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;">
+                                    <div class="card-footer d-flex justify-content-between align-items-center">
                                         <span class="float-left price">$59/night</span>
                                         <a href="#" class="btn btn-outline-success float-right">Reserve</a>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
-
+                        <div class="col-md-6 d-none d-md-block">
+                            <div class="oblique position-absolute top-0 h-100">
+                                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0"
+                                    style="background-image: url('assets/img/65fa16d973db3_User-Signup-and-Sign-in-using-HTML-and-PHP.png');">
+                                </div>
+                            </div>
+                        </div>
+                        {{-- </div> --}}
                     </div>
                 </div>
             </div>

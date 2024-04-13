@@ -50,7 +50,7 @@ Route::get('/detail', function () {
 
 // back-office
 Route::get('/ticket', function () {
-    return view('ticket');
+    return view('emails.ticket');
 });
 Route::get('/profile', function () {
     return view('back-office.profile');
@@ -88,6 +88,9 @@ Route::delete('/room/delete/{id}', [RoomController::class,  'destroy'])->name('r
 Route::get('/getRoomsForApproval', [RoomController::class,  'getRoomsForApproval'])->name('room.getRoomsForApproval');
 Route::delete('/room/refuse/{id}', [RoomController::class,  'refuse'])->name('room.refuse');
 Route::delete('/room/accept/{id}', [RoomController::class,  'accept'])->name('room.accept');
+// soft delte 
+Route::get('/getRoomDeteted', [RoomController::class,  'getRoomDeleted'])->name('room.getRoomDeteted');
+Route::put('/room/restoreRoom/{id}', [RoomController::class,  'restoreRoom'])->name('room.restoreRoom');
 
 //Service routes
 Route::get('/service', [ServiceController::class,  'index'])->name('service.index');

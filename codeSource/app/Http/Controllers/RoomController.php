@@ -30,7 +30,6 @@ class RoomController extends Controller
             'room_type' => 'required',
             'description' => 'required',
             'image' => 'required|image', // Ensure image is valid image file
-            'type_accept' => 'required',
             'price' => 'required|numeric', // Validate price is a number
             'user_id' => 'required',
             'category_id' => 'required',
@@ -67,6 +66,7 @@ class RoomController extends Controller
             return back()->with('error', 'Room creation failed');
         }
 
+
         return back()->with('success', 'Room created successfully');
     }
 
@@ -78,7 +78,6 @@ class RoomController extends Controller
             'room_type' => 'required',
             'description' => 'required',
             'image' => 'required',
-            'type_accept' => 'required',
             'price' => 'required',
             'user_id' => 'required',
             'category_id' => 'required',
@@ -171,5 +170,18 @@ class RoomController extends Controller
         $room->is_accepted = 'accepte';
         $room->save();
         return back()->with('success', 'Room accepted');
+    }
+
+
+    public function getRoomDeleted()
+    {
+        $rooms = Room::withTrashed()->where('deleted_at', '!=', null)->get();
+        return view('back-office.rooms.softDelete', compact('rooms'));
+    }
+    public function restoreRoom($id)
+    {
+        $room = Room::withTrashed()->find($id);
+        $room->restore();
+        return back()->with('success', 'Room restored');
     }
 }

@@ -4,19 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Room extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
     protected $table = 'rooms';
-    protected $fillable =
-    [
+
+    protected $fillable = [
         'room_type',
         'description',
         'image',
-        'type_accept',
         'price',
         'user_id',
         'category_id',
     ];
+
+    protected $dates = ['deleted_at'];
 }

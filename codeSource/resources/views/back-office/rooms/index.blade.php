@@ -2,6 +2,17 @@
 
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="container table-responsive">
 
 
@@ -84,20 +95,7 @@
                                                         @endif
 
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <label for="typeAccept" class="form-label">Type Accept</label>
-                                                        <select name="type_accept" id="typeAccept" class="form-control"
-                                                            required>
-                                                            <option value="auto"
-                                                                @if ($row->typeAccept === 'auto') selected @endif>
-                                                                Automatic
-                                                            </option>
-                                                            <option value="manuelle"
-                                                                @if ($row->typeAccept === 'manuelle') selected @endif>
-                                                                manuelle
-                                                            </option>
-                                                        </select>
-                                                    </div>
+
                                                     <div class="mb-3">
                                                         <label for="category" class="form-label">Category</label>
                                                         <select name="category_id" id="category" class="form-control"
@@ -127,8 +125,7 @@
                                                         <label for="price" class="form-label">Night Price</label>
                                                         <input type="text" name="price" class="form-control"
                                                             id="price" required value="{{ $row->price }}">
-                                                        <input type="hidden" name="user_id"
-                                                            value="{{ session('id') }}">
+                                                        <input type="hidden" name="user_id" value="{{ session('id') }}">
                                                     </div>
                                                 </div>
                                                 <!-- Modal Footer -->
@@ -194,15 +191,7 @@
                             <label for="image" class="form-label">Image</label>
                             <input type="file" name="image" class="form-control" id="image" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="typeAccept" class="form-label">Type Accept</label>
-                            <select name="type_accept" id="typeAccept" class="form-control" required>
-                                <option value="">Select Type Accept</option>
-                                @foreach (['auto', 'manuelle'] as $type)
-                                    <option value="{{ $type }}">{{ ucfirst($type) }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
                         <div class="mb-3">
                             <label for="category" class="form-label">Category</label>
                             <select name="category_id" id="category" class="form-control" required>

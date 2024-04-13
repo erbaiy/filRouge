@@ -12,6 +12,8 @@ class ReservationController extends Controller
         $reservations = Reservation::select('*')
             ->join('users', 'reservations.user_id', '=', 'users.id')
             ->join('rooms', 'reservations.room_id', '=', 'rooms.id')
+            ->where('reservations.status', '=', 'pending')
+            ->where('rooms.type_accept', '=', 'manuelle')
             ->get();
 
         return view('back-office.reservation', compact('reservations'));
