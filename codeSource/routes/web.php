@@ -8,6 +8,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
 use App\Http\controllers\HomeController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ResevationController;
 use App\Http\Controllers\RoleController;
@@ -59,6 +60,9 @@ Route::get('/profile', function () {
 Route::get('/tables', function () {
     return view('back-office.tables');
 });
+
+Route::get('/profile', [ProfileController::class, 'index']);
+Route::put('/annulerReservation/{id}', [ProfileController::class, 'annulerReservation'])->name('annulerReservation');
 
 
 // the below code  is all routes has rolation with authentification:

@@ -68,6 +68,9 @@
 
     <link id="pagestyle" href="../assets/css/soft-ui-dashboard.minf2ad.css?v=1.0.7" rel="stylesheet" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
     <style>
         .async-hide {
             opacity: 0 !important
@@ -197,6 +200,21 @@
                                     <a href="https://www.creative-tim.com/product/soft-ui-dashboard"
                                         class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Sing In</a>
                                 </li>
+
+                            </ul>
+                            <ul>
+                                <li class="nav-item">
+                                    <a class="nav-link  active" href="">
+                                        <div
+                                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                            <i class="fas fa-user default-icon"></i>
+
+                                        </div>
+                                    </a>
+
+
+                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -382,7 +400,8 @@
                                                                     data-bs-dismiss="modal"
                                                                     aria-label="Close"></button>
                                                             </div>
-                                                            <form action="{{ route('reserve') }}" method="post">
+                                                            <form action="{{ route('reserve') }}" method="post"
+                                                                id="payment-form">
                                                                 @csrf
 
                                                                 <div class="card">
@@ -446,6 +465,8 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+
+                                                                    <div id="card-errors" role="alert"></div>
 
                                                                     <div class="modal-footer">
                                                                         <button type="submit"
@@ -726,42 +747,80 @@
         crossorigin="anonymous"></script>
 
 
-    {{-- stripe  start --}}
+    {{-- stripe --}}
     {{-- <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://js.stripe.com/v3/elements.js"></script>
-
     <script>
-        var stripe = Stripe(
-            'pk_test_51OgSVDJsUWbtqrB0BZQVmybq1Hdwu6VGjRGLdVM8YuUlRWWCJkfj7zJntK9uaaRTTimcXo79TD87AR324RHStdUo00VdKYvNGF'
-        );
-        var elements = stripe.elements();
-        var cardElement = elements.create('card');
-        cardElement.mount('#card-element');
-        var form = document.getElementById('payment-form');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create a Stripe client using your public key
+            var stripe = Stripe('{{ config('services.stripe.key') }}');
+            var elements = stripe.elements();
 
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
+            // Custom styling for the Stripe card element
+            var style = {
+                base: {
+                    color: '#32325d',
+                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                    fontSmoothing: 'antialiased',
+                    fontSize: '16px',
+                    '::placeholder': {
+                        color: '#aab7c4'
+                    }
+                },
+                invalid: {
+                    color: '#fa755a',
+                    iconColor: '#fa755a'
+                }
+            };
 
-            stripe.createToken(cardElement).then(function(result) {
-                if (result.error) {
-                    // Handle error
-                    console.error(result.error.message);
+            // Create an instance of the card Element and mount it
+            var card = elements.create('card', {
+                style: style
+            });
+            card.mount('#card-element');
+
+            // Real-time validation errors for the card element
+            card.addEventListener('change', function(event) {
+                var displayError = document.getElementById('card-errors');
+                if (event.error) {
+                    displayError.textContent = event.error.message;
                 } else {
-                    // Token created successfully
-                    var token = result.token;
-                    // Add the token to the form as a hidden input field
-                    var tokenInput = document.createElement('input');
-                    tokenInput.setAttribute('type', 'hidden');
-                    tokenInput.setAttribute('name', 'token');
-                    tokenInput.setAttribute('value', token.id);
-                    form.appendChild(tokenInput);
-                    // Submit the form
-                    form.submit();
+                    displayError.textContent = '';
                 }
             });
+
+            // Handle form submission
+            var form = document.getElementById('payment-form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                stripe.createToken(card).then(function(result) {
+                    if (result.error) {
+                        // Inform the user if there was an error
+                        var errorElement = document.getElementById('card-errors');
+                        errorElement.textContent = result.error.message;
+                    } else {
+                        // Send the token to your server
+                        stripeTokenHandler(result.token);
+                    }
+                });
+            });
+
+            // Insert the token ID into the form so it gets submitted to the server
+            function stripeTokenHandler(token) {
+                var form = document.getElementById('payment-form');
+                var hiddenInput = document.createElement('input');
+                hiddenInput.setAttribute('type', 'hidden');
+                hiddenInput.setAttribute('name', 'stripeToken');
+                hiddenInput.setAttribute('value', token.id);
+                form.appendChild(hiddenInput);
+
+                // Submit the form
+                form.submit();
+            }
         });
     </script> --}}
-    {{-- end stripe --}}
+
+
 </body>
 
 <!-- Mirrored from demos.creative-tim.com/soft-ui-dashboard/pages/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 10 Jan 2024 08:22:18 GMT -->
