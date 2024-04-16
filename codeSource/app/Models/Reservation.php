@@ -15,7 +15,9 @@ class Reservation extends Model
         'checkin',
         'checkout',
         'number_of_nights',
-        'total_price'
+        'total_price',
+        'status'
+
     ];
 
     public function user()

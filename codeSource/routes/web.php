@@ -61,7 +61,7 @@ Route::get('/tables', function () {
     return view('back-office.tables');
 });
 
-Route::get('/profile', [ProfileController::class, 'index']);
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::put('/annulerReservation/{id}', [ProfileController::class, 'annulerReservation'])->name('annulerReservation');
 
 

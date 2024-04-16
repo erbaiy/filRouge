@@ -20,7 +20,7 @@ return new class extends Migration
             $table->dateTime('checkin');
             $table->dateTime('checkout');
             $table->integer('number_of_nights');
-            $table->enum('status', ['accepted', 'rejected', 'pending'])->default('pending');
+            $table->string('status')->default('active'); // e.g., active, cancelled, completed
             $table->boolean('is_annuller')->nullable();
             $table->decimal('total_price', 10, 3);
             $table->timestamps();

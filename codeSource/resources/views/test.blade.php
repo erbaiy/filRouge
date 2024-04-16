@@ -204,12 +204,10 @@
                             </ul>
                             <ul>
                                 <li class="nav-item">
-                                    <a class="nav-link  active" href="">
-                                        <div
-                                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                            <i class="fas fa-user default-icon"></i>
+                                    <a class="nav-link  active" href="{{ route('profile') }}">
 
-                                        </div>
+                                        <i class="fas fa-user default-icon"></i>
+
                                     </a>
 
 
@@ -339,6 +337,19 @@
             <div class="container">
                 <div class="row">
                     <div class="container">
+                        @if (session('success'))
+                            <div class="alert alert-success"
+                                style="color: green; background-color: #ccffcc; border: 1px solid green; padding: 10px; margin-top: 20px; border-radius: 5px; text-align: center;">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if (session('error'))
+                            <div class="alert alert-danger"
+                                style="color: red; background-color: #ffcccc; border: 1px solid red; padding: 10px; margin-top: 20px; border-radius: 5px; text-align: center;">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <div class="row" style="justify-content: center">
                             <div class="col-md-12">
                                 <div class="titlepage text-center" style="margin: 40px;">
@@ -350,47 +361,68 @@
                             </div>
 
                         </div>
+
                         <div class="row">
-                            @foreach ($rooms as $room)
-                                <div class="col-md-4 col-sm-6">
-                                    <div class="room">
-                                        <div class="room_img">
-                                            <figure>
-                                                <img src="{{ 'assets/img/' . $room->image }}" alt="#"
-                                                    style="width: 100%; border-radius: 15px;">
-                                            </figure>
+
+
+
+                            {{-- <div class="col-md-4 col-sm-6">
+                                <div class="room">
+                                    <div class="room_img">
+                                        <figure>
+                                            <img src="https://www.beleontours.com/Media/Hotels/rooms_76938894_NJV%20Athens%20Plaza%20-%20Rooms%20H%20(7).jpg?w=750&h=430&mode=crop&scale=both"
+                                                alt="#" style="width:100%;border-radius:15px;">
+                                        </figure>
+                                    </div>
+                                    <div class="bed_room">
+
+                                        <h3>Bed Room</h3>
+                                        <div>
+                                            A parais
                                         </div>
-                                        <div class="bed_room">
-                                            <div
-                                                style="  
-                                              display: flex;
-                                        justify-content: space-between;    
-                                        padding: 0px 20px;">
-                                                <div>
-                                                    <h4>{{ $room->room_type }}</h4>
-                                                </div>
-                                                <div>
-                                                    <span>
-                                                        {{ $room->price }}$
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                {{ $room->description }}
-                                            </div>
-                                            <div class="card-footer"
-                                                style="    display: flex;
+
+                                        <div class="card-footer"
+                                            style="    display: flex;
                                         justify-content: space-between;
                                         align-items: center;">
-                                                <span class="float-left price">services</span>
-                                                <button data-bs-toggle="modal"
-                                                    data-bs-target="#fullScreenModal{{ $room->id }}"
-                                                    class="btn btn-outline-success float-right">Reserve</button>
+                                            <span class="float-left price">$59/night</span>
+                                            <a href="#" class="btn btn-outline-success float-right">Reserve</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div> --}}
+                            @foreach ($roomsWithServices as $roomData)
+                                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                                    <div class="card card-blog card-plain">
+                                        <div class="position-relative">
+                                            <a class="d-block shadow-xl border-radius-xl">
+                                                <img src="{{ 'assets/img/' . $roomData['room']->image }}"
+                                                    alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
+
+                                            </a>
+                                        </div>
+                                        <div class="card-body px-1 pb-0">
+                                            <p class="text-gradient text-dark mb-2 text-sm">
+                                                {{ $roomData['room']->price }}$</p>
+                                            <a href="javascript:;">
+                                                <h5>
+                                                    {{ $roomData['room']->room_type }}
+                                                </h5>
+                                            </a>
+                                            <p class="mb-4 text-sm">
+                                                {{ $roomData['room']->description }}
+                                            </p>
+
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <button type="button" data-bs-toggle="modal"
+                                                    data-bs-target="#fullScreenModal{{ $roomData['room']->id }}"
+                                                    class="btn btn-outline-primary btn-sm mb-0">reserve</button>
                                                 {{-- modal start --}}
 
-                                                <div class="modal fade" id="fullScreenModal{{ $room->id }}"
-                                                    tabindex="-1" aria-labelledby="fullScreenModalLabel"
-                                                    aria-hidden="true">
+                                                <div class="modal fade"
+                                                    id="fullScreenModal{{ $roomData['room']->id }}" tabindex="-1"
+                                                    aria-labelledby="fullScreenModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered modal-fullscreen">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -422,9 +454,9 @@
                                                                         <input type="hidden" name="user_id"
                                                                             value="{{ session('id') }}">
                                                                         <input type="hidden" name="room_id"
-                                                                            value="{{ $room->id }}">
+                                                                            value="{{ $roomData['room']->id }}">
                                                                         <input type="hidden" name="price"
-                                                                            value="{{ $room->price }}">
+                                                                            value="{{ $roomData['room']->price }}">
 
                                                                         <div class="row mb-3">
                                                                             <label for="checkin"
@@ -477,190 +509,65 @@
                                                             </form>
 
 
-                                                            {{-- <form action="{{ route('reserve') }}" method="POST"
-                                                                id="payment-form">
-                                                                @csrf
-                                                                <input type="hidden" name="token"
-                                                                    value="{{ bin2hex(random_bytes(16)) }}">
-                                                                <div class="modal-body">
-                                                                    <div class="card">
-                                                                        <div class="card-header">
-                                                                            <ul class="nav nav-tabs">
-                                                                                <li class="nav-item">
-                                                                                    <a class="nav-link"
-                                                                                        href="#">Account</a>
-                                                                                </li>
-                                                                                <li class="nav-item">
-                                                                                    <a class="nav-link active"
-                                                                                        href="#">Payment</a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <div class="card-body">
-                                                                            <input type="hidden" name="user_id"
-                                                                                value="{{ session('id') }}"
-                                                                                id="">
-                                                                            <input type="hidden" name="room_id"
-                                                                                value="{{ $room->id }}"
-                                                                                id="">
-                                                                            <input type="hidden" name="price"
-                                                                                value="{{ $room->price }}"
-                                                                                id="">
-                                                                            <div id="card-element">
-                                                                                <div class="row mb-3">
-                                                                                    <label
-                                                                                        for="">Check-in</label>
-                                                                                    <div class="col-7">
-                                                                                        <input type="date"
-                                                                                            name="checkin"
-                                                                                            class="form-control"
-                                                                                            placeholder="Check-in">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row mb-3">
-                                                                                    <label
-                                                                                        for="">Check-out</label>
-                                                                                    <div class="col-7">
-                                                                                        <input type="date"
-                                                                                            name="checkout"
-                                                                                            class="form-control"
-                                                                                            placeholder="Check-out">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <h5 class="card-title">Saved cards:
-                                                                                </h5>
-                                                                                <div class="row mb-3">
-                                                                                    <div class="col-2">
-                                                                                        <img class="img-fluid"
-                                                                                            src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
-                                                                                    </div>
-                                                                                    <div class="col-7">
-                                                                                        <input type="text"
-                                                                                            name="token"
-                                                                                            class="form-control"
-                                                                                            placeholder="**** **** **** 3193">
-                                                                                    </div>
-                                                                                    <div class="col-3">
-                                                                                        <a href="#"
-                                                                                            class="btn btn-link">Remove
-                                                                                            card</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row mb-3">
-                                                                                    <div class="col-2">
-                                                                                        <img class="img-fluid"
-                                                                                            src="https://img.icons8.com/color/48/000000/visa.png" />
-                                                                                    </div>
-                                                                                    <div class="col-7">
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            placeholder="**** **** **** 4296">
-                                                                                    </div>
-                                                                                    <div class="col-3">
-                                                                                        <a href="#"
-                                                                                            class="btn btn-link">Remove
-                                                                                            card</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <h5 class="card-title">Add new card:
-                                                                                </h5>
-                                                                                <div class="row mb-3">
-                                                                                    <div class="col-12">
-                                                                                        <label for="cardHolderName"
-                                                                                            class="form-label">Card
-                                                                                            holder name</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            id="cardHolderName"
-                                                                                            placeholder="Bojan Viner">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="row mb-3">
-                                                                                    <div class="col-12 col-md-7">
-                                                                                        <label for="cardNumber"
-                                                                                            class="form-label">Card
-                                                                                            number</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            id="cardNumber"
-                                                                                            placeholder="5134-5264-4">
-                                                                                    </div>
-                                                                                    <div class="col-6 col-md-2">
-                                                                                        <label for="expDate"
-                                                                                            class="form-label">Exp.
-                                                                                            date</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            id="expDate"
-                                                                                            placeholder="MM/YY">
-                                                                                    </div>
-                                                                                    <div class="col-6 col-md-2">
-                                                                                        <label for="cvv"
-                                                                                            class="form-label">CVV</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            id="cvv"
-                                                                                            placeholder="CVV">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <button type="button" id="submit-payment">Add
-                                                                    card</button>
-
-                                                                <div class="modal-footer">
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary mt-3 mt-md-0">Add
-                                                                        card</button>
-                                                                    <button type="button" class="btn btn"
-                                                                        data-bs-dismiss="modal">Save</button>
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                </div>
-                                                            </form> --}}
                                                         </div>
                                                     </div>
                                                 </div>
                                                 {{-- modale end --}}
+                                                <div class="avatar-group mt-2">
+                                                    @foreach ($roomData['services'] as $service)
+                                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle"
+                                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                            title="{{ $service['name'] }}">
+                                                            <div class="service-item">
+                                                                <img alt="Image placeholder"
+                                                                    src="{{ asset('assets/img/' . $service['image']) }}"
+                                                                    class="service-image">
+                                                                <span
+                                                                    class="service-name">{{ $service['name'] }}</span>
+                                                            </div>
+                                                        </a>
+                                                    @endforeach
+                                                </div>
+
+                                                <style>
+                                                    .service-item {
+                                                        position: relative;
+                                                        display: inline-block;
+                                                    }
+
+                                                    .service-item .service-image {
+                                                        width: 40px;
+                                                        height: 40px;
+                                                        transition: all 0.3s ease-in-out;
+                                                    }
+
+                                                    .service-item:hover .service-image {
+                                                        width: 80px;
+                                                        height: 80px;
+                                                    }
+
+                                                    .service-name {
+                                                        position: absolute;
+                                                        bottom: -20px;
+                                                        left: 50%;
+                                                        transform: translateX(-50%);
+                                                        background-color: #000;
+                                                        color: #fff;
+                                                        padding: 5px 10px;
+                                                        border-radius: 5px;
+                                                        opacity: 0;
+                                                        transition: opacity 0.3s ease-in-out;
+                                                    }
+
+                                                    .service-item:hover .service-name {
+                                                        opacity: 1;
+                                                    }
+                                                </style>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             @endforeach
-
-
-
-                            {{-- <div class="col-md-4 col-sm-6">
-                                <div class="room">
-                                    <div class="room_img">
-                                        <figure>
-                                            <img src="https://www.beleontours.com/Media/Hotels/rooms_76938894_NJV%20Athens%20Plaza%20-%20Rooms%20H%20(7).jpg?w=750&h=430&mode=crop&scale=both"
-                                                alt="#" style="width:100%;border-radius:15px;">
-                                        </figure>
-                                    </div>
-                                    <div class="bed_room">
-
-                                        <h3>Bed Room</h3>
-                                        <div>
-                                            A parais
-                                        </div>
-
-                                        <div class="card-footer"
-                                            style="    display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;">
-                                            <span class="float-left price">$59/night</span>
-                                            <a href="#" class="btn btn-outline-success float-right">Reserve</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div> --}}
-
-
                         </div>
                     </div>
                 </div>
@@ -748,7 +655,7 @@
 
 
     {{-- stripe --}}
-    {{-- <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Create a Stripe client using your public key
@@ -818,7 +725,7 @@
                 form.submit();
             }
         });
-    </script> --}}
+    </script>
 
 
 </body>

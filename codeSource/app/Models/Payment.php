@@ -13,5 +13,6 @@ class Payment extends Model
         'reservation_id',
         'amount',
         'is_paid',
+        'status',
     ];
 }

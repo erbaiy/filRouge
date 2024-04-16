@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('payment_id')->constrained('payments');
             $table->string('token');
+            $table->string('status')->default('issued'); // e.g., issued, cancelled
             $table->timestamps();
         });
     }

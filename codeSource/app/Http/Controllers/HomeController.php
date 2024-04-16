@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{User, Room, Reservation, Payment, Ticket};
+use App\Models\{User, Room, Reservation, Payment, Service, Ticket};
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -11,13 +11,54 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ReservationTicket;
 use Stripe\Exception\ApiErrorException;
 use Stripe\Stripe;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+
+
     public function index()
     {
-        $rooms = Room::where('availability', true)->where('is_accepted', 'accepte')->get();
-        return view('test', compact('rooms'));
+        // $rooms = DB::table('rooms')
+        //     ->select('rooms.*', 'service.id as service_id', 'service.name as service_name')
+        //     ->join('room_service', 'room_service.room_id', '=', 'rooms.id')
+        //     ->join('service', 'service.id', '=', 'room_service.service_id')
+        //     ->where('rooms.availability', true)
+        //     ->where('rooms.is_accepted', 'accepte')
+        //     ->get();
+        $rooms = DB::table('rooms')
+            ->select('rooms.*', 'service.id as service_id', 'service.name as service_name', 'service.image as service_image')
+            ->join('room_service', 'room_service.room_id', '=', 'rooms.id')
+            ->join('service', 'service.id', '=', 'room_service.service_id')
+            ->where('rooms.availability', true)
+            ->where('rooms.is_accepted', 'accepte')
+            ->get();
+
+        // Organize the rooms and services into a nested array
+        $roomsWithServices = [];
+        foreach ($rooms as $room) {
+            $roomId = $room->id;
+            if (!isset($roomsWithServices[$roomId])) {
+                $roomsWithServices[$roomId] = [
+                    'room' => $room,
+                    'services' => [],
+                ];
+            }
+
+            if ($room->service_id) {
+                $service = [
+                    'id' => $room->service_id,
+                    'name' => $room->service_name,
+                    'image' => $room->service_image,
+                ];
+                $roomsWithServices[$roomId]['services'][] = $service;
+            }
+        }
+
+
+
+
+        return view('test', compact('roomsWithServices'));
     }
 
     public function reserve(Request $request)
@@ -66,7 +107,8 @@ class HomeController extends Controller
 
         Mail::to($user->email)->send(new ReservationTicket($user, $ticket, $reservation, $room));
 
-        return response()->json(['message' => 'Reservation successful'], 200);
+        return back()
+            ->with('success', 'Reservation created successfully.');
     }
 
 

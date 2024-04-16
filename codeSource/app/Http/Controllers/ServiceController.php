@@ -14,28 +14,55 @@ class ServiceController extends Controller
 
         return view('back-office.service.index', compact('services'));
     }
+    // public function store(Request $request)
+    // {
+    //     $data = $request->validate([
+
+    //         'name' => 'required',
+    //         'description' => 'required',
+    //         'image' => 'required',
+    //         'price' => 'required',
+    //     ]);
+
+    //     $image = $request->file('image');
+    //     if ($image) { // Check if image exists before processing
+    //         $uniqueFileName = uniqid() . '_' . $image->getClientOriginalName();
+    //         $image->move(public_path('assets/img'), $uniqueFileName);
+    //         $data['image'] = $uniqueFileName;
+    //     } else {
+    //         // Handle case where no image is uploaded (e.g., set default image)
+    //     }
+    //     if (!$data) {
+
+    //         return back()->with('error', 'invalide data');
+    //     }
+    //     $service = Service::create($data);
+
+    //     return back()->with("seccess", 'service created with seccess');
+    // }
+
     public function store(Request $request)
     {
         $data = $request->validate([
-
             'name' => 'required',
             'description' => 'required',
-            'image' => 'required',
+            'image' => 'required|image',
             'price' => 'required',
         ]);
 
-        //  Handle image upload
-        $image = $request->file('image');
-        $uniqueFileName = uniqid() . '_' . $image->getClientOriginalName();
-        $image->move(public_path('assets/img'), $uniqueFileName);
-
-        if (!$data) {
-
-            return back()->with('error', 'invalide data');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $uniqueFileName = uniqid() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('assets/img'), $uniqueFileName);
+            $data['image'] = $uniqueFileName;
+        } else {
+            // Handle case where no image is uploaded (e.g., set default image)
+            $data['image'] = 'default.jpg'; // Replace 'default.jpg' with your default image filename
         }
+
         $service = Service::create($data);
 
-        return back()->with("seccess", 'service created with seccess');
+        return back()->with("success", 'Service created successfully.');
     }
     public function destroy($id)
     {

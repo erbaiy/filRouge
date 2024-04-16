@@ -586,7 +586,7 @@
                                     </div>
                                 @endforeach
 
-                                {{-- <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                                     <div class="card card-blog card-plain">
                                         <div class="position-relative">
                                             <a class="d-block shadow-xl border-radius-xl">
@@ -633,7 +633,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
 
                             </div>
                             <div class="pagination">

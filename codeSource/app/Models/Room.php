@@ -22,4 +22,10 @@ class Room extends Model
     ];
 
     protected $dates = ['deleted_at'];
+
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'room_service', 'room_id', 'service_id');
+    }
 }
