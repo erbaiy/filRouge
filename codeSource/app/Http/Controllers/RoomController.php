@@ -19,8 +19,7 @@ class RoomController extends Controller
     {
         $categories = Category::all();
         $services = Service::all();
-        $rooms = Room::paginate(7);
-
+        $rooms = Room::paginate(5);
         return view('back-office.rooms.index', compact('categories', 'rooms', 'services'));
     }
     public function store(Request $request)

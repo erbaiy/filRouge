@@ -4,7 +4,19 @@
 @section('content')
     <div class="container">
 
+        @if (session('success'))
+            <div class="alert alert-success"
+                style="color: green; background-color: #ccffcc; border: 1px solid green; padding: 10px; margin-top: 20px; border-radius: 5px; text-align: center;">
+                {{ session('success') }}
+            </div>
+        @endif
 
+        @if (session('error'))
+            <div class="alert alert-danger"
+                style="color: red; background-color: #ffcccc; border: 1px solid red; padding: 10px; margin-top: 20px; border-radius: 5px; text-align: center;">
+                {{ session('error') }}
+            </div>
+        @endif
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTagModal">
             Add New role
         </button>

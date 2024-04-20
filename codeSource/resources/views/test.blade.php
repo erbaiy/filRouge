@@ -47,6 +47,7 @@
     <meta name="twitter:creator" content="@creativetim">
     <meta name="twitter:image"
         content="../../../s3.amazonaws.com/creativetim_bucket/products/450/original/opt_sd_free_thumbnail.png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta property="fb:app_id" content="655968634437471">
     <meta property="og:title" content="Soft UI Dashboard by Creative Tim" />
@@ -70,6 +71,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXxZ8SCZFbbFI1vUB4=" crossorigin="anonymous"></script>
 
     <style>
         .async-hide {
@@ -281,34 +284,46 @@
 
                 <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                     <div class="card card-plain mt-8 ml-3">
-                        <div class="card-header pb-0 text-left bg-transparent">
+                        {{-- <div class="card-header pb-0 text-left bg-transparent">
                             <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
                             <p class="mb-0">Enter your email and password to sign in</p>
-                        </div>
+                        </div> --}}
                         <div class="card-body">
 
                             <div class="book-room">
                                 <h1>Book a Room Online</h1>
                                 <form class="book-now">
+
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label for="arrival">Arrival Date:</label>
-                                            <input type="date" class="form-control" id="arrival" name="arrival"
+                                            <input type="date" class="form-control" id="checkin" name="checkin"
                                                 placeholder="dd/mm/yyyy">
                                         </div>
                                         <div class="col-md-4">
                                             <label for="departure">Departure Date:</label>
-                                            <input type="date" class="form-control" id="departure"
-                                                name="departure" placeholder="dd/mm/yyyy">
+                                            <input type="date" class="form-control" id="checkout"
+                                                name="checkout" placeholder="dd/mm/yyyy">
                                         </div>
                                         <div class="col-md-4">
-                                            <label for="departure">travels</label>
-                                            <select class="form-control" name="" id="">
-                                                <option value="oneway">One Way</option>
+                                            <label for="departure">Rooms Type</label>
+                                            <select name="room_type" id="roomTypeSelect" class="form-control"
+                                                required>
+                                                <option value="">Select Room Type</option>
+                                                @foreach (['double', 'single', 'suite'] as $type)
+                                                    <option value="{{ $type }}">{{ ucfirst($type) }}
+                                                    </option>
+                                                @endforeach
                                             </select>
+                                            {{-- <input type="text" name="" id="roomTypeSelect"> --}}
+
+
                                         </div>
+
                                         <div class="col-md-4 pt-" style="padding-top: 2rem !important;">
                                             <button type="submit" class="btn btn-primary">Book Now</button>
+                                            {{-- <button id="filterButton" onclick="handleSearch()">Filter Rooms</button> --}}
+
                                         </div>
                                     </div>
                                 </form>
@@ -362,7 +377,7 @@
 
                         </div>
 
-                        <div class="row">
+                        <div class="row" id="resultArea">
 
 
 
@@ -486,15 +501,38 @@
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="row mb-3">
-                                                                            <label for="card-element"
-                                                                                class="col-sm-3 col-form-label">Payment
-                                                                                Card</label>
-                                                                            <div class="col-sm-9">
-                                                                                <div id="card-element"></div>
-                                                                                <div class="invalid-feedback">Please
-                                                                                    enter valid card details.</div>
-                                                                            </div>
+                                                                        <div class="form-group">
+                                                                            <label for="cardNumber">Card Number</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="cardNumber" name="cardNumber"
+                                                                                placeholder="Enter card number">
+                                                                            @error('cardNumber')
+                                                                                <div class="text-danger">
+                                                                                    {{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label for="expiryDate">Expiration
+                                                                                Date</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="expiryDate" name="expiryDate"
+                                                                                placeholder="MM/YY">
+                                                                            @error('expiryDate')
+                                                                                <div class="text-danger">
+                                                                                    {{ $message }}</div>
+                                                                            @enderror
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label for="cvv">CVV</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="cvv" name="cvv"
+                                                                                placeholder="Enter CVV">
+                                                                            @error('cvv')
+                                                                                <div class="text-danger">
+                                                                                    {{ $message }}</div>
+                                                                            @enderror
                                                                         </div>
                                                                     </div>
 
@@ -654,78 +692,64 @@
         crossorigin="anonymous"></script>
 
 
-    {{-- stripe --}}
-    <script src="https://js.stripe.com/v3/"></script>
+
+
+    {{-- fiter with ajax  --}}
+    <!-- Ensure you have jQuery included -->
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Create a Stripe client using your public key
-            var stripe = Stripe('{{ config('services.stripe.key') }}');
-            var elements = stripe.elements();
+            // Get the elements
+            let roomTypeSelect = document.getElementById('roomTypeSelect');
+            let checkin = document.getElementById('checkin');
+            let checkout = document.getElementById('checkout');
 
-            // Custom styling for the Stripe card element
-            var style = {
-                base: {
-                    color: '#32325d',
-                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                    fontSmoothing: 'antialiased',
-                    fontSize: '16px',
-                    '::placeholder': {
-                        color: '#aab7c4'
-                    }
-                },
-                invalid: {
-                    color: '#fa755a',
-                    iconColor: '#fa755a'
-                }
-            };
+            // Function to handle the search
+            function handleSearch() {
+                let categoryId = roomTypeSelect.value;
+                let checkinDate = checkin.value;
+                let checkoutDate = checkout.value;
 
-            // Create an instance of the card Element and mount it
-            var card = elements.create('card', {
-                style: style
-            });
-            card.mount('#card-element');
+                // Debugging: Output the selected values
+                console.log(categoryId);
+                console.log(checkinDate);
+                console.log(checkoutDate);
 
-            // Real-time validation errors for the card element
-            card.addEventListener('change', function(event) {
-                var displayError = document.getElementById('card-errors');
-                if (event.error) {
-                    displayError.textContent = event.error.message;
+                if (categoryId && checkinDate && checkoutDate) {
+                    // Perform an AJAX request
+                    let url = `/filterRooms/${categoryId}/${checkinDate}/${checkoutDate}`;
+                    let xhr = new XMLHttpRequest();
+                    xhr.open('GET', url);
+                    xhr.responseType = 'text'; // Expecting HTML in return
+
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            document.getElementById('resultArea').innerHTML = xhr.responseText;
+                            console.log(xhr.responseText);
+                        } else {
+                            console.error("Error loading data:", xhr.responseText);
+                        }
+                    };
+
+                    xhr.onerror = function() {
+                        console.error("Error loading data");
+                    };
+
+                    xhr.send();
                 } else {
-                    displayError.textContent = '';
+                    console.error('Missing data'); // Error handling if data is missing
                 }
-            });
-
-            // Handle form submission
-            var form = document.getElementById('payment-form');
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                stripe.createToken(card).then(function(result) {
-                    if (result.error) {
-                        // Inform the user if there was an error
-                        var errorElement = document.getElementById('card-errors');
-                        errorElement.textContent = result.error.message;
-                    } else {
-                        // Send the token to your server
-                        stripeTokenHandler(result.token);
-                    }
-                });
-            });
-
-            // Insert the token ID into the form so it gets submitted to the server
-            function stripeTokenHandler(token) {
-                var form = document.getElementById('payment-form');
-                var hiddenInput = document.createElement('input');
-                hiddenInput.setAttribute('type', 'hidden');
-                hiddenInput.setAttribute('name', 'stripeToken');
-                hiddenInput.setAttribute('value', token.id);
-                form.appendChild(hiddenInput);
-
-                // Submit the form
-                form.submit();
             }
+
+            // Attach handleSearch to events
+            roomTypeSelect.addEventListener('change', handleSearch);
+            checkin.addEventListener('change', handleSearch);
+            checkout.addEventListener('change', handleSearch);
         });
     </script>
+
+
 
 
 </body>

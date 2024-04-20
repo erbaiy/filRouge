@@ -14,10 +14,8 @@
         </div>
     @endif
     <div class="container table-responsive">
-
-
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTagModal">
-            Add New role
+            Add New Room
         </button>
 
         <table class="table border" id="nn">

@@ -88,7 +88,7 @@
         <div class="row">
             <div class="col-12">
 
-                <nav
+                {{-- <nav
                     class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
                     <div class="container-fluid pe-0">
                         <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="dashboard.html"
@@ -140,43 +140,13 @@
                             </ul>
                         </div>
                     </div>
-                </nav>
+                </nav> --}}
 
             </div>
         </div>
     </div>
-    <main class="main-content  mt-0">
-        <section>
-            {{-- <div class="page-header min-vh-75 d-flex flex-column">
-                <div class="col-xl-4 col-lg-5 col-md-6 mx-auto">
-                    <div class="card card-plain mt-8">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-6">
-                                <div class="room">
-                                    <div class="bed_room">
-                                        <h3>Bed Room</h3>
-                                        <div>
-                                            A parais
-                                        </div>
-                                        <div class="card-footer d-flex justify-content-between align-items-center">
-                                            <span class="float-left price">$59/night</span>
-                                            <a href="#" class="btn btn-outline-success float-right">Reserve</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 d-none d-md-block">
-                                <div class="oblique position-absolute top-0 h-100">
-                                    <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0"
-                                        style="background-image: url('assets/img/65fa16d973db3_User-Signup-and-Sign-in-using-HTML-and-PHP.png');">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-        </section>
+    <main class="main-content  mt-2">
+
 
 
 
@@ -188,30 +158,51 @@
                 </script>
             @endif
             <div class="container">
-                <div class="col-xl-4 col-lg-5 col-md-6 mx-auto">
-                    <div class="card card-plain mt-8">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="room">
-                                <div class="bed_room">
-                                    <h3>Bed Room</h3>
-                                    <div>
-                                        A parais
-                                    </div>
-                                    <div class="card-footer d-flex justify-content-between align-items-center">
-                                        <span class="float-left price">$59/night</span>
-                                        <a href="#" class="btn btn-outline-success float-right">Reserve</a>
-                                    </div>
+                <div class="col-xl-12 col-md-6 mb-xl-0 mb-4">
+                    <div class="card card-blog card-plain">
+                        <div class="d-flex " style="justify-content: space-between">
+                            <div style="width: 400px; height: 400px; background-color: forestgreen;">
+                                main
+                            </div>
+                            <div>
+                                <div style="background-color: black;">ddddddd</div>
+                                <div style="background-color: rgb(230, 255, 192);">zdd</div>
+                                <div style="background-color: pink;">zdd</div>
+                                <div style="background-color: rgb(213, 192, 255);">zdd</div>
+                            </div>
+                        </div>
+                        <div class="card-body px-1 pb-0">
+                            <p class="text-gradient text-dark mb-2 text-sm">Project #1</p>
+                            <a href="javascript:;">
+                                <h5>
+                                    Scandinavian
+                                </h5>
+                            </a>
+                            <p class="mb-4 text-sm">
+                                Music is something that every person has his or her own specific opinion about.
+                            </p>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <button type="button" class="btn btn-outline-primary btn-sm mb-0">View Project</button>
+                                <div class="avatar-group mt-2">
+                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
+                                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nick Daniel">
+                                        <img alt="Image placeholder" src="../assets/img/team-3.jpg">
+                                    </a>
+                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
+                                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Peterson">
+                                        <img alt="Image placeholder" src="../assets/img/team-4.jpg">
+                                    </a>
+                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
+                                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Elena Morison">
+                                        <img alt="Image placeholder" src="../assets/img/team-1.jpg">
+                                    </a>
+                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
+                                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Milly">
+                                        <img alt="Image placeholder" src="../assets/img/team-2.jpg">
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 d-none d-md-block">
-                            <div class="oblique position-absolute top-0 h-100">
-                                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0"
-                                    style="background-image: url('assets/img/65fa16d973db3_User-Signup-and-Sign-in-using-HTML-and-PHP.png');">
-                                </div>
-                            </div>
-                        </div>
-                        {{-- </div> --}}
                     </div>
                 </div>
             </div>
