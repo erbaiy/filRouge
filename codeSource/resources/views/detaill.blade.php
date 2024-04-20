@@ -86,7 +86,7 @@
 
     <div class="container position-sticky z-index-sticky top-0">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 ">
 
                 <nav
                     class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
@@ -145,79 +145,191 @@
             </div>
         </div>
     </div>
-    <main class="main-content  mt-0">
-        <section>
-            {{-- <div class="page-header min-vh-75 d-flex flex-column">
-                <div class="col-xl-4 col-lg-5 col-md-6 mx-auto">
-                    <div class="card card-plain mt-8">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-6">
-                                <div class="room">
-                                    <div class="bed_room">
-                                        <h3>Bed Room</h3>
-                                        <div>
-                                            A parais
-                                        </div>
-                                        <div class="card-footer d-flex justify-content-between align-items-center">
-                                            <span class="float-left price">$59/night</span>
-                                            <a href="#" class="btn btn-outline-success float-right">Reserve</a>
-                                        </div>
-                                    </div>
-                                </div>
+    <main class="main-content mt-10">
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="row">
+                    <!-- Card left - Image Gallery -->
+                    <div class="col-md-6">
+                        <div class="product-imgs">
+                            <!-- Main Image Display -->
+                            <div class="img-display">
+                                <img src="{{ asset('assets/img/' . $room->image) }}"alt="shoe image"
+                                    class="img-fluid main-img" style="border-radius: 49px;">
                             </div>
-                            <div class="col-md-6 d-none d-md-block">
-                                <div class="oblique position-absolute top-0 h-100">
-                                    <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0"
-                                        style="background-image: url('assets/img/65fa16d973db3_User-Signup-and-Sign-in-using-HTML-and-PHP.png');">
+                            <!-- Thumbnail Images -->
+                            <div class="img-select"
+                                style="    display: flex;
+                                           justify-content: center;
+                                           align-items: center;
+                                           gap: 3px;width: 50%;">
+
+                                @php
+                                    $serviceImages = explode(',', $room->service_images);
+                                @endphp
+
+                                @foreach ($serviceImages as $service_image)
+                                    <div class="img-item m-2 ">
+                                        <a href="#" data-id="3">
+                                            <img src="{{ asset('assets/img/' . $service_image) }}" alt="shoe image"
+                                                class="img-fluid thumbnail-img rounded-circle" style="width: 100px;">
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card right - Product Details -->
+                    <div class="col-md-6">
+                        <div class="product-content">
+                            <h2 class="product-title">Hotel Room</h2>
+                            <a href="#" class="product-link">Visit Hotel Website</a>
+                            <div class="product-rating">
+                                <!-- Rating Stars -->
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="product-price">
+                                <!-- Price Information -->
+                                <p class="last-price">Room Price: <span>${{ $room->price }}</span></p>
+                            </div>
+                            <div class="product-detail">
+                                <!-- Room Details -->
+                                <h2>About This Room:</h2>
+                                <p>{{ $room->description }}</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis
+                                    eius.
+                                    Dignissimos,
+                                    labore suscipit. Unde.</p>
+                                <ul>
+                                    <!-- Room Specifications -->
+                                    <li>Room Type: <span>{{ $room->room_type }}</span></li>
+                                    <li>Category: <span>{{ $room->category_id }}</span></li>
+                                </ul>
+                            </div>
+                            <div class="purchase-info">
+                                <!-- Add to Cart Button -->
+                                <button type="button" data-bs-toggle="modal"
+                                    data-bs-target="#fullScreenModal{{ $room->id }}"
+                                    class="btn btn-outline-primary btn-sm mb-0">reserve</button>
+                                {{-- modal start --}}
+
+                                <div class="modal fade" id="fullScreenModal{{ $room->id }}" tabindex="-1"
+                                    aria-labelledby="fullScreenModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="fullScreenModalLabel">
+                                                    Full-Screen Modal</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{ route('reserve') }}" method="post" id="payment-form">
+                                                @csrf
+
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <ul class="nav nav-tabs">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" href="#">Account</a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" href="#">Payment</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <input type="hidden" name="stripeToken">
+                                                    <div class="card-body">
+                                                        <input type="hidden" name="user_id"
+                                                            value="{{ session('id') }}">
+                                                        <input type="hidden" name="room_id"
+                                                            value="{{ $room->id }}">
+                                                        <input type="hidden" name="price"
+                                                            value="{{ $room->price }}">
+
+                                                        <div class="row mb-3">
+                                                            <label for="checkin"
+                                                                class="col-sm-3 col-form-label">Check-in</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="date" class="form-control"
+                                                                    id="checkin" name="checkin"
+                                                                    placeholder="Check-in date" required>
+                                                                <div class="invalid-feedback">Please
+                                                                    enter a valid check-in date.</div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-3">
+                                                            <label for="checkout"
+                                                                class="col-sm-3 col-form-label">Check-out</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="date" class="form-control"
+                                                                    id="checkout" name="checkout"
+                                                                    placeholder="Check-out date" required>
+                                                                <div class="invalid-feedback">Please
+                                                                    enter a valid check-out date.</div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="cardNumber">Card Number</label>
+                                                            <input type="text" class="form-control"
+                                                                id="cardNumber" name="cardNumber"
+                                                                placeholder="Enter card number">
+                                                            @error('cardNumber')
+                                                                <div class="text-danger">
+                                                                    {{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="expiryDate">Expiration
+                                                                Date</label>
+                                                            <input type="text" class="form-control"
+                                                                id="expiryDate" name="expiryDate"
+                                                                placeholder="MM/YY">
+                                                            @error('expiryDate')
+                                                                <div class="text-danger">
+                                                                    {{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="cvv">CVV</label>
+                                                            <input type="text" class="form-control" id="cvv"
+                                                                name="cvv" placeholder="Enter CVV">
+                                                            @error('cvv')
+                                                                <div class="text-danger">
+                                                                    {{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="card-errors" role="alert"></div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="submit"
+                                                            class="btn btn-primary mt-3 mt-md-0">Reserve
+                                                            Now</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+
+                                        </div>
                                     </div>
                                 </div>
+                                {{-- modale end --}}
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> --}}
-        </section>
-
-
-
-        <section>
-
-            @if ($errors->any())
-                <script>
-                    alert("{{ implode(' ', $errors->all()) }}");
-                </script>
-            @endif
-            <div class="container">
-                <div class="col-xl-4 col-lg-5 col-md-6 mx-auto">
-                    <div class="card card-plain mt-8">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="room">
-                                <div class="bed_room">
-                                    <h3>Bed Room</h3>
-                                    <div>
-                                        A parais
-                                    </div>
-                                    <div class="card-footer d-flex justify-content-between align-items-center">
-                                        <span class="float-left price">$59/night</span>
-                                        <a href="#" class="btn btn-outline-success float-right">Reserve</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 d-none d-md-block">
-                            <div class="oblique position-absolute top-0 h-100">
-                                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0"
-                                    style="background-image: url('assets/img/65fa16d973db3_User-Signup-and-Sign-in-using-HTML-and-PHP.png');">
-                                </div>
-                            </div>
-                        </div>
-                        {{-- </div> --}}
-                    </div>
-                </div>
             </div>
+        </div>
 
-            </div>
-        </section>
     </main>
 
     <footer class="footer py-5">

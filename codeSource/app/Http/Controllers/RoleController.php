@@ -28,22 +28,26 @@ class RoleController extends Controller
         $role->name = $validatedData['name'];
         $role->save();
 
-        if ($role) {
-            $permissions = $validatedData['uri'];
+        if (!$role) {
+            return back()
+                ->with('error', 'error while saving role');
+        }
+        $permissions = $validatedData['uri'];
 
-            $rolePermissions = [];
+        $rolePermissions = [];
 
-            foreach ($permissions as $permissionId) {
-                $rolePermissions[] = [
-                    'role_id' => $role->id,
-                    'route_id' => $permissionId
-                ];
-            }
-
-            RoleRoute::insert($rolePermissions);
+        foreach ($permissions as $permissionId) {
+            $rolePermissions[] = [
+                'role_id' => $role->id,
+                'route_id' => $permissionId
+            ];
         }
 
-        return redirect()->route('roles.index');
+        $x = RoleRoute::insert($rolePermissions);
+
+
+        return back()
+            ->with('success', 'role creact was successfully');
     }
     public function destroy()
     {

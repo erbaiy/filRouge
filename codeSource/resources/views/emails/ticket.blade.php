@@ -8,237 +8,254 @@
     <title>Document</title>
 </head>
 <style>
-    /*
-    *	TICKET
-    *	---------------------------------------------
-    */
+    @import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
 
-    .ticket-wrap {
-        text-align: center;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body,
+    html {
+        height: 100vh;
+        display: grid;
+        font-family: "Staatliches", cursive;
+        background: #d83565;
+        color: black;
+        font-size: 14px;
+        letter-spacing: 0.1em;
     }
 
     .ticket {
-        display: inline-block;
-        margin: 0 auto;
-        border: 2px solid #9facbc;
-        font-family: "Variable Bahnschrift", "FF DIN", "Franklin Gothic", "Helvetica Neue", sans-serif;
-        font-feature-settings: "kern" 1;
-        background: #fff;
+        margin: auto;
+        display: flex;
+        background: white;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
     }
 
-    .ticket__header {
-        margin: 0;
-        padding: 1.5em;
-        background: #f4f5f6;
+    .left {
+        display: flex;
     }
 
-    .ticket__co span,
-    .ticket__route span {
-        display: block;
+    .image {
+        height: 250px;
+        width: 250px;
+        background-image: url("https://media.pitchfork.com/photos/60db53e71dfc7ddc9f5086f9/1:1/w_1656,h_1656,c_limit/Olivia-Rodrigo-Sour-Prom.jpg");
+        background-size: contain;
+        opacity: 0.85;
     }
 
-    .ticket__co {
-        display: inline-block;
-        position: relative;
-        padding-left: 5em;
-        line-height: 1;
-        color: #5e7186;
-    }
-
-    .ticket__co-icon {
+    .admit-one {
         position: absolute;
-        top: 50%;
-        margin-top: -2em;
-        left: 0;
-        width: 4em;
-        height: auto;
+        color: darkgray;
+        height: 250px;
+        padding: 0 10px;
+        letter-spacing: 0.15em;
+        display: flex;
+        text-align: center;
+        justify-content: space-around;
+        writing-mode: vertical-rl;
+        transform: rotate(-180deg);
     }
 
-    .ticket__co-name {
-        font-size: 2.5em;
-        font-variation-settings: "wght" 500, "wdth" 75;
-        letter-spacing: -.01em;
+    .admit-one span:nth-child(2) {
+        color: white;
+        font-weight: 700;
     }
 
-    .ticket__co-subname {
-        font-variation-settings: "wght" 700;
-        color: #506072;
+    .left .ticket-number {
+        height: 250px;
+        width: 250px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding: 5px;
     }
 
-    .ticket__body {
-        padding: 2rem 1.25em 1.25em;
+    .ticket-info {
+        padding: 10px 30px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: space-between;
+        align-items: center;
     }
 
-    .ticket__route {
-        font-variation-settings: "wght" 300;
-        font-size: 2em;
-        line-height: 1.1;
-    }
-
-    .ticket__description {
-        margin-top: .5em;
-        font-variation-settings: "wght" 350;
-        font-size: 1.125em;
-        color: #506072;
-    }
-
-    .ticket__timing {
+    .date {
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+        padding: 5px 0;
+        font-weight: 700;
         display: flex;
         align-items: center;
-        margin-top: 1rem;
-        padding: 1rem 0;
-        border-top: 2px solid #9facbc;
-        border-bottom: 2px solid #9facbc;
+        justify-content: space-around;
+    }
+
+    .date span {
+        width: 100px;
+    }
+
+    .date span:first-child {
         text-align: left;
     }
 
-    .ticket__timing p {
-        margin: 0 1rem 0 0;
-        padding-right: 1rem;
-        border-right: 2px solid #9facbc;
-        line-height: 1;
+    .date span:last-child {
+        text-align: right;
     }
 
-    .ticket__timing p:last-child {
-        margin: 0;
-        padding: 0;
-        border-right: 0;
+    .date .june-29 {
+        color: #d83565;
+        font-size: 20px;
     }
 
-    .ticket__small-label {
-        display: block;
-        margin-bottom: .5em;
-        font-variation-settings: "wght" 300;
-        font-size: .875em;
-        color: #506072;
+    .show-name {
+        font-size: 32px;
+        font-family: "Nanum Pen Script", cursive;
+        color: #d83565;
     }
 
-    .ticket__detail {
-        font-variation-settings: "wght" 700;
-        font-size: 1.25em;
-        color: #424f5e;
+    .show-name h1 {
+        font-size: 48px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: #4a437e;
     }
 
-    .ticket__admit {
-        margin-top: 2rem;
-        font-size: 2.5em;
-        font-variation-settings: "wght" 700, "wdth" 85;
-        line-height: 1;
-        color: #657990;
+    .time {
+        padding: 10px 0;
+        color: #4a437e;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-weight: 700;
     }
 
-    .ticket__fine-print {
-        margin-top: 1rem;
-        font-variation-settings: "wdth" 75;
-        color: #666;
+    .time span {
+        font-weight: 400;
+        color: gray;
     }
 
-    .ticket__barcode {
-        margin-top: 1.25em;
-        width: 299px;
-        max-width: 100%;
+    .left .time {
+        font-size: 16px;
     }
 
-    @media (min-width: 36em) {
-        .ticket-wrap {
-            margin-bottom: 4em;
-            text-align: center;
-        }
 
-        .ticket {
-            margin: 0 auto;
-            transform: rotate(6deg);
-        }
-
-        .ticket__header {
-            margin: 0;
-            padding: 2em;
-        }
-
-        .ticket__body {
-            padding: 3rem 2em 2em;
-        }
-
-        .ticket__detail {
-            font-size: 1.75em;
-        }
-
-        .ticket__admit {
-            margin-top: 2rem;
-        }
+    .location {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        padding-top: 8px;
+        border-top: 1px solid gray;
     }
 
-    @supports (display: grid) {
-        @media (min-width: 72em) {
+    .location .separator {
+        font-size: 20px;
+    }
 
-            .ticket-info,
-            .ticket-wrap {
-                align-self: center;
-            }
+    .right {
+        width: 180px;
+        border-left: 1px dashed #404040;
+    }
 
-            .ticket-wrap {
-                order: 2;
-                margin-bottom: 0;
-            }
+    .right .admit-one {
+        color: darkgray;
+    }
 
-            .ticket-info {
-                order: 1;
-            }
-        }
+    .right .admit-one span:nth-child(2) {
+        color: gray;
+    }
+
+    .right .right-info-container {
+        height: 250px;
+        padding: 10px 10px 10px 35px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .right .show-name h1 {
+        font-size: 18px;
+    }
+
+    .barcode {
+        height: 100px;
+    }
+
+    .barcode img {
+        height: 100%;
+    }
+
+    .right .ticket-number {
+        color: gray;
     }
 </style>
-<span>From: {{ $ticket->from }}</span>
-<span>To: {{ $ticket->to }}</span>
-<div class="l-col-right ticket-wrap" aria-label="A fake boat ticket demonstrating mixing font weights and widths">
-    <div class="ticket" aria-hidden="true">
-        <div class="ticket__header">
-            <div class="ticket__co">
-                <svg class="ticket__co-icon" xmlns="http://www.w3.org/2000/svg" width="64" height="64">
-                    <circle fill="#506072" cx="32" cy="32" r="32" />
-                    <path fill="#F4F5F6"
-                        d="M17.8 23.7c.5.2 1.1.1 1.4.2.6.1 1.3.1 1.8-.1.2-.1.5-.3.8-.5.3-.3.6-.6 1.1-1 .4-.4.9-.8 1.5-1.2.6-.4 1.3-.7 2.1-.8.4-.1.7-.1 1.1-.1h1c.7.1 1.4.3 2 .6 1.3.7 2.2 1.7 2.8 2.4.6.7 1.1 1.2 1.7 1.4.7.2 1.5.3 2.2.1.7-.2 1.4-.7 2.3-1.5.5-.4 1-.8 1.6-1.1.6-.3 1.2-.5 1.9-.6 1.2-.1 2.5.1 3.6.8 1 .7 1.7 1.6 2.5 2.3.8.7 1.8 1.2 2.9 1.2-.6 0-1.2-.1-1.8-.4-.5-.3-1-.6-1.5-1-1-.7-2-1.7-3.2-1.9-.6-.1-1.2-.1-1.7 0-.6.1-1.1.3-1.5.6-.8.5-1.3 1.6-2.4 2.8-.6.6-1.3 1.1-2.2 1.4-.9.3-1.7.3-2.6.1-1.1-.2-2-.7-2.7-1.3-.7-.6-1.1-1.1-1.5-1.5-.8-.8-1.3-1.1-1.8-1.2-.5-.1-.8-.1-.9 0-.1 0 0 .1.3.1-.2 0-.4 0-.6.1-.2.1-.3.1-.5.3-.3.2-.4.5-.6.6-.3.2-.6.5-.8.7-.4.3-.7.6-1.2 1-1 .7-2.4 1.3-3.6 1.4-.2.1-.5.1-.9.2h-.9c-.8-.2-1.6-.6-2.2-1.1-.6-.5-1-1.1-1.4-1.6-.7-1.1-1.4-2.1-2.8-2.4.3 0 .5-.1.5-.1l-.6-.3c-.5-.3-.7-.3-1-.4.2-.1.4-.1.7-.1h.8c.5 0 1.1.2 1.7.4 1 .4 1.9 1.2 2.6 1.5z" />
-                    <g opacity=".85" fill="#F4F5F6">
-                        <path
-                            d="M48.9 40.3l-.3-.3c0 .1.1.1.1.2s.1.1.2.1zM48.3 39.7l-.1-.1h-.1zM47.6 39.1l.3.3c0-.1-.1-.2-.3-.3zM48 39.6s.1-.1 0 0l.1-.1-.2-.1c.1.1.1.2.1.2zM48 39.6v.2c.1 0 .1-.1 0-.2zM47.1 40.3c-.1 0 .1-.2 0-.3-.3-.2-.6-.3-.9-.4-.1 0-.1-.4-.3-.4-.4-.1-1.2.1-.8.2.6.2 1 .4 1.6.8.5.3 1 .6 1.6 1 .1.1.3.2.4.4-.2-.2-.3-.4-.5-.6-.1-.4-.7-.4-1.1-.7zM51.6 41.8c-.1 0-.2.1-.2.1-.3-.3-.7-.2-1-.3l.1.2c.2.1.3 0 .1-.1.3.3.8.4 1.2.4-.1-.2-.1-.3-.2-.3zM52 42h-.2.2z" />
-                        <path
-                            d="M46 38.4c-1-.5-2.1-.5-3.1-.4-.1.1-.1.2-.2.1h-.3l-.4.1-.1.1c-.1.1 0 .1 0 .1h0-.2c-.1.1-.2.2-.4.2.1-.1.2-.2.4-.2l.2-.2.1-.1c-.3.1-.6.3-.9.5-.1 0-.1.1-.2.1-.2.2-.3.4-.5.4l-.1.1h-.1l-.6.5c-.1.2-.1.3-.2.5h-.2c0 .1 0 .2-.1.3.2 0 .3 0 .4-.1.2 0 0-.5.4-.4-.3-.1-.2.4-.4.4-.1 0-.3 0-.4.1-.1.3-.4.5-.6.5.2-.3.4-.3.7-.3.1-.1.1-.2.1-.3h.2c.1-.1.2-.3.2-.5-.4.3-.7.6-1.1.9-.6.4-1.3.6-2 .7-.7.1-1.4 0-2-.3-.6-.2-1.2-.7-1.7-1.2s-1.1-1.2-1.8-1.8c-.8-.6-1.9-1-2.9-1.1-1-.1-2.1.1-3.1.5-.9.5-1.6 1.2-2.2 1.7-.6.5-1.1.9-1.6 1.1-.5.2-1.2.2-1.7.1-.6-.2-1-.5-1.3-1-.3-.4-.8-1-1.7-1.8-.5-.4-1-.8-1.5-1-.6-.3-1.1-.4-1.6-.5-.6 0-1 .2-1.2.4-.3.2-.3.4-.3.6 0 .4.3.8.3.8.5.6.8.8 1.2 1 .4.3.9.6 1.4 1.6-.4-.6-.1-.6.4-.2.5.4 1.1 1.2 1.6 2 .4.6 1.1 1.1 1.9 1.3.8.2 1.6.2 2.5 0 .9-.2 1.7-.6 2.4-1.1.7-.5 1.2-1 1.7-1.4.5-.4.8-.8 1.2-1 .5-.2 1-.2 1.6-.2.6.1 1 .2 1.5.5.5.4 1.1 1 2.1 1.8.4.4 1 .7 1.7 1 .6.3 1.3.4 2 .5 1.4.1 2.7-.5 3.6-1.2.7-.5 1.4-.9 1.8-1.3.6-.6 1-1.1 1.3-1.5-.5.4-.7.8-1.3 1.4-.4.4 0-.6.2-.9.1-.2.5-.1.5-.2.2-.2.3-.5.6-.7.1-.1.2.2.3.1l.4-.4c.1-.2.3-.3.4-.2.2 0 .4 0 .6.1h.4l.2-.1c-.1-.1-.1-.2-.1-.3.1 0 .3.1.4.1-.1 0-.3-.1-.4-.1 0 .1 0 .2.1.3.6-.2 1.3-.1 2 .1-.4-.2-.7-.3-1-.6.2.1.1.2-.1.2l-.4-.4c.4 0 .8 0 1 .4h.3c.1.1 0 .2 0 .3.1 0 .1.1.2.1-.1-.2-.5-.6-.5-.6z" />
-                        <path d="M41.7 38.5c.1 0 .1-.1.2-.1-.3.1-.5.2-.7.4.2 0 .3-.2.5-.3z" />
-                    </g>
-                    <path fill="#F4F5F6"
-                        d="M12 28.7c.4.2 1 .3 1.8.6.7.3 1.5.9 2 1.5.6.6 1 1.2 1.5 1.7s.9.8 1.3 1c.6.3 1.2.3 1.6.4.4 0-.5.1-1.6-.4-.5-.2-1-.5-1.5-1 .5.8 1.2 1.4 1.9 1.7.5.1 1 .1 1.5.1 1.2 0 2.3-.6 3.1-1.4.8-.7 1.6-1.6 2.5-1.9.3-.1.9-.3 1.5-.3s1.1.1 1.4.2c-.7-.2-1.4-.2-2.1-.1-.7.1-1.3.5-1.9 1-.6.5-1.1 1.1-1.8 1.7-.7.5-1.6.9-2.5 1h.3c.9-.1 1.9-.6 2.6-1.2.7-.6 1.3-1.2 1.9-1.6.2-.1.4-.3.7-.4-.2.1-.4.2-.7.4-.5.4-1 1-1.6 1.6-.4.4-1 .7-1.5 1-.4.2-.9.2-1.4.3-.3.1-.6.1-.8.1h-.3c.2.1.8.3 1.6.2.9-.1 1.9-.6 2.7-1.3.8-.6 1.4-1.1 1.9-1.4.5-.2.8-.3 1-.3.5-.2 1.2-.6 1.9-.4.2.1.4.2.6.2h.3c.5.2.7.8 1.2 1 .1.1.2.5.3.9.1.4.2.7.3.7.7-.3.1-.1 1 .6.1.1.6 0 .8.2.7.5 1.1.4 2 .4.3 0 .6 0 .9-.1h.6c.2 0 .4-.1.6-.1.2-.1.4-.2.7-.5.1-.1.5-.3.8-.7.3-.3.6-.7.6-.7 1-.8 1.2-1.7 2.2-1.7.3-.4.8-.6 1.4-.7.6 0 1.1.1 1.6.2 1 .2 1.1.7 1.5 1.5.2.2.3.3.4.5 0 .2.5.3.7.6l-.2.1c.1.1.2.3.3.3.1.1 0 .1-.1.1-.1.1-.3.1-.2.3.3.4.8.9 1.3 1.2.6.2 1.3.3 1.9.3.1-.1.1-.2.2-.2.2 0 .3 0 .5-.1.1-.2.1-.4.2-.5.1-.5.6-1 .5-1.5 0-.2-.7-.2-.9-.5 0-.1.1-.2.2-.4-.3-.1-.3-.3-.1-.4-.1 0-.1-.1-.1-.1 0-.1.1-.2.1-.2-.5-.4-.6-1-1.5-1.6-.2-.1-.5-.3-.8-.4-.1-.1-.3-.4-.4-.5-.3 0-.4.2-.6.3-.1-.2-.4-.4-.7-.6-.3-.2-.6-.4-1-.6-.7-.3-1.2-.2-1.3.1-.8-.1-.9.2-1.7.3-.5.1-1.1.2-1.7.5-.6.3-1.1.7-1.5 1.1L38.7 32l-.4.4c-.7.6-1.3.9-2.1.9s-1.5-.1-2-.5c-.6-.3-1.1-.9-1.8-1.6-.7-.7-1.7-1.4-2.9-1.7-1.2-.2-2.4-.1-3.5.4s-1.9 1.3-2.6 2c-.7.7-1.4 1.3-2.2 1.4-.8.2-1.7.1-2.3-.1-1.3-.5-2-1.9-3-2.9-.5-.5-1.1-1-1.7-1.2-.3-.1-.5-.2-.8-.3-.2-.1-.4-.1-.6-.1H12z"
-                        opacity=".8" />
-                </svg>
-                <span class="ticket__co-name">
-                    <p> {{ $ticket->token }}</p>
-                </span>
 
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
-                <span class="u-upper ticket__co-subname">Boating Adventures</span>
+    <div class="ticket created-by-anniedotexe">
+        <div class="left">
+            <div></div>
+            <img src="{{ asset('assets/img/' . $room['image']) }}" alt="">
+            {{-- <div class="image"> --}}
+            <p class="admit-one">
+                <span>ADMIT ONE</span>
+                <span>ADMIT ONE</span>
+                <span>ADMIT ONE</span>
+            </p>
+
+            {{-- </div> --}}
+            <div class="ticket-info">
+                <p class="date">
+                    <span>TUESDAY</span>
+                    <span class="june-29">JUNE 29TH</span>
+                    <span>2021</span>
+                </p>
+                <div class="show-name">
+                    <h1>welcome </h1>
+
+                    <h2>{{ $user->name }}</h2>
+                    {{-- @dd('d') --}}
+                </div>
+                <div class="time">
+                    <p> {{ $reservation['checkin'] }}PM <span>TO</span> {{ $reservation['checkout'] }}PM</p>
+                    <p>ROOM <span>:</span> {{ $room['id'] }}</p>
+                </div>
+                <p class="location"><span>YOUSSOFIA</span>
+                    <span class="separator"><i class="far fa-smile"></i></span><span>Salt Lake City, Utah</span>
+                </p>
             </div>
         </div>
-        <div class="ticket__body">
-            <p class="ticket__route">Winter Wonderland</p>
-            <p class="ticket__description">A four-hour tour of the Strait of Garamond</p>
-            <div class="ticket__timing">
-                <p>
-                    <span class="u-upper ticket__small-label">reservation id</span>
-                    <span class="ticket__detail">{{ $room->id }}</span>
+        <div class="right">
+            <p class="admit-one">
+                <span>ADMIT ONE</span>
+                <span>ADMIT ONE</span>
+                <span>ADMIT ONE</span>
+            </p>
+            <div class="right-info-container">
+                <div class="show-name">
+                    <h1>SOUR Prom</h1>
+                </div>
+                <div class="time">
+                    <p>RESERVAION <span>ID:</span> {{ $reservation['id'] }}</p>
+
+                </div>
+                <div class="barcode">
+                    <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb"
+                        alt="QR code">
+                </div>
+                <p class="ticket-number">
+                    #20030220
                 </p>
-                <p>
-                    <span class="u-upper ticket__small-label">Checkin</span>
-                <p>{{ $reservation->checkin }}</p>
-                </p>
-                <p>
-                    <span class="u-upper ticket__small-label">Checkout</span>
-                <p>{{ $reservation->checkout }}</p>
-                </p>
+                <h3>{{ $reservation['total_price'] }}$</h3>
             </div>
-            <p class="ticket__fine-print">This ticket cannot be transferred to another voyage</p>
-            <p class="u-upper ticket__admit">Admit one adult</p>
-            <img class="ticket__barcode" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/515428/barcode.png"
-                alt="Fake barcode" />
         </div>
     </div>
-</div>
+</body>
 
 </html>

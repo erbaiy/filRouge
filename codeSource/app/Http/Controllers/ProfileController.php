@@ -20,6 +20,7 @@ class ProfileController extends Controller
             ->where('reservations.user_id', '=', $user_id)
             ->where('status', '=', 'active')
             ->paginate(4);
+        // dd($user);
 
 
         // dd($reservations);

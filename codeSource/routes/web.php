@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ResevationController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StatisiqueController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 
@@ -38,12 +39,16 @@ Route::post('/payment', [PaymentController::class, 'process'])->name('payment.pr
 
 Route::get('/acceuille', [HomeController::class, 'index']);
 Route::post('/reserve', [HomeController::class, 'reserve'])->name("reserve");
+Route::get('/filterRooms/{categoryId}/{checkinDate}/{checkoutDate}', [HomeController::class, 'filterRooms'])->name('filter.rooms');
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/detail', function () {
-    return view('detaill');
-});
+Route::get('/statistique', [StatisiqueController::class, "adminStatistique"]);
+Route::get('/organizerStatistique', [StatisiqueController::class, "organizerStatistique"]);
+Route::get('/detail/{id}', [HomeController::class, "detail"])->name('rooms.detail');
+Route::get('/gallery', [HomeController::class, "gallery"])->name('rooms.gallery');
+Route::get('/services', [HomeController::class, "service"])->name('rooms.services');
+
 // Route::get('/test', function () {
 //     return view('test');
 // });
