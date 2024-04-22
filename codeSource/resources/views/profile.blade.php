@@ -514,11 +514,24 @@
                         </div>
                     </div>
                 </div>
+                @if (session('success'))
+                    <div class="alert alert-success"
+                        style="color: green; background-color: #ccffcc; border: 1px solid green; padding: 10px; margin-top: 20px; border-radius: 5px; text-align: center;">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('failed'))
+                    <div class="alert alert-danger"
+                        style="color: red; background-color: #ffcccc; border: 1px solid red; padding: 10px; margin-top: 20px; border-radius: 5px; text-align: center;">
+                        {{ session('failed') }}
+                    </div>
+                @endif
                 <div class="col-12 mt-4">
                     <div class="card mb-4">
                         <div class="card-header pb-0 p-3">
                             <h6 class="mb-1">My Reservation</h6>
-                            <p class="text-sm">>Manage your resrvation</p>
+                            <p class="text-sm">Manage your resrvation</p>
                         </div>
                         <div class="card-body p-3">
                             <div class="row">
@@ -555,86 +568,158 @@
                                                     </form>
 
                                                     <div class="avatar-group mt-2">
-                                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                            title="Elena Morison">
-                                                            <img alt="Image placeholder"
-                                                                src="../assets/img/team-1.jpg">
-                                                        </a>
-                                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                            title="Ryan Milly">
-                                                            <img alt="Image placeholder"
-                                                                src="../assets/img/team-2.jpg">
-                                                        </a>
-                                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                            title="Nick Daniel">
-                                                            <img alt="Image placeholder"
-                                                                src="../assets/img/team-3.jpg">
-                                                        </a>
-                                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                            title="Peterson">
-                                                            <img alt="Image placeholder"
-                                                                src="../assets/img/team-4.jpg">
-                                                        </a>
+                                                        <button type="button"
+                                                            class="btn btn-outline-primary btn-sm mb-0 btn-dark"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#fullScreenModal{{ $reservation->id }}">
+                                                            update
+                                                        </button>
+
+                                                        {{-- modal start --}}
+
+                                                        <div class="modal fade"
+                                                            id="fullScreenModal{{ $reservation->id }}" tabindex="-1"
+                                                            aria-labelledby="fullScreenModalLabel" aria-hidden="true">
+                                                            <div
+                                                                class="modal-dialog modal-dialog-centered modal-fullscreen">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="fullScreenModalLabel">
+                                                                            Full-Screen Modal</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <form
+                                                                        action="{{ route('updateReservation', ['reservationId' => $reservation->id]) }}"
+                                                                        method="post" id="payment-form">
+                                                                        @method('put')
+                                                                        @csrf
+
+                                                                        <div class="card">
+                                                                            <div class="card-header">
+                                                                                <ul class="nav nav-tabs">
+                                                                                    <li class="nav-item">
+                                                                                        <a class="nav-link"
+                                                                                            href="#">Account</a>
+                                                                                    </li>
+                                                                                    <li class="nav-item">
+                                                                                        <a class="nav-link active"
+                                                                                            href="#">Payment</a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                            <input type="hidden" name="stripeToken">
+                                                                            <div class="card-body">
+                                                                                <input type="hidden" name="user_id"
+                                                                                    value="{{ session('id') }}">
+                                                                                <input type="hidden" name="room_id"
+                                                                                    value="{{ $reservation->id }}">
+                                                                                <input type="hidden" name="price"
+                                                                                    value="{{ $reservation->price }}">
+                                                                                <div class="row mb-3">
+                                                                                    <label for="checkin"
+                                                                                        class="col-sm-3 col-form-label">Check-in</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <input type="date"
+                                                                                            class="form-control"
+                                                                                            id="checkin"
+                                                                                            name="checkin"
+                                                                                            placeholder="Check-in date"
+                                                                                            value="{{ old($reservation->checkin) }}"
+                                                                                            required>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please enter a valid
+                                                                                            check-in date.
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="row mb-3">
+                                                                                    <label for="checkout"
+                                                                                        class="col-sm-3 col-form-label">Check-out</label>
+                                                                                    <div class="col-sm-9">
+                                                                                        <input type="date"
+                                                                                            class="form-control"
+                                                                                            id="checkout"
+                                                                                            name="checkout"
+                                                                                            placeholder="Check-out date"
+                                                                                            required
+                                                                                            value="{{ $reservation->checkout }}">
+                                                                                        <div class="invalid-feedback">
+                                                                                            Please
+                                                                                            enter a valid check-out
+                                                                                            date.</div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label for="cardNumber">Card
+                                                                                        Number</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="cardNumber"
+                                                                                        name="cardNumber"
+                                                                                        placeholder="Enter card number">
+                                                                                    @error('cardNumber')
+                                                                                        <div class="text-danger">
+                                                                                            {{ $message }}</div>
+                                                                                    @enderror
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label for="expiryDate">Expiration
+                                                                                        Date</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="expiryDate"
+                                                                                        name="expiryDate"
+                                                                                        placeholder="MM/YY">
+                                                                                    @error('expiryDate')
+                                                                                        <div class="text-danger">
+                                                                                            {{ $message }}</div>
+                                                                                    @enderror
+                                                                                </div>
+
+                                                                                <div class="form-group">
+                                                                                    <label for="cvv">CVV</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        id="cvv" name="cvv"
+                                                                                        placeholder="Enter CVV">
+                                                                                    @error('cvv')
+                                                                                        <div class="text-danger">
+                                                                                            {{ $message }}</div>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div id="card-errors" role="alert">
+                                                                            </div>
+
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">Close</button>
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary mt-3 mt-md-0">Reserve
+                                                                                    Now</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{-- modale end --}}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 @endforeach
-
-                                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
-                                    <div class="card card-blog card-plain">
-                                        <div class="position-relative">
-                                            <a class="d-block shadow-xl border-radius-xl">
-                                                <img src="../assets/img/home-decor-2.jpg" alt="img-blur-shadow"
-                                                    class="img-fluid shadow border-radius-lg">
-                                            </a>
-                                        </div>
-                                        <div class="card-body px-1 pb-0">
-                                            <p class="text-gradient text-dark mb-2 text-sm">Project #1</p>
-                                            <a href="javascript:;">
-                                                <h5>
-                                                    Scandinavian
-                                                </h5>
-                                            </a>
-                                            <p class="mb-4 text-sm">
-                                                Music is something that every person has his or her own specific opinion
-                                                about.
-                                            </p>
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <button type="button"
-                                                    class="btn btn-outline-primary btn-sm mb-0">View Project</button>
-                                                <div class="avatar-group mt-2">
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Nick Daniel">
-                                                        <img alt="Image placeholder" src="../assets/img/team-3.jpg">
-                                                    </a>
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Peterson">
-                                                        <img alt="Image placeholder" src="../assets/img/team-4.jpg">
-                                                    </a>
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Elena Morison">
-                                                        <img alt="Image placeholder" src="../assets/img/team-1.jpg">
-                                                    </a>
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Ryan Milly">
-                                                        <img alt="Image placeholder" src="../assets/img/team-2.jpg">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                             <div class="pagination">
                                 {{ $reservations->links('pagination::bootstrap-4') }}

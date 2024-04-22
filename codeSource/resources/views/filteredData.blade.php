@@ -55,6 +55,7 @@
                                         <div class="card-body">
                                             <input type="hidden" name="user_id" value="{{ session('id') }}">
                                             <input type="hidden" name="room_id" value="{{ $roomData['room']->id }}">
+
                                             <input type="hidden" name="price"
                                                 value="{{ $roomData['room']->price }}">
 
@@ -112,9 +113,12 @@
 
                                         <div id="card-errors" role="alert"></div>
 
-                                        <div class="modal-footer">
+                                        <div class="modal-footer"> <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+
                                             <button type="submit" class="btn btn-primary mt-3 mt-md-0">Reserve
                                                 Now</button>
+
                                         </div>
                                     </div>
                                 </form>

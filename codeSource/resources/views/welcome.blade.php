@@ -10,15 +10,8 @@
 </head>
 
 <body>
-    @if (session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
-    @endif
+    home
 
-    <form action="{{ route('payment.process') }}" method="post">
-        @csrf
-        <input type="text" name="checkin" id="">
-        <button type="submit">Pay Now</button>
-    </form>
 </body>
 
 </html>

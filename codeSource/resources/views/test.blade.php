@@ -157,7 +157,7 @@
                 <nav
                     class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
                     <div class="container-fluid pe-0">
-                        <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="dashboard.html"
+                        <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="{{ route('acceuille') }}"
                             style="font-family: fangsong;">
                             Hotelo
                         </a>
@@ -174,21 +174,18 @@
                             <ul class="navbar-nav mx-auto ms-xl-auto me-xl-7">
                                 <li class="nav-item">
                                     <a class="nav-link d-flex align-items-center me-2 active" aria-current="page"
-                                        href="dashboard.html">
-                                        <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
+                                        href="{{ '/acceuille' }}">
                                         Rooms
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link me-2" href="profile.html">
-                                        <i class="fa fa-user opacity-6 text-dark me-1"></i>
+                                    <a class="nav-link me-2" href="{{ route('rooms.services') }}">
                                         Services
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link me-2" href="sign-in.html">
-                                        <i class="fas fa-key opacity-6 text-dark me-1"></i>
+                                    <a class="nav-link me-2" href="{{ route('rooms.gallery') }}">
                                         Gallery
                                     </a>
                                 </li>
@@ -198,25 +195,23 @@
                                     href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Reserve
                                 </a>
                             </li>
+
                             <ul class="navbar-nav d-lg-block d-none">
                                 <li class="nav-item">
-                                    <a href="https://www.creative-tim.com/product/soft-ui-dashboard"
+                                    <a href="{{ route('auth_getLogin') }}"
                                         class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Sing In</a>
                                 </li>
 
                             </ul>
-                            <ul>
-                                <li class="nav-item">
-                                    <a class="nav-link  active" href="{{ route('profile') }}">
+                            <li class="nav-item d-flex align-items-center">
 
-                                        <i class="fas fa-user default-icon"></i>
+                                <a class="" href="{{ route('profile') }}">
+                                    <img src="../assets/img/bruce-mars.jpg" alt="profile_image"
+                                        class="w-100 border rounded-circle shadow" style="    height: 41px;">
+                                </a>
 
-                                    </a>
+                            </li>
 
-
-                                </li>
-
-                            </ul>
                         </div>
                     </div>
                 </nav>
@@ -359,10 +354,10 @@
                             </div>
                         @endif
 
-                        @if (session('error'))
+                        @if (session('failed'))
                             <div class="alert alert-danger"
                                 style="color: red; background-color: #ffcccc; border: 1px solid red; padding: 10px; margin-top: 20px; border-radius: 5px; text-align: center;">
-                                {{ session('error') }}
+                                {{ session('failed') }}
                             </div>
                         @endif
                         <div class="row" style="justify-content: center">
@@ -540,14 +535,15 @@
                                                                     <div id="card-errors" role="alert"></div>
 
                                                                     <div class="modal-footer">
+                                                                        <button type="button"
+                                                                            class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Close</button>
                                                                         <button type="submit"
                                                                             class="btn btn-primary mt-3 mt-md-0">Reserve
                                                                             Now</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
-
-
                                                         </div>
                                                     </div>
                                                 </div>

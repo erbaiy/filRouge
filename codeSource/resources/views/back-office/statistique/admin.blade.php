@@ -13,7 +13,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's tikets</p>
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Used tikets</p>
                                         <h5 class="font-weight-bolder mb-0">
                                             {{ $tiketsUsed }}
                                             <span class="text-success text-sm font-weight-bolder">+55%</span>
@@ -80,7 +80,7 @@
                                 <div class="col-8">
                                     <div class="numbers">
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">
-                                            completed ReservationCount
+                                            completed Reservation
                                         </p>
                                         <h5 class="font-weight-bolder mb-0">
                                             {{ $completedReservationCount }}
@@ -105,9 +105,12 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="d-flex flex-column h-100">
-                                        <p class="mb-1 pt-2 text-bold">availability Rooms</p>
+                                        <p class="mb-1 pt-2 text-bold">availabile Rooms</p>
                                         <h1 class="font-weight-bolder">{{ $availabilityRooms }}</h1>
-                                        <h2 class="mb-5">Total number of rooms</h2>
+                                        <h5 class="text-success text-sm font-weight-bolder">
+
+                                        </h5>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
@@ -128,11 +131,11 @@
                 <div class="col-lg-5">
                     <div class="card h-100 p-3">
                         <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100"
-                            style="background-image: url('../assets/img/ivancik.jpg');">
+                            style="background-image: url('https://th.bing.com/th/id/R.a09fa2cc499c71efd59e727d6fb3a4eb?rik=3MhdjVpyEN4f9w&pid=ImgRaw&r=0');">
                             <span class="mask bg-gradient-dark"></span>
                             <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
-                                <h5 class="text-white font-weight-bolder mb-4 pt-2">Tolal of event </h5>
-                                <h1 class="text-white">{{ $cancelledReservationCount }} Events</h1>
+                                <h5 class="text-white font-weight-bolder mb-4 pt-2">Cancelled Reservation </h5>
+                                <h1 class="text-white">{{ $cancelledReservationCount }} Reservation</h1>
                                 <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto"
                                     href="javascript:;">
                                     Read More
@@ -152,7 +155,7 @@
                                     <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
                                 </div>
                             </div>
-                            <h6 class="ms-2 mt-4 mb-0"> Active Users </h6>
+                            <h6 class="ms-2 mt-4 mb-0"> Users </h6>
                             <p class="text-sm ms-2"> (<span class="font-weight-bolder">+23%</span>) than last week </p>
                             <div class="container border-radius-lg">
                                 <div class="row">
@@ -256,7 +259,7 @@
                                                     </g>
                                                 </svg>
                                             </div>
-                                            <p class="text-xs mt-1 mb-0 font-weight-bold">tikets</p>
+                                            <p class="text-xs mt-1 mb-0 font-weight-bold">active Reservation</p>
                                         </div>
                                         <h4 class="font-weight-bolder">{{ $activeReservationCount }}</h4>
                                         <div class="progress w-75">
@@ -264,44 +267,7 @@
                                                 aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
-                                    <div class="col-3 py-3 ps-0">
-                                        <div class="d-flex mb-2">
-                                            <div
-                                                class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-danger text-center me-2 d-flex align-items-center justify-content-center">
-                                                <svg width="10px" height="10px" viewBox="0 0 40 40" version="1.1"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                    <title>settings</title>
-                                                    <g stroke="none" stroke-width="1" fill="none"
-                                                        fill-rule="evenodd">
-                                                        <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF"
-                                                            fill-rule="nonzero">
-                                                            <g transform="translate(1716.000000, 291.000000)">
-                                                                <g transform="translate(304.000000, 151.000000)">
-                                                                    <polygon class="color-background"
-                                                                        opacity="0.596981957"
-                                                                        points="18.0883333 15.7316667 11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667">
-                                                                    </polygon>
-                                                                    <path class="color-background"
-                                                                        d="M31.5666667,23.2333333 C31.0516667,23.2933333 30.53,23.3333333 30,23.3333333 C29.4916667,23.3333333 28.9866667,23.3033333 28.48,23.245 L22.4116667,30.7433333 L29.9416667,38.2733333 C32.2433333,40.575 35.9733333,40.575 38.275,38.2733333 L38.275,38.2733333 C40.5766667,35.9716667 40.5766667,32.2416667 38.275,29.94 L31.5666667,23.2333333 Z"
-                                                                        opacity="0.596981957"></path>
-                                                                    <path class="color-background"
-                                                                        d="M33.785,11.285 L28.715,6.215 L34.0616667,0.868333333 C32.82,0.315 31.4483333,0 30,0 C24.4766667,0 20,4.47666667 20,10 C20,10.99 20.1483333,11.9433333 20.4166667,12.8466667 L2.435,27.3966667 C0.95,28.7083333 0.0633333333,30.595 0.00333333333,32.5733333 C-0.0583333333,34.5533333 0.71,36.4916667 2.11,37.89 C3.47,39.2516667 5.27833333,40 7.20166667,40 C9.26666667,40 11.2366667,39.1133333 12.6033333,37.565 L27.1533333,19.5833333 C28.0566667,19.8516667 29.01,20 30,20 C35.5233333,20 40,15.5233333 40,10 C40,8.55166667 39.685,7.18 39.1316667,5.93666667 L33.785,11.285 Z">
-                                                                    </path>
-                                                                </g>
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                </svg>
-                                            </div>
-                                            <p class="text-xs mt-1 mb-0 font-weight-bold">Items</p>
-                                        </div>
-                                        <h4 class="font-weight-bolder">43</h4>
-                                        <div class="progress w-75">
-                                            <div class="progress-bar bg-dark w-50" role="progressbar" aria-valuenow="50"
-                                                aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
