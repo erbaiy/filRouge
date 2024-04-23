@@ -54,9 +54,10 @@ class AuthentificationController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
 
             return back()->withErrors(['email' => 'The provided credentials do not match our records.']);
-        } else {
-            session(['id' => $user->id]);
         }
+        session(['id' => $user->id]);
+
+        return redirect()->route('acceuille');
     }
     public function logout()
     {

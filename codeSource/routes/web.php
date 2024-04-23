@@ -55,8 +55,12 @@ Route::get('/services', [HomeController::class, "service"])->name('rooms.service
 // authentification public
 Route::get('/registerview', [AuthentificationController::class, 'getRogister'])->name("auth_getRogister");
 Route::get('/getLogin', [AuthentificationController::class, 'getLogin'])->name("auth_getLogin");
+Route::post('/register', [AuthentificationController::class, 'register'])->name("auth_Rogister");
+Route::post('/login', [AuthentificationController::class, 'login'])->name("auth_Login");
 Route::get('/forgetpassword', [ForgetPassword::class, 'forgetPassword'])->name("auth_forgetPassword");
 Route::get('/resetwithemail/{token}', [ForgetPassword::class, 'getThenewPassword'])->name('resetwithemail');
+Route::post('/sendToEmail', [ForgetPassword::class, 'sendToEmail'])->name("auth_sendToEmail");
+Route::post('/insertnewpassword/{token}', [ForgetPassword::class, 'addNewPassword'])->name('new_password');
 
 // Route::group(
 //     ['middleware' => [Auth::class]],
@@ -124,27 +128,26 @@ Route::group(['middleware' => [Auth::class]], function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('/annulerReservation/{id}', [ProfileController::class, 'annulerReservation'])->name('annulerReservation');
     Route::put('/updateReservation/{reservationId}', [ProfileController::class, 'updateReservation'])->name('updateReservation');
-    Route::post('/register', [AuthentificationController::class, 'register'])->name("auth_Rogister");
-    Route::post('/login', [AuthentificationController::class, 'login'])->name("auth_Login");
+
     Route::get('/logout', [AuthentificationController::class, 'logout'])->name("auth_Logout");
-    Route::post('/sendToEmail', [ForgetPassword::class, 'sendToEmail'])->name("auth_sendToEmail");
-    Route::post('/insertnewpassword/{token}', [ForgetPassword::class, 'addNewPassword'])->name('new_password');
     Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
 
     // Routes accessible only to admin users
     Route::group(['middleware' => [AdminMiddleware::class]], function () {
         Route::get('/statistique', [StatisiqueController::class, "adminStatistique"]);
         Route::resource('category', CategoryController::class);
-        Route::resource('room', RoomController::class);
         Route::get('/getRoomsForApproval', [RoomController::class, 'getRoomsForApproval'])->name('room.getRoomsForApproval');
         Route::delete('/room/refuse/{id}', [RoomController::class, 'refuse'])->name('room.refuse');
         Route::delete('/room/accept/{id}', [RoomController::class, 'accept'])->name('room.accept');
         Route::get('/getRoomDeteted', [RoomController::class, 'getRoomDeleted'])->name('room.getRoomDeteted');
         Route::put('/room/restoreRoom/{id}', [RoomController::class, 'restoreRoom'])->name('room.restoreRoom');
-        Route::resource('service', ServiceController::class);
+        Route::get('/service', [ServiceController::class,  'index'])->name('service.index');
+        Route::post('/service/store', [ServiceController::class,  'store'])->name('service.store');
+        Route::put('/service/update/{id}', [ServiceController::class,  'update'])->name('service.update');
+        Route::delete('/service/delete/{id}', [ServiceController::class,  'destroy'])->name('service.destroy');
         Route::resource('users', UserController::class);
         Route::resource('roles', RoleController::class);
-        Route::delete('/roles/delete/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
+        Route::delete('/roles/destroy/{id}', [RoleController::class, 'destroy'])->name('roles.delete');
     });
 
     // Routes accessible only to organizer users

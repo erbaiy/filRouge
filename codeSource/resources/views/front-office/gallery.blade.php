@@ -72,25 +72,45 @@
         .async-hide {
             opacity: 0 !important
         }
+
+
+        /* Custom style for the room gallery */
+        .main-content {
+            padding: 20px 0;
+        }
+
+        .img-display {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-img {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .img-display:hover .main-img {
+            transform: scale(1.05);
+        }
     </style>
-
-
 
 
     <script defer data-site="demos.creative-tim.com" src="../../../api.nepcha.com/js/nepcha-analytics.js"></script>
 </head>
 
 <body class>
-    <noscript><iframe src="https://wwwmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
+    {{-- <noscript><iframe src="https://wwwmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript> --}}
 
     <div class="container position-sticky z-index-sticky top-0">
         <div class="row">
             <div class="col-12 ">
+
                 <nav
                     class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
                     <div class="container-fluid pe-0">
-                        <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="dashboard.html"
+                        <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="{{ route('acceuille') }}"
                             style="font-family: fangsong;">
                             Hotelo
                         </a>
@@ -119,32 +139,49 @@
 
                                 <li class="nav-item">
                                     <a class="nav-link me-2" href="{{ route('rooms.gallery') }}">
-                                        Gallery
+                                        Blog
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link me-2" href="{{ route('rooms.gallery') }}">
+                                        About us
                                     </a>
                                 </li>
                             </ul>
-                            <li class="nav-item d-flex align-items-center">
+                            {{-- <li class="nav-item d-flex align-items-center">
                                 <a class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" target="_blank"
                                     href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Reserve
                                 </a>
-                            </li>
-                            <ul class="navbar-nav d-lg-block d-none">
-                                <li class="nav-item">
-                                    <a href="{{ route('auth_getLogin') }}"
-                                        class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Sing In</a>
-                                </li>
+                            </li> --}}
+                            @if (!session('id'))
+                                <ul class="navbar-nav d-lg-block d-none">
+                                    <li class="nav-item">
+                                        <a href="{{ route('auth_getLogin') }}"
+                                            class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Sing In</a>
+                                    </li>
 
-                            </ul>
-                            <ul>
-                                <li class="nav-item" style=" list-style-type: none;">
-                                    <a class="nav-link active" href="{{ route('profile') }}">
-                                        <i class="fas fa-user default-icon"></i>
+
+                                </ul>
+                            @else
+                                <li class="nav-item d-flex align-items-center" style="    margin-right: 10px;">
+
+                                    <a class="" href="{{ route('auth_Logout') }}">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/000/421/556/original/logout-icon-vector-illustration.jpg"
+                                            alt="profile_image" class="w-100 border rounded-circle shadow"
+                                            style="    height: 41px;">
                                     </a>
 
                                 </li>
+                            @endif
+                            <li class="nav-item d-flex align-items-center">
 
+                                <a class="" href="{{ route('profile') }}">
+                                    <img src="../assets/img/bruce-mars.jpg" alt="profile_image"
+                                        class="w-100 border rounded-circle shadow" style="    height: 41px;">
+                                </a>
 
-                            </ul>
+                            </li>
+
 
                         </div>
                     </div>
@@ -169,7 +206,7 @@
         <div class="container">
             <div class="row">
                 @foreach ($rooms as $service_image)
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="col-lg-6 col-md-4 col-sm-6 mb-4">
                         <div class="img-display">
                             <img src="{{ asset('assets/img/' . $service_image) }}" alt="Room image"
                                 class="img-fluid main-img rounded">
@@ -178,30 +215,9 @@
                 @endforeach
             </div>
         </div>
-        <style>
-            /* Custom style for the room gallery */
-            .main-content {
-                padding: 20px 0;
-            }
 
-            .img-display {
-                position: relative;
-                overflow: hidden;
-                border-radius: 20px;
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            }
-
-            .main-img {
-                transition: transform 0.3s ease-in-out;
-            }
-
-            .img-display:hover .main-img {
-                transform: scale(1.05);
-            }
-        </style>
     </main>
-
-    <footer class="footer py-5">
+    <footer class="footer py-5 mt-10">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mb-4 mx-auto text-center">
@@ -224,6 +240,7 @@
                         Pricing
                     </a>
                 </div>
+
                 <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
                     <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
                         <span class="text-lg fab fa-dribbble"></span>

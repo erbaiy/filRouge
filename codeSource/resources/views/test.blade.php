@@ -70,7 +70,9 @@
     <link id="pagestyle" href="../assets/css/soft-ui-dashboard.minf2ad.css?v=1.0.7" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXxZ8SCZFbbFI1vUB4=" crossorigin="anonymous"></script>
 
@@ -80,69 +82,6 @@
         }
     </style>
     <script src="https://js.stripe.com/v3/"></script>
-
-
-
-    {{-- <script>
-        (function(a, s, y, n, c, h, i, d, e) {
-            s.className += ' ' + y;
-            h.start = 1 * new Date;
-            h.end = i = function() {
-                s.className = s.className.replace(RegExp(' ?' + y), '')
-            };
-            (a[n] = a[n] || []).hide = h;
-            setTimeout(function() {
-                i();
-                h.end = null
-            }, c);
-            h.timeout = c;
-        })(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {
-            'GTM-K9BGS8K': true
-        });
-    </script> --}}
-
-    {{-- <script>
-        (function(i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '../../../www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-46172202-22', 'auto', {
-            allowLinker: true
-        });
-        ga('set', 'anonymizeIp', true);
-        ga('require', 'GTM-K9BGS8K');
-        ga('require', 'displayfeatures');
-        ga('require', 'linker');
-        ga('linker:autoLink', ["2checkout.com", "avangate.com"]);
-    </script> --}}
-
-    {{-- 
-    <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                '../../../www.googletagmanager.com/gtm5445.html?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-NKDMSK6');
-    </script> --}}
-
-
-
     <script defer data-site="demos.creative-tim.com" src="../../../api.nepcha.com/js/nepcha-analytics.js"></script>
 </head>
 
@@ -186,24 +125,42 @@
 
                                 <li class="nav-item">
                                     <a class="nav-link me-2" href="{{ route('rooms.gallery') }}">
-                                        Gallery
+                                        Blog
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link me-2" href="{{ route('rooms.gallery') }}">
+                                        About us
                                     </a>
                                 </li>
                             </ul>
-                            <li class="nav-item d-flex align-items-center">
+                            {{-- <li class="nav-item d-flex align-items-center">
                                 <a class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" target="_blank"
                                     href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Reserve
                                 </a>
-                            </li>
+                            </li> --}}
+                            @if (!session('id'))
+                                <ul class="navbar-nav d-lg-block d-none">
+                                    <li class="nav-item">
+                                        <a href="{{ route('auth_getLogin') }}"
+                                            class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Sing In</a>
+                                    </li>
 
-                            <ul class="navbar-nav d-lg-block d-none">
-                                <li class="nav-item">
-                                    <a href="{{ route('auth_getLogin') }}"
-                                        class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Sing In</a>
+
+                                </ul>
+                            @else
+                                <li class="nav-item d-flex align-items-center" style="    margin-right: 10px;">
+
+                                    <a class="" href="{{ route('auth_Logout') }}">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/000/421/556/original/logout-icon-vector-illustration.jpg"
+                                            alt="profile_image" class="w-100 border rounded-circle shadow"
+                                            style="    height: 31px;">
+                                    </a>
+
                                 </li>
-
-                            </ul>
+                            @endif
                             <li class="nav-item d-flex align-items-center">
+
 
                                 <a class="" href="{{ route('profile') }}">
                                     <img src="../assets/img/bruce-mars.jpg" alt="profile_image"
@@ -211,6 +168,7 @@
                                 </a>
 
                             </li>
+
 
                         </div>
                     </div>
@@ -220,60 +178,7 @@
         </div>
     </div>
     <main class="main-content  mt-0">
-        {{-- <section>
-            <div class="page-header min-vh-75">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
-                            <div class="card card-plain mt-8 ml-3">
-                                <div class="card-header pb-0 text-left bg-transparent">
-                                    <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
-                                    <p class="mb-0">Enter your email and password to sign in</p>
-                                </div>
-                                <div class="card-body">
 
-                                    <div class="book-room">
-                                        <h1>Book a Room Online</h1>
-                                        <form class="book-now">
-                                            <div class="form-group row">
-                                                <label for="arrival" class="col-sm-2 col-form-label">Arrival</label>
-                                                <div class="col-sm-10">
-                                                    <img class="date-icon" src="images/date.png" alt="Calendar icon">
-                                                    <input type="date" class="form-control online-book"
-                                                        id="arrival" name="arrival" placeholder="dd/mm/yyyy">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="departure"
-                                                    class="col-sm-2 col-form-label">Departure</label>
-                                                <div class="col-sm-10">
-                                                    <img class="date-icon" src="images/date.png" alt="Calendar icon">
-                                                    <input type="date" class="form-control online-book"
-                                                        id="departure" name="departure" placeholder="dd/mm/yyyy">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-12 text-center">
-                                                    <button type="submit" class="btn btn-primary book-btn">Book
-                                                        Now</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
-                                    style="background-image:url('https://www.teledataict.com/media/2021/08/hotel_technology-1024x576.jpg')">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
         <section>
             <div class="page-header min-vh-75">
 
@@ -341,25 +246,47 @@
 
             @if ($errors->any())
                 <script>
-                    alert("{{ implode(' ', $errors->all()) }}");
+                    setTimeout(function() {
+                        alert("{{ implode(' ', $errors->all()) }}");
+                    }, 3000); // 3000 milliseconds = 3 seconds
                 </script>
             @endif
+
             <div class="container">
                 <div class="row">
                     <div class="container">
                         @if (session('success'))
-                            <div class="alert alert-success"
+                            <div id="successAlert" class="alert alert-success"
                                 style="color: green; background-color: #ccffcc; border: 1px solid green; padding: 10px; margin-top: 20px; border-radius: 5px; text-align: center;">
                                 {{ session('success') }}
                             </div>
                         @endif
 
                         @if (session('failed'))
-                            <div class="alert alert-danger"
+                            <div id="failedAlert" class="alert alert-danger"
                                 style="color: red; background-color: #ffcccc; border: 1px solid red; padding: 10px; margin-top: 20px; border-radius: 5px; text-align: center;">
                                 {{ session('failed') }}
                             </div>
                         @endif
+
+                        <script>
+                            // Function to remove success message after 3 seconds
+                            setTimeout(function() {
+                                var successAlert = document.getElementById('successAlert');
+                                if (successAlert) {
+                                    successAlert.parentNode.removeChild(successAlert);
+                                }
+                            }, 3000);
+
+                            // Function to remove error message after 3 seconds
+                            setTimeout(function() {
+                                var failedAlert = document.getElementById('failedAlert');
+                                if (failedAlert) {
+                                    failedAlert.parentNode.removeChild(failedAlert);
+                                }
+                            }, 3000);
+                        </script>
+
                         <div class="row" style="justify-content: center">
                             <div class="col-md-12">
                                 <div class="titlepage text-center" style="margin: 40px;">
@@ -611,27 +538,27 @@
         </section>
     </main>
 
-    <footer class="footer py-5">
+    <footer class="footer py-5 mt-10">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mb-4 mx-auto text-center">
                     <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
                         Company
                     </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+                    <a href="" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
                         About Us
                     </a>
                     <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
                         Team
                     </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                        Products
-                    </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+
+                    <a href="{{ route('rooms.gallery') }}" target="_blank"
+                        class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
                         Blog
                     </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                        Pricing
+                    <a href="{{ route('rooms.services') }}" target="_blank"
+                        class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
+                        Services
                     </a>
                 </div>
                 <div class="col-lg-8 mx-auto text-center mb-4 mt-2">

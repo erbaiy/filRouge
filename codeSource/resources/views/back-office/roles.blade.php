@@ -80,7 +80,7 @@
                             </div>
                         </td>
                         <td class="border">
-                            <form action="{{ route('roles.destroy', ['id' => $row->id]) }}" method="POST">
+                            <form action="{{ route('roles.delete', ['id' => $row->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" value="{{ $row->id }}">

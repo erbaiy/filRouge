@@ -88,10 +88,10 @@
         <div class="row">
             <div class="col-12 ">
 
-                {{-- <nav
+                <nav
                     class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
                     <div class="container-fluid pe-0">
-                        <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="dashboard.html"
+                        <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="{{ route('acceuille') }}"
                             style="font-family: fangsong;">
                             Hotelo
                         </a>
@@ -108,73 +108,101 @@
                             <ul class="navbar-nav mx-auto ms-xl-auto me-xl-7">
                                 <li class="nav-item">
                                     <a class="nav-link d-flex align-items-center me-2 active" aria-current="page"
-                                        href="dashboard.html">
-                                        <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
+                                        href="{{ '/acceuille' }}">
                                         Rooms
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link me-2" href="profile.html">
-                                        <i class="fa fa-user opacity-6 text-dark me-1"></i>
+                                    <a class="nav-link me-2" href="{{ route('rooms.services') }}">
                                         Services
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link me-2" href="sign-in.html">
-                                        <i class="fas fa-key opacity-6 text-dark me-1"></i>
-                                        Gallery
+                                    <a class="nav-link me-2" href="{{ route('rooms.gallery') }}">
+                                        Blog
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link me-2" href="{{ route('rooms.gallery') }}">
+                                        About us
                                     </a>
                                 </li>
                             </ul>
-                            <li class="nav-item d-flex align-items-center">
-                                <a class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" target="_blank"
-                                    href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Reserve
-                                </a>
-                            </li>
-                            <ul class="navbar-nav d-lg-block d-none">
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com/product/soft-ui-dashboard"
-                                        class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Sing In</a>
+                            {{-- <li class="nav-item d-flex align-items-center">
+                            <a class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" target="_blank"
+                                href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Reserve
+                            </a>
+                        </li> --}}
+                            @if (!session('id'))
+                                <ul class="navbar-nav d-lg-block d-none">
+                                    <li class="nav-item">
+                                        <a href="{{ route('auth_getLogin') }}"
+                                            class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Sing In</a>
+                                    </li>
+
+
+                                </ul>
+                            @else
+                                <li class="nav-item d-flex align-items-center" style="    margin-right: 10px;">
+
+                                    <a class="" href="{{ route('auth_Logout') }}">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/000/421/556/original/logout-icon-vector-illustration.jpg"
+                                            alt="profile_image" class="w-100 border rounded-circle shadow"
+                                            style="    height: 31px;">
+                                    </a>
+
                                 </li>
-                            </ul>
+                            @endif
+                            <li class="nav-item d-flex align-items-center">
+
+
+                                <a class="" href="{{ route('profile') }}">
+                                    <img src="../assets/img/bruce-mars.jpg" alt="profile_image"
+                                        class="w-100 border rounded-circle shadow" style="    height: 41px;">
+                                </a>
+
+                            </li>
+
+
                         </div>
                     </div>
-                </nav> --}}
+                </nav>
 
             </div>
         </div>
     </div>
     <main class="main-content mt-10">
-        <div class="card-wrapper">
+        <div class="card-wrapper container">
             <div class="card">
                 <div class="row">
                     <!-- Card left - Image Gallery -->
                     <div class="col-md-6">
                         <div class="product-imgs">
                             <!-- Main Image Display -->
-                            <div class="img-display">
-                                <img src="{{ asset('assets/img/' . $room->image) }}"alt="shoe image"
-                                    class="img-fluid main-img" style="border-radius: 49px;">
+                            <div class="img-display" style="width: 100%;">
+                                <img src="{{ asset('assets/img/' . $room->image) }}" alt="Room Image"
+                                    class="img-fluid main-img"
+                                    style="border-radius: 20px; width: 100%; height: auto;">
                             </div>
                             <!-- Thumbnail Images -->
-                            <div class="img-select"
-                                style="    display: flex;
-                                           justify-content: center;
-                                           align-items: center;
-                                           gap: 3px;width: 50%;">
-
+                            <div class="d-flex justify-content-center align-items-center"
+                                style="gap: 20px; width: 50%; flex-direction: row;">
                                 @php
                                     $serviceImages = explode(',', $room->service_images);
+                                    $serviceNames = explode(',', $room->service_names);
                                 @endphp
-
-                                @foreach ($serviceImages as $service_image)
-                                    <div class="img-item m-2 ">
-                                        <a href="#" data-id="3">
-                                            <img src="{{ asset('assets/img/' . $service_image) }}" alt="shoe image"
-                                                class="img-fluid thumbnail-img rounded-circle" style="width: 100px;">
-                                        </a>
-                                    </div>
+                                @foreach ($serviceImages as $key => $serviceImage)
+                                    <a href="javascript:;" class="avatar-xs rounded-circle" data-bs-toggle="tooltip"
+                                        data-bs-placement="bottom" title="{{ $serviceNames[$key] }}">
+                                        <div class="service-item" style="margin-right: 10px; position: relative;">
+                                            <img alt="Service Image" style="width: 50px;"
+                                                src="{{ asset('assets/img/' . $serviceImage) }}"
+                                                class="service-image">
+                                            <span class="service-name"
+                                                style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0.7); color: #fff; padding: 5px; border-radius: 5px; opacity: 0; transition: opacity 0.3s;">{{ $serviceNames[$key] }}</span>
+                                        </div>
+                                    </a>
                                 @endforeach
                             </div>
                         </div>
@@ -201,9 +229,7 @@
                                 <h2>About This Room:</h2>
                                 <p>{{ $room->description }}</p>
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis
-                                    eius.
-                                    Dignissimos,
-                                    labore suscipit. Unde.</p>
+                                    eius. Dignissimos, labore suscipit. Unde.</p>
                                 <ul>
                                     <!-- Room Specifications -->
                                     <li>Room Type: <span>{{ $room->room_type }}</span></li>
@@ -214,125 +240,41 @@
                                 <!-- Add to Cart Button -->
                                 <button type="button" data-bs-toggle="modal"
                                     data-bs-target="#fullScreenModal{{ $room->id }}"
-                                    class="btn btn-outline-primary btn-sm mb-0">reserve</button>
-                                {{-- modal start --}}
-
-                                <div class="modal fade" id="fullScreenModal{{ $room->id }}" tabindex="-1"
-                                    aria-labelledby="fullScreenModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="fullScreenModalLabel">
-                                                    Full-Screen Modal</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <form action="{{ route('reserve') }}" method="post" id="payment-form">
-                                                @csrf
-
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <ul class="nav nav-tabs">
-                                                            <li class="nav-item">
-                                                                <a class="nav-link" href="#">Account</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a class="nav-link active" href="#">Payment</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <input type="hidden" name="stripeToken">
-                                                    <div class="card-body">
-                                                        <input type="hidden" name="user_id"
-                                                            value="{{ session('id') }}">
-                                                        <input type="hidden" name="room_id"
-                                                            value="{{ $room->id }}">
-                                                        <input type="hidden" name="price"
-                                                            value="{{ $room->price }}">
-
-                                                        <div class="row mb-3">
-                                                            <label for="checkin"
-                                                                class="col-sm-3 col-form-label">Check-in</label>
-                                                            <div class="col-sm-9">
-                                                                <input type="date" class="form-control"
-                                                                    id="checkin" name="checkin"
-                                                                    placeholder="Check-in date" required>
-                                                                <div class="invalid-feedback">Please
-                                                                    enter a valid check-in date.</div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row mb-3">
-                                                            <label for="checkout"
-                                                                class="col-sm-3 col-form-label">Check-out</label>
-                                                            <div class="col-sm-9">
-                                                                <input type="date" class="form-control"
-                                                                    id="checkout" name="checkout"
-                                                                    placeholder="Check-out date" required>
-                                                                <div class="invalid-feedback">Please
-                                                                    enter a valid check-out date.</div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="cardNumber">Card Number</label>
-                                                            <input type="text" class="form-control"
-                                                                id="cardNumber" name="cardNumber"
-                                                                placeholder="Enter card number">
-                                                            @error('cardNumber')
-                                                                <div class="text-danger">
-                                                                    {{ $message }}</div>
-                                                            @enderror
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="expiryDate">Expiration
-                                                                Date</label>
-                                                            <input type="text" class="form-control"
-                                                                id="expiryDate" name="expiryDate"
-                                                                placeholder="MM/YY">
-                                                            @error('expiryDate')
-                                                                <div class="text-danger">
-                                                                    {{ $message }}</div>
-                                                            @enderror
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="cvv">CVV</label>
-                                                            <input type="text" class="form-control" id="cvv"
-                                                                name="cvv" placeholder="Enter CVV">
-                                                            @error('cvv')
-                                                                <div class="text-danger">
-                                                                    {{ $message }}</div>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="card-errors" role="alert"></div>
-
-                                                    <div class="modal-footer">
-                                                        <button type="submit"
-                                                            class="btn btn-primary mt-3 mt-md-0">Reserve
-                                                            Now</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- modale end --}}
+                                    class="btn btn-outline-primary btn-sm mb-0">Reserve</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </main>
+    <style>
+        .service-item {
+            margin-right: 20px;
+            /* Adjust as needed */
+        }
 
-    <footer class="footer py-5">
+        .service-name {
+            display: none;
+            position: absolute;
+            bottom: -25px;
+            /* Adjust as needed */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .service-item:hover .service-name {
+            display: block;
+        }
+    </style>
+
+
+
+    <footer class="footer py-5 mt-10">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mb-4 mx-auto text-center">
