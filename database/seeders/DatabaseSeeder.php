@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use  Database\Seeders\Users;
 use Illuminate\Database\Seeder;
 use PHPUnit\Metadata\Uses;
+use RoleSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             Uses::class,
             CategorySeeder::class,
+            RoleSeeder::class,
         ]);
     }
 }

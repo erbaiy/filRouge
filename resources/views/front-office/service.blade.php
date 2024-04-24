@@ -186,24 +186,36 @@
         </div>
 
         <div class="container">
-            <div class="row">
-                @foreach ($services as $service)
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                        <div class="card h-100">
-                            <img src="{{ asset('assets/img/' . $service->image) }}" alt="Service image"
-                                class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $service->name }}</h5>
-                                <p class="card-text">{{ $service->description }}</p>
-                            </div>
 
+            <div class="card-body p-3">
+                <div class="row">
+                    @foreach ($services as $service)
+                        <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                            <div class="card card-blog card-plain">
+                                <div class="position-relative">
+                                    <a class="d-block shadow-xl border-radius-xl">
+                                        <img src="{{ asset('assets/img/' . $service->image) }}" alt="img-blur-shadow"
+                                            class="img-fluid shadow border-radius-xl">
+                                    </a>
+                                </div>
+                                <div class="card-body px-1 pb-0">
+                                    <p class="text-gradient text-dark mb-2 text-sm">
+                                        {{ $service->price }}$</p>
+                                    <a href="javascript:;">
+                                        <h5>{{ $service->name }}</h5>
+                                    </a>
+                                    <p class="mb-4 text-sm">{{ $service->description }}.</p>
+
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+
             </div>
 
         </div>
-        <style>
+        {{-- <style>
             /* Custom style for the room gallery */
             .main-content {
                 padding: 20px 0;
@@ -223,7 +235,7 @@
             .img-display:hover .main-img {
                 transform: scale(1.05);
             }
-        </style>
+        </style> --}}
     </main>
 
     <footer class="footer py-5">
