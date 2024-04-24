@@ -26,12 +26,6 @@
             <input type="email" class="form-control" placeholder="Email" name="email" aria-label="Email"
                 aria-describedby="email-addon">
         </div>
-        @if ($errors->has('email'))
-            <div class="alert alert-danger">
-                {{ $errors->first('email') }}
-            </div>
-        @endif
-
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" id="rememberMe" checked>
             <label class="form-check-label" for="rememberMe">Remember me</label>

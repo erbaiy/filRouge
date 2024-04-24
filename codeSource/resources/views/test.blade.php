@@ -158,16 +158,17 @@
                                     </a>
 
                                 </li>
+
+                                <li class="nav-item d-flex align-items-center">
+
+
+                                    <a class="" href="{{ route('profile') }}">
+                                        <img src="../assets/img/bruce-mars.jpg" alt="profile_image"
+                                            class="w-100 border rounded-circle shadow" style="    height: 41px;">
+                                    </a>
+
+                                </li>
                             @endif
-                            <li class="nav-item d-flex align-items-center">
-
-
-                                <a class="" href="{{ route('profile') }}">
-                                    <img src="../assets/img/bruce-mars.jpg" alt="profile_image"
-                                        class="w-100 border rounded-circle shadow" style="    height: 41px;">
-                                </a>
-
-                            </li>
 
 
                         </div>
@@ -352,7 +353,8 @@
                                                 {{ $roomData['room']->description }}
                                             </p>
 
-                                            <div class="d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center justify-content-between"
+                                                style="margin-bottom: 20px;">
                                                 <button type="button" data-bs-toggle="modal"
                                                     data-bs-target="#fullScreenModal{{ $roomData['room']->id }}"
                                                     class="btn btn-outline-primary btn-sm mb-0">reserve</button>
@@ -475,7 +477,12 @@
                                                     </div>
                                                 </div>
                                                 {{-- modale end --}}
-                                                <div class="avatar-group mt-2">
+                                                <div class="avatar-group mt-2"
+                                                    style="margin-bottom: 27px; display: flex;
+                                                    justify-content: space-between;
+                                                    align-items: center;
+                                                    gap: 20px;
+                                                ">
                                                     @foreach ($roomData['services'] as $service)
                                                         <a href="javascript:;" class="avatar avatar-xs rounded-circle"
                                                             data-bs-toggle="tooltip" data-bs-placement="bottom"

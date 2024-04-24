@@ -65,65 +65,6 @@
 
     <link id="pagestyle" href="../assets/css/soft-ui-dashboard.minf2ad.css?v=1.0.7" rel="stylesheet" />
 
-    {{-- <style>
-        .async-hide {
-            opacity: 0 !important
-        }
-    </style>
-    <script>
-        (function(a, s, y, n, c, h, i, d, e) {
-            s.className += ' ' + y;
-            h.start = 1 * new Date;
-            h.end = i = function() {
-                s.className = s.className.replace(RegExp(' ?' + y), '')
-            };
-            (a[n] = a[n] || []).hide = h;
-            setTimeout(function() {
-                i();
-                h.end = null
-            }, c);
-            h.timeout = c;
-        })(window, document.documentElement, 'async-hide', 'dataLayer', 4000, {
-            'GTM-K9BGS8K': true
-        });
-    </script>
-    <script>
-        (function(i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '../../../www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-46172202-22', 'auto', {
-            allowLinker: true
-        });
-        ga('set', 'anonymizeIp', true);
-        ga('require', 'GTM-K9BGS8K');
-        ga('require', 'displayfeatures');
-        ga('require', 'linker');
-        ga('linker:autoLink', ["2checkout.com", "avangate.com"]);
-    </script>
-    <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                '../../../www.googletagmanager.com/gtm5445.html?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-NKDMSK6');
-    </script> --}}
 
 
 
@@ -134,71 +75,7 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
 
-    <div class="container position-sticky z-index-sticky top-0">
-        <div class="row">
-            <div class="col-12">
 
-                <nav
-                    class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
-                    <div class="container-fluid pe-0">
-                        <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="dashboard.html">
-                            Soft UI Dashboard
-                        </a>
-                        <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon mt-2">
-                                <span class="navbar-toggler-bar bar1"></span>
-                                <span class="navbar-toggler-bar bar2"></span>
-                                <span class="navbar-toggler-bar bar3"></span>
-                            </span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navigation">
-                            <ul class="navbar-nav mx-auto ms-xl-auto me-xl-7">
-                                <li class="nav-item">
-                                    <a class="nav-link d-flex align-items-center me-2 active" aria-current="page"
-                                        href="dashboard.html">
-                                        <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
-                                        Dashboard
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link me-2" href="profile.html">
-                                        <i class="fa fa-user opacity-6 text-dark me-1"></i>
-                                        Profile
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link me-2" href="sign-up.html">
-                                        <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
-                                        Sign Up
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link me-2" href="sign-in.html">
-                                        <i class="fas fa-key opacity-6 text-dark me-1"></i>
-                                        Sign In
-                                    </a>
-                                </li>
-                            </ul>
-                            <li class="nav-item d-flex align-items-center">
-                                <a class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" target="_blank"
-                                    href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online
-                                    Builder</a>
-                            </li>
-                            <ul class="navbar-nav d-lg-block d-none">
-                                <li class="nav-item">
-                                    <a href="https://www.creative-tim.com/product/soft-ui-dashboard"
-                                        class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Free download</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-
-            </div>
-        </div>
-    </div>
     <main class="main-content  mt-0">
         <section>
             <div class="page-header min-vh-75">
@@ -232,59 +109,7 @@
         </section>
     </main>
 
-    <footer class="footer py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mb-4 mx-auto text-center">
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                        Company
-                    </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                        About Us
-                    </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                        Team
-                    </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                        Products
-                    </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                        Blog
-                    </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-5 me-3 mb-sm-0 mb-2">
-                        Pricing
-                    </a>
-                </div>
-                <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                        <span class="text-lg fab fa-dribbble"></span>
-                    </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                        <span class="text-lg fab fa-twitter"></span>
-                    </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                        <span class="text-lg fab fa-instagram"></span>
-                    </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                        <span class="text-lg fab fa-pinterest"></span>
-                    </a>
-                    <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-                        <span class="text-lg fab fa-github"></span>
-                    </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-8 mx-auto text-center mt-1">
-                    <p class="mb-0 text-secondary">
-                        Copyright Â©
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script> Soft by Creative Tim.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+
 
 
     <script src="../assets/js/core/popper.min.js"></script>
