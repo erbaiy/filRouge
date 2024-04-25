@@ -1,27 +1,23 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
-use App\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        // Define roles and their permissions
         $roles = [
-            ['name' => 'admin'],
-            ['name' => 'user'],
-            // Add more roles here if needed
+            ['id' => 1, 'name' => 'Admin'],
+            ['id' => 17, 'name' => 'User'],
         ];
 
-        // Insert roles into the database
-        foreach ($roles as $role) {
-            Role::create($role);
-        }
+        // Inserting roles into the database
+        DB::table('role')->insert($roles);
     }
 }

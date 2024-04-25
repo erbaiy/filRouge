@@ -32,6 +32,48 @@ class ProfileController extends Controller
         // }
         return view('profile', compact('user', 'reservations'));
     }
+    public function updateProfile(Request $request)
+    {
+        $id = session('id');
+
+        $validatedData = $request->validate([
+            'image' => 'nullable',
+            'email' => 'required',
+            'name' => 'required',
+            'phone' => 'nullable',
+            'description' => 'nullable',
+        ]);
+        // dd($validatedData);
+
+        try {
+            $user = User::findOrFail($id);
+
+            // Handle image upload
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('assets/img'), $imageName);
+                $validatedData['image'] = $imageName;
+            }
+
+            $user->image = $validatedData['image'];
+            $user->email = $validatedData['email'];
+            $user->name = $validatedData['name'];
+            $user->mobileNumber = $validatedData['phone'];
+            $user->description = $validatedData['description'];
+
+            $user->save();
+
+
+
+            return redirect()->back()->with('success', 'Profile updated successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update profile: ' . $e->getMessage());
+        }
+    }
+
+
+
     public function annulerReservation(Request $request, $id)
     {
         // Begin transaction to ensure data integrity

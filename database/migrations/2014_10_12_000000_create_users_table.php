@@ -16,9 +16,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image')->nullable();
+            $table->string('description')->nullable();
+            $table->integer('mobileNumber')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('isBlocked')->default(false);
             $table->rememberToken();
             $table->unsignedBigInteger('role_id');
             $table->timestamps();

@@ -10,14 +10,11 @@ use App\Http\controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\ResevationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatisiqueController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\Auth;
-use App\Http\Middleware\Authenticate;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,13 +37,10 @@ Route::post('/payment', [PaymentController::class, 'process'])->name('payment.pr
 
 Route::get('/pageNotFound', function () {
     return view('pageNotFound');
-});
+})->name('unauthorize');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 // public Route
-Route::get('/acceuille', [HomeController::class, 'index'])->name('acceuille');
+Route::get('/', [HomeController::class, 'index'])->name('acceuille');
 Route::get('/filterRooms/{categoryId}/{checkinDate}/{checkoutDate}', [HomeController::class, 'filterRooms'])->name('filter.rooms');
 
 Route::get('/detail/{id}', [HomeController::class, "detail"])->name('rooms.detail');
@@ -126,6 +120,7 @@ Route::group(['middleware' => [Auth::class]], function () {
     // Routes accessible to all authenticated users
     Route::post('/reserve', [HomeController::class, 'reserve'])->name("reserve");
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profileUpdate', [ProfileController::class, 'updateProfile'])->name('UpdateProfile');
     Route::put('/annulerReservation/{id}', [ProfileController::class, 'annulerReservation'])->name('annulerReservation');
     Route::put('/updateReservation/{reservationId}', [ProfileController::class, 'updateReservation'])->name('updateReservation');
 
@@ -145,7 +140,11 @@ Route::group(['middleware' => [Auth::class]], function () {
         Route::post('/service/store', [ServiceController::class,  'store'])->name('service.store');
         Route::put('/service/update/{id}', [ServiceController::class,  'update'])->name('service.update');
         Route::delete('/service/delete/{id}', [ServiceController::class,  'destroy'])->name('service.destroy');
-        Route::resource('users', UserController::class);
+        Route::get('/users', [UserController::class,  'index'])->name('users.index');
+        Route::post('/users/store', [UserController::class,  'store'])->name('user.store');
+        Route::put('/users/update/{id}', [UserController::class,  'update'])->name('users.update');
+        Route::delete('/users/delete/{id}', [UserController::class,  'destroy'])->name('users.destroy');
+        Route::put('/users/block/{id}', [UserController::class,  'block'])->name('blockUser');
         Route::resource('roles', RoleController::class);
         Route::delete('/roles/destroy/{id}', [RoleController::class, 'destroy'])->name('roles.delete');
     });

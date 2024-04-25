@@ -13,7 +13,9 @@ class UserController extends Controller
     {
         $permissions = Route::all();
         $roles = Role::all();
-        $users = User::join('role', 'users.role_id', "=", 'role.id')->select("users.*", "role.name as role_name")->get();
+        $users = User::join('role', 'users.role_id', "=", 'role.id')->select("users.*", "role.name as role_name")
+            ->where('role.name', '!=', "admin")
+            ->get();
         // dd($roles);
         return view('back-office.user.index', compact('users', 'permissions', 'roles'));
     }
@@ -32,6 +34,20 @@ class UserController extends Controller
     {
         $deleteRole = User::find($id);
         $deleteRole->delete();
-        return redirect()->route('users.index');
+        if (!$deleteRole->delete()) {
+            return redirect()->back()->with('error', 'room delete seccess');
+        }
+
+        return redirect()->back()->with('seccess', 'room delete seccess');
+    }
+    public function block($id)
+    {
+        $role = User::find($id);
+        if (!$role) {
+            return redirect()->back()->with('erorr', 'erorr');
+        }
+        $role->isBlocked = true;
+        $role->save();
+        return redirect()->back()->with('seccess', 'user blocked with seccess');
     }
 }

@@ -55,6 +55,9 @@ class AuthentificationController extends Controller
 
             return back()->withErrors(['email' => 'The provided credentials do not match our records.']);
         }
+        if ($user->isBlocked) {
+            return redirect()->route("unauthorize");
+        }
         session(['id' => $user->id]);
 
         return redirect()->route('acceuille');

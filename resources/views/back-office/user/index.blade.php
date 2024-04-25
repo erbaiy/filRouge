@@ -2,6 +2,15 @@
 
 
 @section('content')
+    @if (session('seccess'))
+        <div id="successAlert" class="alert alert-success"
+            style="color: green; background-color: #ccffcc; border: 1px solid green; padding: 10px; margin-top: 20px; border-radius: 5px; text-align: center;">
+        </div>
+    @else
+        <div id="failedAlert" class="alert alert-danger"
+            style="color: red; background-color: #ffcccc; border: 1px solid red; padding: 10px; margin-top: 20px; border-radius: 5px; text-align: center;">
+            {{ session('error') }}</div>
+    @endif
     <div class="container table-responsive">
 
         <table class="table border" id="nn">
@@ -12,6 +21,7 @@
                     <th scope="col" class="border">role</th>
                     <th scope="col" class="border">edit</th>
                     <th scope="col" class="border">delete</th>
+                    <th scope="col" class="border">Block</th>
                 </tr>
             </thead>
             <tbody class="border">
@@ -63,11 +73,19 @@
                             </div>
                         </td>
                         <td class="border">
-                            <form action="{{ route('users.destroy', ['id' => $row->id]) }}" method="POST">
+                            <form action="{{ route('users.destroy', $row->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <input type="hidden" name="id" value="{{ $row->id }}">
                                 <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+                        <td class="border">
+                            <form action="{{ route('blockUser', $row->id) }}" method="POST">
+                                @csrf
+                                @method('put')
+                                <input type="hidden" name="id" value="{{ $row->id }}">
+                                <button type="submit" class="btn btn-outline-danger">block</button>
                             </form>
                         </td>
                     </tr>
@@ -78,5 +96,23 @@
         {{-- <div class="pagination">
             {{ $users->links('pagination::bootstrap-4') }}
         </div> --}}
+
     </div>
+    <script>
+        // Function to remove success message after 3 seconds
+        setTimeout(function() {
+            var successAlert = document.getElementById('successAlert');
+            if (successAlert) {
+                successAlert.parentNode.removeChild(successAlert);
+            }
+        }, 3000);
+
+        // Function to remove error message after 3 seconds
+        setTimeout(function() {
+            var failedAlert = document.getElementById('failedAlert');
+            if (failedAlert) {
+                failedAlert.parentNode.removeChild(failedAlert);
+            }
+        }, 3000);
+    </script>
 @endsection

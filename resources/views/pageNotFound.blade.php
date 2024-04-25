@@ -8,673 +8,355 @@
     <title>Document</title>
 </head>
 <style>
-    @charset "UTF-8";
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans|Nova+Mono');
 
-    /***********************************
-                /* 1. BODY */
-    /***********************************/
+    :root {
+        --font-header: 'Nova Mono', monospace;
+        --font-text: 'Open Sans', sans-serif;
+        --color-theme: #F1EEDB;
+        --color-bg: #282B24;
+
+        --animation-sentence: 'You know you\'re supposed to leave, right?';
+        --animation-duration: 40s;
+    }
 
     * {
-        margin: 0;
-        padding: 0;
-        -webkit-text-size-adjust: none;
-    }
-
-    html,
-    body {
-        height: 100%;
-        overflow: hidden;
-    }
-
-    body {
-        padding: 0;
-        margin: 0;
-        background: #181828;
-        font-size: 14px;
-        line-height: 1;
-    }
-
-    label {
-        cursor: pointer;
-    }
-
-    a {
-        margin: 0;
-        padding: 0;
-        vertical-align: baseline;
-        background: transparent;
-        text-decoration: none;
-        color: #000;
-    }
-
-    input,
-    select,
-    button,
-    textarea {
-        margin: 0;
-        font-size: 100%;
-    }
-
-    html,
-    div,
-    span,
-    applet,
-    object,
-    iframe,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    blockquote,
-    pre,
-    a,
-    abbr,
-    acronym,
-    address,
-    big,
-    cite,
-    code,
-    del,
-    dfn,
-    em,
-    font,
-    img,
-    ins,
-    kbd,
-    q,
-    s,
-    samp,
-    small,
-    strike,
-    strong,
-    sub,
-    sup,
-    tt,
-    var,
-    b,
-    u,
-    i,
-    center,
-    dl,
-    dt,
-    dd,
-    ol,
-    ul,
-    li,
-    fieldset,
-    form,
-    label,
-    legend,
-    table,
-    caption,
-    tbody,
-    tfoot,
-    thead,
-    tr,
-    th,
-    td,
-    input {
-        border: 0;
-        outline: 0;
-        font-size: 100%;
-        vertical-align: baseline;
-        background: transparent;
-    }
-
-
-    .top-header:before {
-        background-image: url(https://1.bp.blogspot.com/-gxsOcYWghHA/Xp_izTh4sFI/AAAAAAAAU8s/y637Fwg99qAuzW9na_NT_uApny8Vce95gCEwYBhgL/s1600/header-footer-gradient-bg.png);
-    }
-
-    .top-header:before {
-        content: '';
-        display: block;
-        width: 100%;
-        height: 4px;
-        background-repeat: repeat-x;
-        background-size: contain;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0.5;
-    }
-
-
-    .starsec {
-        content: " ";
-        position: absolute;
-        width: 3px;
-        height: 3px;
-        background: transparent;
-        box-shadow: 571px 173px #00BCD4, 1732px 143px #00BCD4, 1745px 454px #FF5722, 234px 784px #00BCD4, 1793px 1123px #FF9800, 1076px 504px #03A9F4, 633px 601px #FF5722, 350px 630px #FFEB3B, 1164px 782px #00BCD4, 76px 690px #3F51B5, 1825px 701px #CDDC39, 1646px 578px #FFEB3B, 544px 293px #2196F3, 445px 1061px #673AB7, 928px 47px #00BCD4, 168px 1410px #8BC34A, 777px 782px #9C27B0, 1235px 1941px #9C27B0, 104px 1690px #8BC34A, 1167px 1338px #E91E63, 345px 1652px #009688, 1682px 1196px #F44336, 1995px 494px #8BC34A, 428px 798px #FF5722, 340px 1623px #F44336, 605px 349px #9C27B0, 1339px 1344px #673AB7, 1102px 1745px #3F51B5, 1592px 1676px #2196F3, 419px 1024px #FF9800, 630px 1033px #4CAF50, 1995px 1644px #00BCD4, 1092px 712px #9C27B0, 1355px 606px #F44336, 622px 1881px #CDDC39, 1481px 621px #9E9E9E, 19px 1348px #8BC34A, 864px 1780px #E91E63, 442px 1136px #2196F3, 67px 712px #FF5722, 89px 1406px #F44336, 275px 321px #009688, 592px 630px #E91E63, 1012px 1690px #9C27B0, 1749px 23px #673AB7, 94px 1542px #FFEB3B, 1201px 1657px #3F51B5, 1505px 692px #2196F3, 1799px 601px #03A9F4, 656px 811px #00BCD4, 701px 597px #00BCD4, 1202px 46px #FF5722, 890px 569px #FF5722, 1613px 813px #2196F3, 223px 252px #FF9800, 983px 1093px #F44336, 726px 1029px #FFC107, 1764px 778px #CDDC39, 622px 1643px #F44336, 174px 1559px #673AB7, 212px 517px #00BCD4, 340px 505px #FFF, 1700px 39px #FFF, 1768px 516px #F44336, 849px 391px #FF9800, 228px 1824px #FFF, 1119px 1680px #FFC107, 812px 1480px #3F51B5, 1438px 1585px #CDDC39, 137px 1397px #FFF, 1080px 456px #673AB7, 1208px 1437px #03A9F4, 857px 281px #F44336, 1254px 1306px #CDDC39, 987px 990px #4CAF50, 1655px 911px #00BCD4, 1102px 1216px #FF5722, 1807px 1044px #FFF, 660px 435px #03A9F4, 299px 678px #4CAF50, 1193px 115px #FF9800, 918px 290px #CDDC39, 1447px 1422px #FFEB3B, 91px 1273px #9C27B0, 108px 223px #FFEB3B, 146px 754px #00BCD4, 461px 1446px #FF5722, 1004px 391px #673AB7, 1529px 516px #F44336, 1206px 845px #CDDC39, 347px 583px #009688, 1102px 1332px #F44336, 709px 1756px #00BCD4, 1972px 248px #FFF, 1669px 1344px #FF5722, 1132px 406px #F44336, 320px 1076px #CDDC39, 126px 943px #FFEB3B, 263px 604px #FF5722, 1546px 692px #F44336;
-        animation: animStar 150s linear infinite;
-    }
-
-    .starthird {
-        content: " ";
-        position: absolute;
-        width: 3px;
-        height: 3px;
-        background: transparent;
-        box-shadow: 571px 173px #00BCD4, 1732px 143px #00BCD4, 1745px 454px #FF5722, 234px 784px #00BCD4, 1793px 1123px #FF9800, 1076px 504px #03A9F4, 633px 601px #FF5722, 350px 630px #FFEB3B, 1164px 782px #00BCD4, 76px 690px #3F51B5, 1825px 701px #CDDC39, 1646px 578px #FFEB3B, 544px 293px #2196F3, 445px 1061px #673AB7, 928px 47px #00BCD4, 168px 1410px #8BC34A, 777px 782px #9C27B0, 1235px 1941px #9C27B0, 104px 1690px #8BC34A, 1167px 1338px #E91E63, 345px 1652px #009688, 1682px 1196px #F44336, 1995px 494px #8BC34A, 428px 798px #FF5722, 340px 1623px #F44336, 605px 349px #9C27B0, 1339px 1344px #673AB7, 1102px 1745px #3F51B5, 1592px 1676px #2196F3, 419px 1024px #FF9800, 630px 1033px #4CAF50, 1995px 1644px #00BCD4, 1092px 712px #9C27B0, 1355px 606px #F44336, 622px 1881px #CDDC39, 1481px 621px #9E9E9E, 19px 1348px #8BC34A, 864px 1780px #E91E63, 442px 1136px #2196F3, 67px 712px #FF5722, 89px 1406px #F44336, 275px 321px #009688, 592px 630px #E91E63, 1012px 1690px #9C27B0, 1749px 23px #673AB7, 94px 1542px #FFEB3B, 1201px 1657px #3F51B5, 1505px 692px #2196F3, 1799px 601px #03A9F4, 656px 811px #00BCD4, 701px 597px #00BCD4, 1202px 46px #FF5722, 890px 569px #FF5722, 1613px 813px #2196F3, 223px 252px #FF9800, 983px 1093px #F44336, 726px 1029px #FFC107, 1764px 778px #CDDC39, 622px 1643px #F44336, 174px 1559px #673AB7, 212px 517px #00BCD4, 340px 505px #FFF, 1700px 39px #FFF, 1768px 516px #F44336, 849px 391px #FF9800, 228px 1824px #FFF, 1119px 1680px #FFC107, 812px 1480px #3F51B5, 1438px 1585px #CDDC39, 137px 1397px #FFF, 1080px 456px #673AB7, 1208px 1437px #03A9F4, 857px 281px #F44336, 1254px 1306px #CDDC39, 987px 990px #4CAF50, 1655px 911px #00BCD4, 1102px 1216px #FF5722, 1807px 1044px #FFF, 660px 435px #03A9F4, 299px 678px #4CAF50, 1193px 115px #FF9800, 918px 290px #CDDC39, 1447px 1422px #FFEB3B, 91px 1273px #9C27B0, 108px 223px #FFEB3B, 146px 754px #00BCD4, 461px 1446px #FF5722, 1004px 391px #673AB7, 1529px 516px #F44336, 1206px 845px #CDDC39, 347px 583px #009688, 1102px 1332px #F44336, 709px 1756px #00BCD4, 1972px 248px #FFF, 1669px 1344px #FF5722, 1132px 406px #F44336, 320px 1076px #CDDC39, 126px 943px #FFEB3B, 263px 604px #FF5722, 1546px 692px #F44336;
-        animation: animStar 10s linear infinite;
-    }
-
-    .starfourth {
-        content: " ";
-        position: absolute;
-        width: 2px;
-        height: 2px;
-        background: transparent;
-        box-shadow: 571px 173px #00BCD4, 1732px 143px #00BCD4, 1745px 454px #FF5722, 234px 784px #00BCD4, 1793px 1123px #FF9800, 1076px 504px #03A9F4, 633px 601px #FF5722, 350px 630px #FFEB3B, 1164px 782px #00BCD4, 76px 690px #3F51B5, 1825px 701px #CDDC39, 1646px 578px #FFEB3B, 544px 293px #2196F3, 445px 1061px #673AB7, 928px 47px #00BCD4, 168px 1410px #8BC34A, 777px 782px #9C27B0, 1235px 1941px #9C27B0, 104px 1690px #8BC34A, 1167px 1338px #E91E63, 345px 1652px #009688, 1682px 1196px #F44336, 1995px 494px #8BC34A, 428px 798px #FF5722, 340px 1623px #F44336, 605px 349px #9C27B0, 1339px 1344px #673AB7, 1102px 1745px #3F51B5, 1592px 1676px #2196F3, 419px 1024px #FF9800, 630px 1033px #4CAF50, 1995px 1644px #00BCD4, 1092px 712px #9C27B0, 1355px 606px #F44336, 622px 1881px #CDDC39, 1481px 621px #9E9E9E, 19px 1348px #8BC34A, 864px 1780px #E91E63, 442px 1136px #2196F3, 67px 712px #FF5722, 89px 1406px #F44336, 275px 321px #009688, 592px 630px #E91E63, 1012px 1690px #9C27B0, 1749px 23px #673AB7, 94px 1542px #FFEB3B, 1201px 1657px #3F51B5, 1505px 692px #2196F3, 1799px 601px #03A9F4, 656px 811px #00BCD4, 701px 597px #00BCD4, 1202px 46px #FF5722, 890px 569px #FF5722, 1613px 813px #2196F3, 223px 252px #FF9800, 983px 1093px #F44336, 726px 1029px #FFC107, 1764px 778px #CDDC39, 622px 1643px #F44336, 174px 1559px #673AB7, 212px 517px #00BCD4, 340px 505px #FFF, 1700px 39px #FFF, 1768px 516px #F44336, 849px 391px #FF9800, 228px 1824px #FFF, 1119px 1680px #FFC107, 812px 1480px #3F51B5, 1438px 1585px #CDDC39, 137px 1397px #FFF, 1080px 456px #673AB7, 1208px 1437px #03A9F4, 857px 281px #F44336, 1254px 1306px #CDDC39, 987px 990px #4CAF50, 1655px 911px #00BCD4, 1102px 1216px #FF5722, 1807px 1044px #FFF, 660px 435px #03A9F4, 299px 678px #4CAF50, 1193px 115px #FF9800, 918px 290px #CDDC39, 1447px 1422px #FFEB3B, 91px 1273px #9C27B0, 108px 223px #FFEB3B, 146px 754px #00BCD4, 461px 1446px #FF5722, 1004px 391px #673AB7, 1529px 516px #F44336, 1206px 845px #CDDC39, 347px 583px #009688, 1102px 1332px #F44336, 709px 1756px #00BCD4, 1972px 248px #FFF, 1669px 1344px #FF5722, 1132px 406px #F44336, 320px 1076px #CDDC39, 126px 943px #FFEB3B, 263px 604px #FF5722, 1546px 692px #F44336;
-        animation: animStar 50s linear infinite;
-    }
-
-    .starfifth {
-        content: " ";
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        background: transparent;
-        box-shadow: 571px 173px #00BCD4, 1732px 143px #00BCD4, 1745px 454px #FF5722, 234px 784px #00BCD4, 1793px 1123px #FF9800, 1076px 504px #03A9F4, 633px 601px #FF5722, 350px 630px #FFEB3B, 1164px 782px #00BCD4, 76px 690px #3F51B5, 1825px 701px #CDDC39, 1646px 578px #FFEB3B, 544px 293px #2196F3, 445px 1061px #673AB7, 928px 47px #00BCD4, 168px 1410px #8BC34A, 777px 782px #9C27B0, 1235px 1941px #9C27B0, 104px 1690px #8BC34A, 1167px 1338px #E91E63, 345px 1652px #009688, 1682px 1196px #F44336, 1995px 494px #8BC34A, 428px 798px #FF5722, 340px 1623px #F44336, 605px 349px #9C27B0, 1339px 1344px #673AB7, 1102px 1745px #3F51B5, 1592px 1676px #2196F3, 419px 1024px #FF9800, 630px 1033px #4CAF50, 1995px 1644px #00BCD4, 1092px 712px #9C27B0, 1355px 606px #F44336, 622px 1881px #CDDC39, 1481px 621px #9E9E9E, 19px 1348px #8BC34A, 864px 1780px #E91E63, 442px 1136px #2196F3, 67px 712px #FF5722, 89px 1406px #F44336, 275px 321px #009688, 592px 630px #E91E63, 1012px 1690px #9C27B0, 1749px 23px #673AB7, 94px 1542px #FFEB3B, 1201px 1657px #3F51B5, 1505px 692px #2196F3, 1799px 601px #03A9F4, 656px 811px #00BCD4, 701px 597px #00BCD4, 1202px 46px #FF5722, 890px 569px #FF5722, 1613px 813px #2196F3, 223px 252px #FF9800, 983px 1093px #F44336, 726px 1029px #FFC107, 1764px 778px #CDDC39, 622px 1643px #F44336, 174px 1559px #673AB7, 212px 517px #00BCD4, 340px 505px #FFF, 1700px 39px #FFF, 1768px 516px #F44336, 849px 391px #FF9800, 228px 1824px #FFF, 1119px 1680px #FFC107, 812px 1480px #3F51B5, 1438px 1585px #CDDC39, 137px 1397px #FFF, 1080px 456px #673AB7, 1208px 1437px #03A9F4, 857px 281px #F44336, 1254px 1306px #CDDC39, 987px 990px #4CAF50, 1655px 911px #00BCD4, 1102px 1216px #FF5722, 1807px 1044px #FFF, 660px 435px #03A9F4, 299px 678px #4CAF50, 1193px 115px #FF9800, 918px 290px #CDDC39, 1447px 1422px #FFEB3B, 91px 1273px #9C27B0, 108px 223px #FFEB3B, 146px 754px #00BCD4, 461px 1446px #FF5722, 1004px 391px #673AB7, 1529px 516px #F44336, 1206px 845px #CDDC39, 347px 583px #009688, 1102px 1332px #F44336, 709px 1756px #00BCD4, 1972px 248px #FFF, 1669px 1344px #FF5722, 1132px 406px #F44336, 320px 1076px #CDDC39, 126px 943px #FFEB3B, 263px 604px #FF5722, 1546px 692px #F44336;
-        animation: animStar 80s linear infinite;
-    }
-
-    @keyframes animStar {
-        0% {
-            transform: translateY(0px);
-        }
-
-        100% {
-            transform: translateY(-2000px);
-        }
-    }
-
-
-
-    button {
-        border: none;
-        padding: 0;
-        font-size: 0;
-        line-height: 0;
-        background: none;
-        cursor: pointer;
-    }
-
-    :focus {
-        outline: 0;
-    }
-
-    .clearfix:before,
-    .clearfix:after {
-        content: "\0020";
-        display: block;
-        height: 0;
-        visibility: hidden;
-    }
-
-    .clearfix:after {
-        clear: both;
-    }
-
-    .clearfix {
-        zoom: 1;
-    }
-
-    /* 1. END BODY */
-    /***********************************/
-
-    /***********************************
-                /* 2. CONTENT */
-    /***********************************/
-    /* 2.1. Section error */
-    .error {
-        min-height: 100vh;
-        position: relative;
-        padding: 240px 0;
         box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        margin-top: 70px;
-    }
-
-    .error__overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-
-    .error__content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        -webkit-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-    }
-
-    .error__message {
-        text-align: center;
-        color: #181828;
-    }
-
-    .message__title {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 900;
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        font-size: 5.6rem;
-        padding-bottom: 40px;
-        max-width: 960px;
-        margin: 0 auto;
-    }
-
-    .message__text {
-        font-family: 'Montserrat', sans-serif;
-        line-height: 42px;
-        font-size: 18px;
-        padding: 0 60px;
-        max-width: 680px;
-        margin: auto;
-    }
-
-    .error__nav {
-        max-width: 600px;
-        margin: 40px auto 0;
-        text-align: center;
-    }
-
-    .e-nav__form {
-        position: relative;
-        height: 45px;
-        overflow: hidden;
-        width: 170px;
-        display: inline-block;
-        vertical-align: top;
-        border: 1px solid #212121;
-        padding-left: 10px;
-        padding-right: 46px;
-    }
-
-    .e-nav__icon {
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-        transform: translateY(-50%);
-        color: #212121;
-        -webkit-transition: color .25s ease;
-        transition: color .25s ease;
-    }
-
-    .e-nav__link {
-        height: 45px;
-        line-height: 45px;
-        width: 170px;
-        display: inline-block;
-        vertical-align: top;
-        margin: 0 15px;
-        border: 1px solid #181828;
-        color: #181828;
-        text-decoration: none;
-        font-family: 'Montserrat', sans-serif;
-        text-transform: uppercase;
-        font-size: 11px;
-        letter-spacing: .1rem;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .e-nav__link:before {
-        content: '';
-        height: 200px;
-        background: #212121;
-        position: absolute;
-        top: 70px;
-        right: 70px;
-        width: 260px;
-        -webkit-transition: all .3s;
-        transition: all .3s;
-        -webkit-transform: rotate(50deg);
-        transform: rotate(50deg);
-    }
-
-    .e-nav__link:after {
-        -webkit-transition: all .3s;
-        transition: all .3s;
-        z-index: 999;
-        position: relative;
-    }
-
-    .e-nav__link:after {
-        content: "Home Page";
-    }
-
-    .e-nav__link:hover:before {
-        top: -60px;
-        right: -50px;
-    }
-
-    .e-nav__link:hover {
-        color: #fff;
-    }
-
-    .e-nav__link:nth-child(2):hover:after {
-        color: #fff;
-    }
-
-    /* 2.1. END Section Error */
-
-    /* 2.2. Social style */
-    .error__social {
-        position: absolute;
-        top: 50%;
-        -webkit-transform: translateY(-50%);
-        transform: translateY(-50%);
-        left: 20px;
-        z-index: 10;
-    }
-
-    .e-social__list {
         margin: 0;
         padding: 0;
-        list-style-type: none;
     }
 
-    .e-social__icon {
-        padding-bottom: 30px;
-    }
-
-    .e-social__icon:last-child {
-        padding-bottom: 0;
-    }
-
-    .e-social__link {
-        color: #fff;
-        -webkit-transition: all .25s ease;
-        transition: all .25s ease;
-        display: block;
-    }
-
-    .e-social__link:hover {
-        opacity: .7;
-    }
-
-    /* 2.2. END Social style */
-
-    /* 2.3. Lamp */
-    .lamp {
-        position: absolute;
-        left: 0px;
-        right: 0px;
-        top: 0px;
-        margin: 0px auto;
-        width: 300px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        transform-origin: center top;
-        animation-timing-function: cubic-bezier(0.6, 0, 0.38, 1);
-        animation: move 5.1s infinite;
-    }
-
-    @keyframes move {
-        0% {
-            transform: rotate(40deg);
-        }
-
-        50% {
-            transform: rotate(-40deg);
-        }
-
-        100% {
-            transform: rotate(40deg);
-        }
-    }
-
-    .cable {
-        width: 8px;
-        height: 248px;
-        background-image: linear-gradient(rgb(32 148 218 / 70%), rgb(193 65 25)), linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
-    }
-
-    .cover {
-        width: 200px;
-        height: 80px;
-        background: #0bd5e8;
-        border-top-left-radius: 50%;
-        border-top-right-radius: 50%;
-        position: relative;
-        z-index: 200;
-    }
-
-    .in-cover {
+    body {
         width: 100%;
-        max-width: 200px;
-        height: 20px;
-        border-radius: 100%;
-        background: #08ffff;
-        position: absolute;
-        left: 0px;
-        right: 0px;
-        margin: 0px auto;
-        bottom: -9px;
-        z-index: 100;
+        font-family: var(--font-text);
+        color: var(--color-theme);
+        background: var(--color-bg);
+        overflow: hidden;
     }
 
-    .in-cover .bulb {
-        width: 50px;
-        height: 50px;
-        background-color: #08fffa;
+    .container {
+        text-align: center;
+        margin: 1rem 0.5rem 0;
+    }
+
+    .container h1 {
+        font-family: var(--font-header);
+        font-size: calc(4rem + 2vw);
+        text-transform: uppercase;
+    }
+
+    .container p {
+        text-transform: uppercase;
+        letter-spacing: 0.2rem;
+        font-size: 2rem;
+        margin: 1.5rem 0 3rem;
+    }
+
+    svg.keyhole {
+        height: 82px;
+        width: 82px;
+        opacity: 0;
+        visibility: hidden;
+        /* define an animation for the keyhole, to introduce it
+      paused by default, run with a timeout in JavaScript
+      */
+        animation: showKey 0.5s 0.5s paused ease-out forwards;
+    }
+
+    svg.key {
+        height: 164px;
+        width: 164px;
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        /* define an animation for the keyhole, to introduce it
+      paused by default, run with a timeout in JavaScript
+      */
+        animation: showKey 0.5s 0.5s paused ease-out forwards;
+    }
+
+    .ghost {
+        /* border: 1px solid tomato; */
+        position: absolute;
+        bottom: 5px;
+        left: calc(50% - 100px);
+        width: 200px;
+        height: 200px;
+        /* have the ghost move to the right and to the left of the screen, turning to its central position and repeating the animation twice */
+        animation: hoverGhost calc(var(--animation-duration)/2) ease-in-out 2;
+
+    }
+
+    /* introduce text through a pseudo element, connected to the animated div */
+    .ghost:before {
+        content: var(--animation-sentence);
+        color: var(--color-theme);
         border-radius: 50%;
         position: absolute;
-        left: 0px;
-        right: 0px;
-        bottom: -20px;
-        margin: 0px auto;
-        -webkit-box-shadow: 0 0 15px 7px rgba(0, 255, 255, 0.8), 0 0 40px 25px rgba(0, 255, 255, 0.5), -75px 0 30px 15px rgba(0, 255, 255, 0.2);
-        box-shadow: 0 0 25px 7px rgb(127 255 255 / 80%), 0 0 64px 47px rgba(0, 255, 255, 0.5), 0px 0 30px 15px rgba(0, 255, 255, 0.2);
+        bottom: 100%;
+        text-align: center;
+        line-height: 2;
+        padding: 1rem;
+        visibility: hidden;
+        opacity: 0;
+        /* have each string of text introduced as the ghost returns from the right edge of the screen, and for the length of time it takes to cover the central portion (a fourth, which becomes an eight as the animation length is half the total duration) */
+        /* the delay for an hypothetical duration of 40s is 7.5s for the first, 27.5s for the second and finally 40s for the last
+      in fractions and with a bit of math it boils down to 3/16, 27/40 and 1
+      // ! remember to include a slight delay in the animation of the key and keyhole
+      */
+        animation:
+            showText calc(var(--animation-duration)/8) calc(var(--animation-duration)*3/16) ease-out forwards,
+            showNewText calc(var(--animation-duration)/8) calc(var(--animation-duration)*27/40) ease-out forwards,
+            showFinalText calc(var(--animation-duration)/8) var(--animation-duration) ease-out forwards;
+
     }
 
-
-    .light {
-        width: 200px;
-        height: 0px;
-        border-bottom: 900px solid rgb(44 255 255 / 24%);
-        border-left: 50px solid transparent;
-        border-right: 50px solid transparent;
-        position: absolute;
-        left: 0px;
-        right: 0px;
-        top: 270px;
-        margin: 0px auto;
-        z-index: 1;
-        border-radius: 90px 90px 0px 0px;
-    }
-
-    /* 2.3. END Lamp */
-    /***********************************
-                /* 2. END CONTENT */
-    /***********************************/
-
-    /***********************************
-                /* 3. RESPONSIVE */
-    /***********************************/
-    .error {
-        overflow: hidden;
-        max-height: 100vh;
-    }
-
-    @media (max-width: 1400px) {
-        .lamp {
-            zoom: .5;
+    /* define the keyframe animations
+    - hoverghost to have the ghost move right, left and then back to its default position
+    - showKey to introduce into view the key (and keyhole) svg
+    - showText, showNewText, showFinalText to show the different strings (the implementation is quite quirky and primed for optimization)
+     */
+    @keyframes hoverGhost {
+        25% {
+            transform: translateX(20vw);
         }
 
-        .error__content {
-            top: 55%;
-        }
-
-        .message__title {
-            font-size: 3.5rem;
+        75% {
+            transform: translateX(-20vw);
         }
     }
 
-    @media (max-width: 900px) {
-
-        .message__title {
-            font-size: 34px;
-
-        }
-
-        .error__content {
-            top: 55%;
+    @keyframes showKey {
+        to {
+            opacity: 1;
+            visibility: visible;
         }
     }
 
-    @media (max-width: 950px) {
-        .lamp__wrap {
-            max-height: 100vh;
-            overflow: hidden;
-            max-width: 100vw;
+
+    /* alter the text changing the value of the custom property, weary of changing its value when the pseudo element is hidden and changing its value in the last keyframe (as the animation gives this value as per the "forwards" value of the fill-mode property)  */
+    @keyframes showText {
+        2% {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .error__social {
-            bottom: 30px;
-            top: auto;
-            transform: none;
-            width: 100%;
-            position: fixed;
-            left: 0;
+        98% {
+
+            opacity: 1;
+            visibility: visible;
         }
 
-        .e-social__icon {
-            display: inline-block;
-            padding-right: 30px;
+        99% {
+            --animation-sentence: 'You know you\'re supposed to leave, right?';
+            opacity: 0;
+            visibility: hidden;
         }
 
-        .e-social__icon:last-child {
-            padding-right: 0;
-        }
-
-        .e-social__icon {
-            padding-bottom: 0;
+        100% {
+            --animation-sentence: 'So much to do, so little time...';
         }
     }
 
-    @media (max-width: 750px) {
-
-        body,
-        html,
-        {
-        max-height: 100vh;
-    }
-
-    .error__content {
-        position: static;
-        margin: 0 auto;
-        transform: none;
-        padding-top: 300px;
-    }
-
-    .error {
-        padding-top: 0;
-        padding-bottom: 100px;
-        height: 100vh;
-    }
-    }
-
-    @media (max-width: 650px) {
-        .message__title {
-            font-size: 36px;
-            padding-bottom: 20px;
+    @keyframes showNewText {
+        2% {
+            --animation-sentence: 'So much to do, so little time...';
+            opacity: 1;
+            visibility: visible;
         }
 
-        .message__text {
-            font-size: 16px;
-            line-height: 2;
-            padding-right: 20px;
-            padding-left: 20px;
+        98% {
+
+            opacity: 1;
+            visibility: visible;
         }
 
-        .lamp {
-            zoom: .6;
+        99% {
+            --animation-sentence: 'So much to do, so little time...';
+            opacity: 0;
+            visibility: hidden;
         }
 
-        .error__content {
-            padding-top: 180px;
+        100% {
+            --animation-sentence: 'Okay, you seem to care about this. Here\'s a key just for you';
         }
     }
 
-    @media (max-width: 480px) {
-
-        .message__title {
-            font-size: 30px;
+    @keyframes showFinalText {
+        2% {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .message__text {
-            padding-left: 10px;
-            padding-right: 10px;
-            font-size: 15px;
+        98% {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .error__nav {
-            margin-top: 20px;
+        100% {
+            opacity: 0;
+            visibility: hidden;
         }
     }
 </style>
 
 <body>
-    <a href="https://codepen.io/uiswarup/full/vYPxywO" target="_blank">
-        <header class="top-header">
-        </header>
+    <!-- include the svg assets later used in the project -->
+    <svg style="display: none;">
+        <symbol id="keyhole" xmlns="http://www.w3.org/2000/svg" width="100" height="100"
+            viewBox="0 0 26.458333 26.458334">
+            <g transform="translate(0 -270.542)">
+                <circle cx="13.229" cy="279.141" r="8.599" fill="#f1eedb" paint-order="stroke fill markers" />
+                <path
+                    d="M10.516 283.271h5.427c1.164 0 1.768.861 2.102 1.802l3.59 10.125c.334.94-.937 1.802-2.102 1.802H6.926c-1.165 0-2.437-.861-2.103-1.802l3.59-10.125c.334-.94.938-1.802 2.103-1.802z"
+                    fill="#f1eedb" paint-order="stroke fill markers" />
+                <circle r="6.06" cy="279.141" cx="13.229" fill="#282b24" paint-order="stroke fill markers" />
+                <path
+                    d="M11.502 283.76h3.455c.741 0 1.126.733 1.338 1.534l2.286 8.614c.213.8-.597 1.534-1.338 1.534H9.216c-.742 0-1.551-.733-1.339-1.534l2.286-8.614c.212-.8.597-1.534 1.339-1.534z"
+                    fill="#282b24" paint-order="stroke fill markers" />
+            </g>
+        </symbol>
+        <symbol id="key" xmlns="http://www.w3.org/2000/svg" width="100" height="100"
+            viewBox="0 0 26.458333 26.458334">
+            <circle cx="13.229" cy="279.141" r="8.599" paint-order="stroke fill markers"
+                transform="matrix(0 -.76923 .7499 0 -202.882 23.405)" fill="#f1eedb" />
+            <circle r="8.599" cy="279.141" cx="13.229" paint-order="stroke fill markers"
+                transform="matrix(0 -.5887 .57392 0 -153.756 21.017)" fill="#282b24" />
+            <path fill="#f1eedb" paint-order="stroke fill markers" d="M12.03 12.13h14.428v2.2H12.03z" />
+            <path fill="#f1eedb" paint-order="stroke fill markers"
+                d="M18.147 12.13h2.895v6.772h-2.895zM22.113 12.13h2.716v5.065h-2.716z" />
+        </symbol>
+        <symbol id="ghost" xmlns="http://www.w3.org/2000/svg" width="100" height="100"
+            viewBox="0 0 26.458333 26.458334">
+            <g transform="translate(0 -270.542)">
+                <path
+                    d="M4.63 279.293c0-4.833 3.85-8.751 8.6-8.751 4.748 0 8.598 3.918 8.598 8.75H13.23zM4.725 279.293h16.914c.052 0 .19.043.19.096l-.095 14.329c0 .026-.011.05-.028.068a.093.093 0 0 1-.067.028c-.881 0-1.235-1.68-2.114-1.616-.995.072-1.12 2.082-2.114 2.154-.88.064-1.233-1.615-2.115-1.615-.881 0-1.233 1.615-2.114 1.615-.881 0-1.233-1.615-2.114-1.615-.882 0-1.236 1.679-2.115 1.615-.994-.072-1.12-2.082-2.114-2.154-.88-.063-1.41 1.077-2.114 1.616-.021.016-.05-.01-.067-.028a.097.097 0 0 1-.028-.068v-14.33c0-.052.042-.095.095-.095z"
+                    fill="#f1eedb" paint-order="stroke fill markers" />
+                <path
+                    d="M15.453 281.27a1.987 1.94 0 0 1-.994 1.68 1.987 1.94 0 0 1-1.987 0 1.987 1.94 0 0 1-.994-1.68h1.988z"
+                    fill="#282b24" paint-order="stroke fill markers" />
+                <g fill="#282b24" transform="matrix(1 0 0 1.0177 .283 -5.653)">
+                    <ellipse cx="10.205" cy="278.668" rx="1.231" ry="1.181"
+                        paint-order="stroke fill markers" />
+                    <ellipse ry="1.181" rx="1.231" cy="278.668" cx="16.159"
+                        paint-order="stroke fill markers" />
+                    <ellipse ry=".331" rx=".853" cy="280.936" cx="10.205" opacity=".5"
+                        paint-order="stroke fill markers" />
+                    <ellipse cx="16.159" cy="280.936" rx=".853" ry=".331" opacity=".5"
+                        paint-order="stroke fill markers" />
+                </g>
+                <ellipse ry=".614" rx="8.082" cy="296.386" cx="13.229" opacity=".1" fill="#f1eedb"
+                    paint-order="stroke fill markers" />
+            </g>
+        </symbol>
 
-        <!--dust particel-->
-        <div>
-            <div class="starsec"></div>
-            <div class="starthird"></div>
-            <div class="starfourth"></div>
-            <div class="starfifth"></div>
-        </div>
-        <!--Dust particle end--->
+    </svg>
+
+    <!-- include in a container a heading, paragraph and svg for the keyhole -->
+    <div class="container">
+        <h1>403</h1>
+        <p>access not granted</p>
+        <svg class="keyhole">
+            <use href="#keyhole" />
+        </svg>
+    </div>
+
+    <!-- outside of the container, to have them absolute positioned in relation to the body, include an svg for the key and one for the ghost -->
+    <svg class="key">
+        <use href="#key" />
+    </svg>
+
+    <!--
+    ! nest the svg in a vi, give the svg and vi the same class
+    the div and svg behave differently when translating the element through the transform property, giving a nice distance between the text (included with a pseudo element on the div) and the svg
+  -->
+    <div class="ghost">
+        <svg class="ghost">
+            <use href="#ghost" />
+        </svg>
+    </div>
+    <script>
+        // target the elements in the DOM used in the project
+
+        /**
+         * svg for the key and keyhole
+         * div nesting the ghost
+         * heading and paragraph
+         */
+        const key = document.querySelector(".key");
+        const keyhole = document.querySelector(".keyhole");
+        const ghost = document.querySelector(".ghost");
+
+        const heading = document.querySelector("h1");
+        const paragraph = document.querySelector("p");
 
 
-        <div class="lamp__wrap">
-            <div class="lamp">
-                <div class="cable"></div>
-                <div class="cover"></div>
-                <div class="in-cover">
-                    <div class="bulb"></div>
-                </div>
-                <div class="light"></div>
-            </div>
-        </div>
-        <!-- END Lamp -->
-        <section class="error">
-            <!-- Content -->
-            <div class="error__content">
-                <div class="error__message message">
-                    <h1 style="color: white;" class="">You are not autorise to this page</h1>
-                    <p class="message__text">We're sorry, the page you were looking for isn't found here. The link you
-                        followed may either be broken or no longer exists. Please try again, or take a look at our.</p>
-                </div>
-                <div class="error__nav e-nav">
-                    <a href="{{ route('acceuille') }}" target="_blanck" class="e-nav__link"
-                        style="    color: white;"></a>
-                </div>
-            </div>
-            <!-- END Content -->
+        // for the length of the timout, consider the --animation-duration custom property and add a small delay
+        // retrieve properties on the root element
+        const root = document.querySelector(":root");
+        const rootStyles = getComputedStyle(root);
+        // retrieve the animation-duration custom property
+        // ! this is specified as "40s", in seconds, so parse the number and includ it in milliseconds
+        const animationDuration = parseInt(rootStyles.getPropertyValue("--animation-duration")) * 1000;
+        let keyTimer = animationDuration * 9 / 8;
 
-        </section>
 
-    </a>
+        // retrieve the dimensions of the key (to have the key exactly where the cursor would lie)
+        const keyBox = key.getBoundingClientRect();
+        // console.log(keyBox);
 
+
+        // KEY & KEYHOLE ANIMATION
+        // include a timeout with the specified time frame
+        const timeoutID = setTimeout(() => {
+            // after the specified time, change the cursor as to seemingly grab the key
+            key.parentElement.parentElement.style.cursor = "grab";
+
+            // introduce the key and keyhole svg elements by triggering the paused-by-default animation
+            key.style.animationPlayState = "running";
+            keyhole.style.animationPlayState = "running";
+
+            // ! pointer-events set to none on the key to allow for a mouseover event on the keyhole
+            // the key is indeed used in stead of the normal cursor and would overlap on top of everything
+            key.style.pointerEvents = "none";
+
+            // when the cursor hovers anywhere in the window, call a function to update the position of the key and have it match the cursor
+            window.addEventListener("mousemove", updateKeyPosition);
+
+            // when the cursor hovers on the keyhole, call a function to grant access and remove present listeners
+            keyhole.addEventListener("mouseover", grantAccess);
+
+            clearTimeout(timeoutID);
+        }, keyTimer);
+
+
+        // define the function which updates the position of the absolute-positioned key according to the mouse coordinates (and the keys own dimensions)
+        const updateKeyPosition = (e) => {
+            let x = e.clientX;
+            let y = e.clientY;
+            key.style.left = x - keyBox.width / 1.5;
+            key.style.top = y - keyBox.height / 2;
+        };
+
+        // define the function which notifies the user of the grant access
+        const grantAccess = () => {
+            // restore the cursor
+            key.parentElement.parentElement.style.cursor = "default";
+
+            // change the text of the heading and paragraph elements
+            heading.textContent = '🎉 yay 🎉';
+            paragraph.textContent = 'access granted';
+
+            // remove the svg elements for the key and keywhole from the flow of the document
+            keyhole.style.display = "none";
+            key.style.display = "none";
+
+            // remove the event listeners, most notably the one on the window
+            window.removeEventListener("mousemove", updateKeyPosition);
+            keyhole.removeEventListener("mouseover", grantAccess);
+        };
+    </script>
 </body>
+
 
 </html>

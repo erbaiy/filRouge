@@ -16,6 +16,7 @@ class OrganizerMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+
         $user = DB::table('users')
             ->join('role', 'users.role_id', '=', 'role.id')
             ->where('users.id', '=', session('id'))
