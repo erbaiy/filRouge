@@ -70,6 +70,4 @@
         </div>
     </div>
     <!-- end our_room -->
-
-    <!--  footer -->
-@endsection <!-- end header -->
+@endsection

@@ -20,12 +20,11 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTagModal">
             Add New role
         </button>
-        <table class="table border" id="nn">
+        <table class="table" id="nn">
             <thead class="border">
                 <tr>
                     <th scope="col" class="border">name</th>
                     <th scope="col" class="border">edit</th>
-                    <th scope="col" class="border">delete</th>
                 </tr>
             </thead>
             <tbody class="border">
@@ -57,16 +56,7 @@
                                                     <input type="text" name="name" class="form-control" id="tagName"
                                                         required value="{{ $row->name }}">
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="tagName" class="form-label">Permission Name</label>
-                                                    <select name="uri[]" multiple class="form-control">
-                                                        <option value="">slect permission</option>
-                                                        @foreach ($routes as $route)
-                                                            <option value="{{ $route->id }}">{{ $route->uri }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
@@ -79,14 +69,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="border">
-                            <form action="{{ route('roles.delete', ['id' => $row->id]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="id" value="{{ $row->id }}">
-                                <button type="submit" class="btn btn-outline-danger">Delete</button>
-                            </form>
-                        </td>
+
                     </tr>
                 @endforeach
             </tbody>
@@ -118,15 +101,7 @@
                             <input type="text" name="name" class="form-control" id="tagName" required>
                             <input type="hidden" name="role_id" value="">
                         </div>
-                        <div class="mb-3">
-                            <label for="tagName" class="form-label">Permission Name</label>
-                            <select name="uri[]" class="form-control" multiple>
-                                <option value="">slect permission</option>
-                                @foreach ($routes as $route)
-                                    <option value="{{ $route->id }}">{{ $route->uri }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
 
                     </div>
 

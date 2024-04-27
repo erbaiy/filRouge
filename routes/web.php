@@ -35,9 +35,12 @@ use App\Http\Middleware\Auth;
 Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
 Route::post('/payment', [PaymentController::class, 'process'])->name('payment.process');
 
-Route::get('/pageNotFound', function () {
-    return view('pageNotFound');
+Route::get('/Unauthorized', function () {
+    return view('responses.Unauthorized');
 })->name('unauthorize');
+Route::fallback(function () {
+    return view('responses.errors404');
+});
 
 // public Route
 Route::get('/', [HomeController::class, 'index'])->name('acceuille');
@@ -130,7 +133,10 @@ Route::group(['middleware' => [Auth::class]], function () {
     // Routes accessible only to admin users
     Route::group(['middleware' => [AdminMiddleware::class]], function () {
         Route::get('/statistique', [StatisiqueController::class, "adminStatistique"]);
-        Route::resource('category', CategoryController::class);
+        Route::get('/category', [CategoryController::class,  'index'])->name('category.index');
+        Route::post('/category/store', [CategoryController::class,  'store'])->name('category.store');
+        Route::put('/category/update/{id}', [CategoryController::class,  'update'])->name('category.update');
+        Route::delete('/category/delete/{id}', [CategoryController::class,  'destroy'])->name('category.destroy');
         Route::get('/getRoomsForApproval', [RoomController::class, 'getRoomsForApproval'])->name('room.getRoomsForApproval');
         Route::delete('/room/refuse/{id}', [RoomController::class, 'refuse'])->name('room.refuse');
         Route::delete('/room/accept/{id}', [RoomController::class, 'accept'])->name('room.accept');

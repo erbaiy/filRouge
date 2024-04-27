@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\ReservationTicket;
 use App\Models\Payment;
 use App\Models\Reservation;
+use App\Models\Role;
 use App\Models\Room;
 use App\Models\Ticket;
 use App\Models\User;
@@ -17,60 +18,62 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $user_id = session("id");
-        $user = User::where('id', $user_id)->first(); // `first()` to get single user
+        $userId = session("id");
+        $user = User::join('role', 'role.id', '=', 'users.role_id')
+            ->select('users.*', 'role.name as role_name')
+            ->where('users.id', $userId)
+            ->first();
+
         $reservations = Reservation::join('rooms', 'reservations.room_id', '=', 'rooms.id')
             ->select('rooms.id as roomID', 'reservations.*')
-            ->where('reservations.user_id', '=', $user_id)
-            ->where('status', '=', 'active')
+            ->where('reservations.user_id', $userId)
+            ->where('status', 'active')
             ->paginate(4);
-        // dd($user);
 
-        // foreach ($reservations as $reservation) {
-
-        //     dd($reservation->price);
-        // }
         return view('profile', compact('user', 'reservations'));
     }
+
+
     public function updateProfile(Request $request)
     {
         $id = session('id');
 
         $validatedData = $request->validate([
-            'image' => 'nullable',
             'email' => 'required',
             'name' => 'required',
             'phone' => 'nullable',
             'description' => 'nullable',
         ]);
-        // dd($validatedData);
 
-        try {
-            $user = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
-            // Handle image upload
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $imageName = time() . '_' . $image->getClientOriginalName();
-                $image->move(public_path('assets/img'), $imageName);
-                $validatedData['image'] = $imageName;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $uniqueFileName = uniqid() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('assets/img'), $uniqueFileName);
+
+            // Delete the old image file
+            if ($user->image) {
+                $oldImagePath = public_path('assets/img') . '/' . $user->image;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
             }
 
-            $user->image = $validatedData['image'];
-            $user->email = $validatedData['email'];
-            $user->name = $validatedData['name'];
-            $user->mobileNumber = $validatedData['phone'];
-            $user->description = $validatedData['description'];
-
-            $user->save();
-
-
-
-            return redirect()->back()->with('success', 'Profile updated successfully');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to update profile: ' . $e->getMessage());
+            $user->image = $uniqueFileName;
         }
+
+        $user->email = $validatedData['email'];
+        $user->name = $validatedData['name'];
+        $user->mobileNumber = $validatedData['phone'];
+        $user->description = $validatedData['description'];
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'Profile updated successfully');
     }
+
+
 
 
 
@@ -122,7 +125,6 @@ class ProfileController extends Controller
             'checkin' => 'required|date|after:now',
             'checkout' => 'required|date|after:checkin',
         ]);
-        // dd($data);
         // Find the reservation
         $reservation = Reservation::findOrFail($reservationId);
 

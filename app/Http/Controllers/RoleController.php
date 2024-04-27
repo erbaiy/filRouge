@@ -13,15 +13,12 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        $routes = Route::all();
-
-        return view("back-office.roles", compact('roles', 'routes'));
+        return view("back-office.roles", compact('roles'));
     }
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'uri' => 'required|array'
         ]);
 
         $role = new Role();
@@ -32,55 +29,19 @@ class RoleController extends Controller
             return back()
                 ->with('error', 'error while saving role');
         }
-        $permissions = $validatedData['uri'];
-
-        $rolePermissions = [];
-
-        foreach ($permissions as $permissionId) {
-            $rolePermissions[] = [
-                'role_id' => $role->id,
-                'route_id' => $permissionId
-            ];
-        }
-
-        $x = RoleRoute::insert($rolePermissions);
-
-
         return back()
-            ->with('success', 'role creact was successfully');
+            ->with('seccess', 'role creact was successfully');
     }
-    public function destroy()
-    {
-        $deleteRole = Role::find($_POST["id"]);
-        $deleteRole->delete();
-        return redirect()->route('roles.index');
-    }
+
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'uri' => 'required|array'
         ]);
 
         $role = Role::findOrFail($id);
         $role->name = $validatedData['name'];
         $role->save();
-
-        if ($role) {
-            $permissions = $validatedData['uri'];
-
-            $rolePermissions = [];
-
-            foreach ($permissions as $permissionId) {
-                $rolePermissions[] = [
-                    'role_id' => $role->id,
-                    'route_id' => $permissionId
-                ];
-            }
-
-            RoleRoute::where('role_id', $role->id)->delete();
-            RoleRoute::insert($rolePermissions);
-        }
 
         return redirect()->route('roles.index');
     }

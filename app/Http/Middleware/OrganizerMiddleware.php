@@ -28,6 +28,6 @@ class OrganizerMiddleware
         }
 
         // Redirect or return response if not an admin or user not found
-        return redirect('/pageNotFound')->with('error', 'Unauthorized');
+        return redirect('/Unauthorized')->with('error', 'Unauthorized');
     }
 }

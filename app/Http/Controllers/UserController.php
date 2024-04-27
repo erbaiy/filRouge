@@ -11,13 +11,13 @@ class UserController extends Controller
 {
     public function index()
     {
-        $permissions = Route::all();
+
         $roles = Role::all();
         $users = User::join('role', 'users.role_id', "=", 'role.id')->select("users.*", "role.name as role_name")
             ->where('role.name', '!=', "admin")
             ->get();
         // dd($roles);
-        return view('back-office.user.index', compact('users', 'permissions', 'roles'));
+        return view('back-office.user.index', compact('users', 'roles'));
     }
     public function update(Request $request, $id)
     {

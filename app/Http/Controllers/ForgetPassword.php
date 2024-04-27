@@ -70,6 +70,5 @@ class ForgetPassword extends Controller
         } else {
             dd(0);
         }
-        // return redirect()->route('auth_getLogin');
     }
 }

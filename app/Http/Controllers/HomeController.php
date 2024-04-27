@@ -3,97 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\{User, Room, Reservation, Payment, Service, Ticket};
-use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ReservationTicket;
-use Stripe\Exception\ApiErrorException;
-use Stripe\Stripe;
 use Illuminate\Support\Facades\DB;
-use Stripe\PaymentIntent;
-use Illuminate\Support\Facades\Validator;
-use Stripe\Charge;
 use Illuminate\Validation\Rule;
-
-
 
 class HomeController extends Controller
 {
 
-
-
-    // $rooms = DB::table('rooms')
-    //     ->select('rooms.*', 'service.id as service_id', 'service.name as service_name', 'service.image as service_image')
-    //     ->join('room_service', 'room_service.room_id', '=', 'rooms.id')
-    //     ->join('service', 'service.id', '=', 'room_service.service_id')
-    //     ->where('rooms.availability', true)
-    //     ->where('rooms.is_accepted', 'accepte')
-    //     ->get();
-    // $rooms = DB::table('rooms')
-    //     ->select('rooms.*', DB::raw('ANY_VALUE(service.id) as service_id'), DB::raw('ANY_VALUE(service.name) as service_name'), DB::raw('ANY_VALUE(service.image) as service_image'))
-    //     ->join('room_service', 'rooms.id', '=', 'room_service.room_id')
-    //     ->join('service', 'service.id', '=', 'room_service.service_id')
-    //     ->leftJoin('reservations', function ($join) {
-    //         $join->on('reservations.room_id', '=', 'rooms.id')
-    //             ->whereDate('reservations.checkin', '>=', DB::raw('CURDATE()'));
-    //     })
-    //     ->where('rooms.availability', true)
-    //     ->whereNull('reservations.id')
-    //     // ->where('rooms.room_type', 'double')
-    //     ->groupBy('rooms.id')
-    //     ->get();
-    // public function index()
-    // {
-    //     $rooms = DB::table('rooms')
-    //         ->select(
-    //             'rooms.*',
-    //             DB::raw('GROUP_CONCAT(service.id) AS service_ids'),
-    //             DB::raw('GROUP_CONCAT(service.name) AS service_names'),
-    //             DB::raw('GROUP_CONCAT(service.image) AS service_images')
-    //         )
-
-    //         ->join('room_service', 'rooms.id', '=', 'room_service.room_id')
-    //         ->join('service', 'service.id', '=', 'room_service.service_id')
-    //         ->leftJoin('reservations', function ($join) {
-    //             $join->on('reservations.room_id', '=', 'rooms.id')
-    //                 ->whereDate('reservations.checkin', '>=', DB::raw('CURDATE()'));
-    //         })
-    //         ->where('rooms.availability', true)
-    //         ->whereNull('reservations.id')
-    //         // ->where('rooms.room_type', 'double')
-    //         ->groupBy('rooms.id')
-    //         ->get();
-    //     // Organize the rooms and services into a nested array
-    //     $roomsWithServices = [];
-    //     foreach ($rooms as $room) {
-    //         $roomId = $room->id;
-    //         if (!isset($roomsWithServices[$roomId])) {
-    //             $roomsWithServices[$roomId] = [
-    //                 'room' => $room,
-    //                 'services' => [],
-    //             ];
-    //         }
-
-    //         if ($room->service_id) {
-    //             $service = [
-    //                 'id' => $room->service_id,
-    //                 'name' => $room->service_name,
-    //                 'image' => $room->service_image,
-    //             ];
-    //             $roomsWithServices[$roomId]['services'][] = $service;
-    //         }
-    //     }
-
-
-
-
-    //     return view('test', compact('roomsWithServices'));
-    // }
-
     public function index()
     {
+
+        $user = User::find(session('id'));
 
         $rooms = DB::table('rooms')
             ->select(
@@ -142,9 +66,7 @@ class HomeController extends Controller
                 $roomsWithServices[$roomId]['services'][] = $service;
             }
         }
-
-
-        return view('test', compact('roomsWithServices'));
+        return view('front-office.index', compact('roomsWithServices', 'user'));
     }
 
 
@@ -261,12 +183,12 @@ class HomeController extends Controller
             }
         }
         if ($roomsWithServices === []) {
-            return view('nodata');
+            return view('responses.nodata');
         }
 
         // Instead of checking for empty $roomsWithServices, let the view handle this case
 
-        return view('filteredData', ['roomsWithServices' => $roomsWithServices]);
+        return view('responses.filteredData', ['roomsWithServices' => $roomsWithServices]);
     }
 
 
@@ -294,7 +216,7 @@ class HomeController extends Controller
             ->groupBy('rooms.id')
             ->first();
         // dd($room);
-        return view('detaill', compact('room'));
+        return view('front-office.detaill', compact('room'));
     }
 
     public function gallery()

@@ -110,7 +110,7 @@
                 <div class="row gx-4">
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            <img src="{{ asset('assets/img/' . $user->image) }}" alt="profile_image"
+                            <img src="assets/img/662cc911671c9_WIN_20240419_22_28_48_Pro.jpg" alt="profile_image"
                                 class="w-100 border-radius-lg shadow-sm">
                         </div>
 
