@@ -147,56 +147,7 @@ class HomeController extends Controller
         return view('test', compact('roomsWithServices'));
     }
 
-    // public function reserve(Request $request)
-    // {
-    //     $data = $request->validate([
-    //         'user_id' => 'required|exists:users,id',
-    //         'room_id' => 'required|exists:rooms,id',
-    //         'checkin' => 'required|date|after:now',
-    //         'checkout' => 'required|date|after:checkin',
-    //         'price' => 'required|numeric',
-    //     ]);
 
-    //     $room = Room::find($data['room_id']);
-    //     if (!$room || !$room->availability) {
-    //         return response()->json(['error' => 'Room not available or not found.'], 422);
-    //     }
-    //     // $room->availability = false;
-    //     // $room->update();
-
-    //     $checkin = Carbon::parse($data['checkin']);
-    //     $checkout = Carbon::parse($data['checkout']);
-    //     $number_of_nights = $checkout->diffInDays($checkin);
-    //     $total_price = $data['price'] * $number_of_nights;
-
-    //     $reservation = Reservation::create([
-    //         'user_id' => $data['user_id'],
-    //         'room_id' => $room->id,
-    //         'checkin' => $checkin,
-    //         'checkout' => $checkout,
-    //         'number_of_nights' => $number_of_nights,
-    //         'total_price' => $total_price,
-    //     ]);
-    //     $room->update(['availability' => false]);
-
-    //     $payment = Payment::create([
-    //         'reservation_id' => $reservation->id,
-    //         'amount' => $total_price,
-    //         'is_paid' => true,
-    //     ]);
-
-    //     $ticket = Ticket::create([
-    //         'payment_id' => $payment->id,
-    //         'token' => Str::random(32),
-    //     ]);
-
-    //     $user = $reservation->user;
-
-    //     Mail::to($user->email)->send(new ReservationTicket($user, $ticket, $reservation, $room));
-
-    //     return back()
-    //         ->with('success', 'Reservation created successfully.');
-    // }
     public function reserve(Request $request)
     {
         $data = $request->validate([
@@ -215,10 +166,14 @@ class HomeController extends Controller
         // Check if the room is available for the selected dates
         $checkin = Carbon::parse($data['checkin']);
         $checkout = Carbon::parse($data['checkout']);
-        if (!$room->isAvailableForBooking($checkin, $checkout)) {
-            return redirect()->back()->with(['failed' => 'The room is not available for the selected dates.']);
-        }
+        $checkStatus = Reservation::where('room_id', '=', $room->id)->get();
 
+        foreach ($checkStatus as $checkStatu) {
+            if (!$room->isAvailableForBooking($checkin, $checkout) && $checkStatu->status != 'cancelled') {
+
+                return redirect()->back()->with('failed', 'The room is not available for the selected dates.');
+            }
+        }
         // Calculate reservation details
         $number_of_nights = $checkout->diffInDays($checkin);
         $total_price = $data['price'] * $number_of_nights;
@@ -314,90 +269,6 @@ class HomeController extends Controller
         return view('filteredData', ['roomsWithServices' => $roomsWithServices]);
     }
 
-
-
-    // public function filterRooms($categoryId, $checkinDate, $checkoutDate)
-    // {
-    //     $rooms = DB::table('rooms')
-    //         ->select(
-    //             'rooms.*',
-    //             DB::raw('GROUP_CONCAT(service.id) AS service_ids'),
-    //             DB::raw('GROUP_CONCAT(service.name) AS service_names'),
-    //             DB::raw('GROUP_CONCAT(service.image) AS service_images')
-    //         )
-    //         ->join('room_service', 'rooms.id', '=', 'room_service.room_id')
-    //         ->join('service', 'service.id', '=', 'room_service.service_id')
-    //         ->leftJoin('reservations', 'reservations.room_id', '=', 'rooms.id')
-    //         ->where('rooms.room_type', $categoryId)
-    //         ->where(function ($query) use ($checkinDate, $checkoutDate) {
-    //             $query->whereNull('reservations.checkin')
-    //                 ->orWhere(function ($query) use ($checkinDate, $checkoutDate) {
-    //                     $query->where('reservations.checkout', '<=', $checkinDate)
-    //                         ->orWhere('reservations.checkin', '>=', $checkoutDate);
-    //                 })
-    //                 ->orWhere(function ($query) use ($checkinDate, $checkoutDate) {
-    //                     $query->where('reservations.checkin', '<', $checkinDate)
-    //                         ->where('reservations.checkout', '>', $checkoutDate);
-    //                 });
-    //         })
-    //         ->where('rooms.availability', true)
-    //         ->groupBy('rooms.id')
-    //         ->get();
-
-
-    //     // Organize the rooms and services into a nested array
-    //     $roomsWithServices = [];
-    //     foreach ($rooms as $room) {
-    //         $roomId = $room->id;
-    //         if (!isset($roomsWithServices[$roomId])) {
-    //             $roomsWithServices[$roomId] = [
-    //                 'room' => $room,
-    //                 'services' => [],
-    //             ];
-    //         }
-    //         if ($room->service_ids) {
-    //             $serviceIds = explode(',', $room->service_ids);
-    //             $serviceNames = explode(',', $room->service_names);
-    //             $serviceImages = explode(',', $room->service_images);
-
-    //             foreach ($serviceIds as $index => $serviceId) {
-    //                 $service = [
-    //                     'id' => $serviceId,
-    //                     'name' => $serviceNames[$index],
-    //                     'image' => $serviceImages[$index],
-    //                 ];
-    //                 $roomsWithServices[$roomId]['services'][] = $service;
-    //             }
-    //         }
-    //     }
-
-    //     if (empty($roomsWithServices)) {
-    //         return "<h1>No rooms available at this time.</h1>"; // Security risk if not sanitized!
-    //     }
-
-    //     return view('filteredData', ['roomsWithServices' => $roomsWithServices]);
-    // }
-
-
-
-
-
-
-
-
-
-    //     select rooms.*,reservations.*,
-    // GROUP_CONCAT(service.id) AS service_ids,
-    // GROUP_CONCAT(service.name) AS service_names,
-    // GROUP_CONCAT(service.image) AS service_images
-    // FROM rooms
-    // INNER JOIN room_service ON rooms.id=room_service.room_id 
-    // INNER JOIN service on service.id=room_service.service_id
-    // LEFT JOIN reservations on reservations.room_id=rooms.id 
-    // WHERE reservations.checkin is null or  reservations.checkin AND reservations.checkout BETWEEN "2024-05-06 00:00:00
-    // " AND "2024-05-10 00:00:00"
-
-    // GROUP by reservations.id,rooms.id
 
     public function detail($id)
     {

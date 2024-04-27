@@ -65,8 +65,12 @@
 
     <link id="pagestyle" href="../assets/css/soft-ui-dashboard.minf2ad.css?v=1.0.7" rel="stylesheet" />
 
-
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css"
+        integrity="sha512-8RxmFOVaKQe/xtg6lbscU9DU0IRhURWEuiI0tXevv+lXbAHfkpamD4VKFQRto9WgfOJDwOZ74c/s9Yesv3VvIQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script defer data-site="demos.creative-tim.com" src="../../../api.nepcha.com/js/nepcha-analytics.js"></script>
 </head>
@@ -87,6 +91,12 @@
 
                     <h3 class="text-white font-weight-bolder ms-2">Profile</h3>
                 </nav>
+                <nav aria-label="breadcrumb" style="margin-top: 10px">
+
+                    <a class="" href="{{ route('acceuille') }}">
+                        <-Back <i class="fas fa-door-open"></i>
+                    </a>
+                </nav>
 
             </div>
         </nav>
@@ -100,10 +110,10 @@
                 <div class="row gx-4">
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            {{-- @dd('assets/img/' . $user->image) --}}
                             <img src="{{ asset('assets/img/' . $user->image) }}" alt="profile_image"
                                 class="w-100 border-radius-lg shadow-sm">
                         </div>
+
 
                     </div>
                     <div class="col-auto my-auto">
@@ -112,7 +122,7 @@
                                 {{ $user->name }}
                             </h5>
                             <p class="mb-0 font-weight-bold text-sm">
-                                USER
+                                {{ $user->role_name }}
                             </p>
                         </div>
                     </div>
@@ -430,13 +440,13 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="{{ route('UpdateProfile', ['id' => session('id')]) }}" method="POST">
+                                <form action="{{ route('UpdateProfile') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
                                     <div class="mb-3">
                                         <label for="image" class="form-label">Image</label>
-                                        <input type="file" class="form-control" id="image" name="image"
-                                            value="{{ $user->image }}">
+                                        <input type="file" class="form-control" id="image" name="image">
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
@@ -465,6 +475,7 @@
                                     </div>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
