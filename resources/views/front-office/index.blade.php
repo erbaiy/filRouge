@@ -1,4 +1,3 @@
-
 @extends('front-office.app.layout')
 @section('content')
     <main class="main-content  mt-0">
@@ -85,7 +84,9 @@
                         @if (session('failed'))
                             <div id="failedAlert" class="alert alert-danger"
                                 style="color: red; background-color: #ffcccc; border: 1px solid red; padding: 10px; margin-top: 20px; border-radius: 5px; text-align: center;">
-                                {{ session('failed') }}
+                                <span style="color: white
+                                "></span>
+                                {{ session('failed') }}</span>
                             </div>
                         @endif
 
@@ -122,33 +123,6 @@
                         <div class="row" id="resultArea">
 
 
-
-                            {{-- <div class="col-md-4 col-sm-6">
-                                <div class="room">
-                                    <div class="room_img">
-                                        <figure>
-                                            <img src="https://www.beleontours.com/Media/Hotels/rooms_76938894_NJV%20Athens%20Plaza%20-%20Rooms%20H%20(7).jpg?w=750&h=430&mode=crop&scale=both"
-                                                alt="#" style="width:100%;border-radius:15px;">
-                                        </figure>
-                                    </div>
-                                    <div class="bed_room">
-
-                                        <h3>Bed Room</h3>
-                                        <div>
-                                            A parais
-                                        </div>
-
-                                        <div class="card-footer"
-                                            style="    display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;">
-                                            <span class="float-left price">$59/night</span>
-                                            <a href="#" class="btn btn-outline-success float-right">Reserve</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div> --}}
                             @foreach ($roomsWithServices as $roomData)
                                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                                     <div class="card card-blog card-plain">
@@ -379,7 +353,6 @@
                 console.log(checkoutDate);
 
                 if (categoryId && checkinDate && checkoutDate) {
-                    // Perform an AJAX request
                     let url = `/filterRooms/${categoryId}/${checkinDate}/${checkoutDate}`;
                     let xhr = new XMLHttpRequest();
                     xhr.open('GET', url);

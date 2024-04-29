@@ -9,7 +9,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ReservationTicket;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
+
 
 class HomeController extends Controller
 {
@@ -133,6 +134,78 @@ class HomeController extends Controller
         // Redirect back with success message
         return back()->with('success', 'Reservation created successfully.');
     }
+
+    // public function reserve(Request $request)
+    // {
+    //     try {
+    //         $data = $request->validate([
+    //             'user_id' => 'required|exists:users,id',
+    //             'room_id' => 'required|exists:rooms,id',
+    //             'checkin' => 'required|date|after:now',
+    //             'checkout' => 'required|date|after:checkin',
+    //             'price' => 'required|numeric',
+    //         ]);
+    //     } catch (ValidationException $e) {
+    //         return redirect()->back()->withErrors($e->validator->errors())->withInput();
+    //     }
+
+    //     $room = Room::find($data['room_id']);
+    //     if (!$room || !$room->availability) {
+    //         return redirect()->back()->with('error', 'Room not available or not found.');
+    //     }
+
+    //     // Check if the room is available for the selected dates
+    //     $checkin = Carbon::parse($data['checkin']);
+    //     $checkout = Carbon::parse($data['checkout']);
+    //     $checkStatus = Reservation::where('room_id', $room->id)
+    //         ->where('status', '!=', 'cancelled')
+    //         ->where(function ($query) use ($checkin, $checkout) {
+    //             $query->whereBetween('checkin', [$checkin, $checkout])
+    //                 ->orWhereBetween('checkout', [$checkin, $checkout]);
+    //         })
+    //         ->exists();
+
+    //     if ($checkStatus) {
+    //         return redirect()->back()->with('error', 'The room is not available for the selected dates.');
+    //     }
+
+    //     // Calculate reservation details
+    //     $number_of_nights = $checkout->diffInDays($checkin);
+    //     $total_price = $data['price'] * $number_of_nights;
+
+    //     // Create reservation
+    //     $reservation = Reservation::create([
+    //         'user_id' => $data['user_id'],
+    //         'room_id' => $room->id,
+    //         'checkin' => $checkin,
+    //         'checkout' => $checkout,
+    //         'number_of_nights' => $number_of_nights,
+    //         'total_price' => $total_price,
+    //     ]);
+
+    //     // Update room availability
+    //     $room->update(['availability' => false]);
+
+    //     // Create payment
+    //     $payment = Payment::create([
+    //         'reservation_id' => $reservation->id,
+    //         'amount' => $total_price,
+    //         'is_paid' => true,
+    //     ]);
+
+    //     // Generate ticket
+    //     $ticket = Ticket::create([
+    //         'payment_id' => $payment->id,
+    //         'token' => Str::random(32),
+    //     ]);
+
+    //     // Send email notification
+    //     $user = $reservation->user;
+    //     Mail::to($user->email)->send(new ReservationTicket($user, $ticket, $reservation, $room));
+
+    //     // Redirect back with success message
+    //     return redirect()->back()->with('success', 'Reservation created successfully.');
+    // }
 
 
 

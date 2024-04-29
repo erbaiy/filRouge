@@ -16,12 +16,10 @@ class ForgetPassword extends Controller
     //
     public function forgetPassword()
     {
-
         return view('aut.forget-password');
     }
     public function sendToEmail(Request $request)
     {
-
         $request->validate([
             'email' => 'required|email',
         ]);
@@ -41,12 +39,12 @@ class ForgetPassword extends Controller
             $message->to($request->email)
                 ->subject('Reset Password');
         });
-        // dd($resetLink);
+
         if ($success) {
 
             return back()->with('seccess', 'Password reset link sent.');
         } else {
-            dd('failed');
+
             return back()->withErrors(['error' => 'Failed to send reset link.']);
         }
     }
@@ -58,17 +56,23 @@ class ForgetPassword extends Controller
     public function addNewPassword(Request $request)
     {
         $request->validate([
-            'password' => 'required',
+            'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required',
         ]);
+
         $user = User::where('remember_token', $request->token)->first();
+
+        if (!$user) {
+            return redirect()->route('auth_getLogin')->with('error', 'Invalid token. Please try again.');
+        }
+
         $user->password = Hash::make($request->password);
         $user->remember_token = null;
-        $user->save();
-        if ($user) {
-            redirect(route('auth_getLogin'))->with('status', 'Your password has been changed successfully! Please login now');
+
+        if ($user->save()) {
+            return redirect()->route('auth_getLogin')->with('status', 'Your password has been changed successfully! Please login now');
         } else {
-            dd(0);
+            return redirect()->route('auth_getLogin')->with('error', 'Failed to update password. Please try again.');
         }
     }
 }
