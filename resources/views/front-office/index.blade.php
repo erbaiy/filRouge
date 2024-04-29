@@ -67,7 +67,7 @@
                 <script>
                     setTimeout(function() {
                         alert("{{ implode(' ', $errors->all()) }}");
-                    }, 3000); // 3000 milliseconds = 3 seconds
+                    }, 3000);
                 </script>
             @endif
 
@@ -90,23 +90,7 @@
                             </div>
                         @endif
 
-                        <script>
-                            // Function to remove success message after 3 seconds
-                            setTimeout(function() {
-                                var successAlert = document.getElementById('successAlert');
-                                if (successAlert) {
-                                    successAlert.parentNode.removeChild(successAlert);
-                                }
-                            }, 3000);
 
-                            // Function to remove error message after 3 seconds
-                            setTimeout(function() {
-                                var failedAlert = document.getElementById('failedAlert');
-                                if (failedAlert) {
-                                    failedAlert.parentNode.removeChild(failedAlert);
-                                }
-                            }, 3000);
-                        </script>
 
                         <div class="row" style="justify-content: center">
                             <div class="col-md-12">
@@ -382,5 +366,23 @@
             checkin.addEventListener('change', handleSearch);
             checkout.addEventListener('change', handleSearch);
         });
+    </script>
+
+    <script>
+        // Function to remove success message after 3 seconds
+        setTimeout(function() {
+            var successAlert = document.getElementById('successAlert');
+            if (successAlert) {
+                successAlert.parentNode.removeChild(successAlert);
+            }
+        }, 3000);
+
+        // Function to remove error message after 3 seconds
+        setTimeout(function() {
+            var failedAlert = document.getElementById('failedAlert');
+            if (failedAlert) {
+                failedAlert.parentNode.removeChild(failedAlert);
+            }
+        }, 3000);
     </script>
 @endsection
