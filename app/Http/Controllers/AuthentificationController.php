@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthentificationController extends Controller
@@ -59,6 +60,14 @@ class AuthentificationController extends Controller
             return redirect()->route("unauthorize");
         }
         session(['id' => $user->id]);
+        $role = DB::table('users')
+            ->join('role', 'users.role_id', '=', 'role.id')
+            ->select('role.name as role_name')
+            ->where('users.id', $user->id)
+            ->first();
+
+        session(['role' => $role->role_name]);
+
 
         return redirect()->route('acceuille');
     }
