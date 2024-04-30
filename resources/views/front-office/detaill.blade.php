@@ -59,7 +59,6 @@
                                 <ul>
                                     <!-- Room Specifications -->
                                     <li>Room Type: <span>{{ $room->room_type }}</span></li>
-                                    <li>Category: <span>{{ $room->category_id }}</span></li>
                                 </ul>
                             </div>
                             <div class="purchase-info">
@@ -73,6 +72,7 @@
                 </div>
             </div>
         </div>
+
     </main>
     <style>
         .service-item {
